@@ -1,0 +1,1471 @@
+﻿
+    /* ==========================================================================
+       SYSTÃˆME DE DESIGN Ã‰DITORIAL AVANCÃ‰ â€” MANIFESTE TYPOGRAPHIQUE & GRILLE
+       Palette :
+       - Ivoire noble : #F5F1E9 (surface respirante, tons papier vergÃ©)
+       - Encre noire : #161614 (structure graphique, densitÃ© d'impression)
+       - Terracotta Orange : #F16B45 (point de tension, impulsion)
+       - Vert Sauge poudrÃ© : #C7D5C0 (Ã©quilibre architectural)
+       - Lavande feutrÃ©e : #8C83A8 (subtilitÃ©, nuance Ã©ditoriale)
+       ========================================================================== */
+    :root {
+      --c-ivoire: #F5F1E9;
+      --c-ivoire-paper: #FAF7F2;
+      --c-ivoire-card: #ECE6DA;
+      --c-hairline: rgba(22, 22, 20, 0.12);
+      --c-hairline-strong: rgba(22, 22, 20, 0.28);
+      --c-noir: #161614;
+      --c-noir-muted: rgba(22, 22, 20, 0.7);
+      --c-noir-subtle: rgba(22, 22, 20, 0.05);
+      --c-orange: #F16B45;
+      --c-orange-glow: rgba(241, 107, 69, 0.2);
+      --c-sauge: #C7D5C0;
+      --c-sauge-ink: #4E6047;
+      --c-lavande: #8C83A8;
+      --c-lavande-ink: #554D6C;
+
+      /* Typographie & Rythme */
+      --font-display: var(--font-syne), -apple-system, sans-serif;
+      --font-editorial: var(--font-fraunces), Georgia, serif;
+      --font-body: var(--font-plus-jakarta), -apple-system, sans-serif;
+      --font-mono: var(--font-space-mono), monospace;
+
+      /* Proportions & Ã‰chelles */
+      --container-max: 1400px;
+      --ease-editorial: cubic-bezier(0.19, 1, 0.22, 1);
+      --ease-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+      --trans-base: 0.35s var(--ease-editorial);
+    }
+
+    /* Mode Studio Sombre */
+    body.theme-studio-dark {
+      --c-ivoire: #131311;
+      --c-ivoire-paper: #181816;
+      --c-ivoire-card: #20201D;
+      --c-hairline: rgba(245, 241, 233, 0.12);
+      --c-hairline-strong: rgba(245, 241, 233, 0.25);
+      --c-noir: #F5F1E9;
+      --c-noir-muted: rgba(245, 241, 233, 0.72);
+      --c-noir-subtle: rgba(245, 241, 233, 0.04);
+      --c-sauge-ink: #A4B89F;
+      --c-lavande-ink: #BDB7CF;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--c-ivoire);
+      color: var(--c-noir);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+      overflow-x: clip;
+    }
+
+    body {
+      background-color: var(--c-ivoire);
+      color: var(--c-noir);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: background-color 0.4s var(--ease-editorial), color 0.4s var(--ease-editorial);
+    }
+
+    /* Trame d'architecture discrÃ¨te et repÃ¨res de composition */
+    .editorial-grid-lines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      opacity: 0.35;
+    }
+
+    .grid-line-col {
+      border-right: 1px dashed var(--c-hairline);
+      height: 100%;
+    }
+    .grid-line-col:first-child {
+      border-left: 1px dashed var(--c-hairline);
+    }
+
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 1.25rem; }
+      .editorial-grid-lines { display: none; }
+    }
+
+    /* ==========================================================================
+       MASTHEAD ARCHITECTURAL : FOLIO, DATE & CONTRÃ”LES HAUT DE PAGE
+       ========================================================================== */
+    .masthead-folio {
+      border-bottom: 1px solid var(--c-hairline);
+      padding: 0.65rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(245, 241, 233, 0.95);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background 0.3s;
+    }
+    body.theme-studio-dark .masthead-folio {
+      background: rgba(19, 19, 17, 0.95);
+    }
+
+    .masthead-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .folio-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--c-noir-muted);
+    }
+
+    .folio-marker {
+      color: var(--c-orange);
+      font-weight: 700;
+    }
+
+    .folio-status-beacon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--c-noir);
+      font-weight: 700;
+    }
+
+    .beacon-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c-orange);
+      position: relative;
+    }
+    .beacon-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: var(--c-orange);
+      opacity: 0.35;
+      animation: beaconWave 2s infinite ease-out;
+    }
+
+    @keyframes beaconWave {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    .folio-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-folio-toggle {
+      background: transparent;
+      border: 1px solid var(--c-hairline);
+      padding: 0.3rem 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--c-noir);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s var(--ease-snappy);
+    }
+
+    .btn-folio-toggle:hover {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    /* ==========================================================================
+       NAVIGATION PRINCIPALE : RYTHME Ã‰DITORIAL & MONOGRAMME
+       ========================================================================== */
+    header.site-header {
+      padding: 2.4rem 0 1.8rem;
+      border-bottom: 2px solid var(--c-hairline-strong);
+    }
+
+    .header-layout {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .brand-monogram-lockup {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      text-decoration: none;
+      color: var(--c-noir);
+    }
+
+    .brand-index-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-orange);
+    }
+
+    .brand-name-huge {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .brand-role-caption {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--c-noir-muted);
+      letter-spacing: 0.06em;
+      margin-top: 0.2rem;
+    }
+
+    nav.site-nav {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+    }
+
+    .nav-link-item {
+      text-decoration: none;
+      color: var(--c-noir);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .nav-link-item .nav-idx {
+      font-size: 0.65rem;
+      color: var(--c-orange);
+      margin-right: 0.3rem;
+    }
+
+    .nav-link-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--c-orange);
+      transition: width 0.3s var(--ease-editorial);
+    }
+
+    .nav-link-item:hover::after {
+      width: 100%;
+    }
+
+    .header-contact-action {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      padding: 0.75rem 1.4rem;
+      border: 1px solid var(--c-noir);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s var(--ease-snappy);
+    }
+
+    .header-contact-action:hover {
+      background: var(--c-orange);
+      border-color: var(--c-orange);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+      nav.site-nav { display: none; }
+    }
+
+    /* ==========================================================================
+       SECTION HERO : COMPOSITION ASYMÃ‰TRIQUE & COUVERTURE DE REVUE D'ART
+       ========================================================================== */
+    section.hero-cover {
+      padding: 4rem 0 5rem;
+      position: relative;
+      border-bottom: 1px solid var(--c-hairline);
+    }
+
+    .hero-composition-grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 4rem;
+      align-items: stretch;
+    }
+
+    .hero-composition-grid > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-composition-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+    }
+
+    .hero-lead-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-editorial-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-noir-muted);
+    }
+
+    .hero-editorial-meta .meta-tag-bold {
+      color: var(--c-orange);
+      font-weight: 700;
+    }
+
+    .hero-monumental-title {
+      font-size: clamp(2.9rem, 5.6vw, 5.2rem);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--c-noir);
+      margin-bottom: 2.5rem;
+      overflow-wrap: anywhere;
+    }
+
+    .title-line-block {
+      display: block;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+    }
+
+    .title-line-serif-accent {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--c-orange);
+      letter-spacing: -0.02em;
+      display: inline-block;
+      margin-right: 0.2em;
+      text-transform: none;
+    }
+
+    .hero-statement-text {
+      font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+      line-height: 1.65;
+      color: var(--c-noir-muted);
+      max-width: 650px;
+      margin-bottom: 2.8rem;
+    }
+
+    .hero-statement-text strong {
+      color: var(--c-noir);
+      font-weight: 600;
+    }
+
+    /* Le Prisme MÃ©thodologique Style "Table TraÃ§ante" */
+    .drafting-perspective-panel {
+      border: 1px solid var(--c-hairline-strong);
+      background: var(--c-ivoire-paper);
+      padding: 1.5rem 1.8rem;
+      margin-bottom: 2.8rem;
+      position: relative;
+    }
+
+    .drafting-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--c-hairline);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .drafting-switch-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .draft-tab-btn {
+      background: transparent;
+      border: 1px solid var(--c-hairline);
+      padding: 0.4rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--c-noir-muted);
+      transition: all 0.2s ease;
+    }
+
+    .draft-tab-btn.active {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    .draft-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .draft-spec-chip {
+      background: var(--c-ivoire);
+      border: 1px solid var(--c-hairline);
+      padding: 0.35rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--c-noir);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .draft-spec-chip:hover {
+      transform: translateY(-2px);
+      border-color: var(--c-orange);
+    }
+
+    .chip-code-symbol {
+      color: var(--c-orange);
+      font-weight: 700;
+    }
+
+    /* Actions Hero */
+    .hero-cta-ribbon {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .btn-solid-orange {
+      background: var(--c-orange);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      padding: 1rem 1.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid var(--c-orange);
+      transition: all 0.25s var(--ease-snappy);
+    }
+
+    .btn-solid-orange:hover {
+      background: #d6542f;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px var(--c-orange-glow);
+    }
+
+    .btn-outline-ink {
+      background: transparent;
+      color: var(--c-noir);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      padding: 1rem 1.7rem;
+      border: 1px solid var(--c-hairline-strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.25s var(--ease-snappy);
+    }
+
+    .btn-outline-ink:hover {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    .quick-copy-email-box {
+      border: 1px dashed var(--c-hairline-strong);
+      padding: 0.65rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--c-noir-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      transition: all 0.2s;
+    }
+
+    .quick-copy-email-box:hover {
+      border-color: var(--c-orange);
+      color: var(--c-noir);
+      background: rgba(241, 107, 69, 0.05);
+    }
+
+    /* Cadre Visuel Architectural (Portrait Auteur Inset) */
+    .hero-portrait-frame-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .architectural-portrait-wrapper {
+      border: 2px solid var(--c-noir);
+      background: var(--c-noir);
+      padding: 12px;
+      position: relative;
+    }
+
+    .portrait-image-inset {
+      position: relative;
+      aspect-ratio: 4 / 4.2;
+      overflow: hidden;
+      background: var(--c-ivoire-card);
+    }
+
+    .portrait-image-inset img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05) brightness(0.96);
+      transition: transform 0.8s var(--ease-editorial);
+    }
+
+    .architectural-portrait-wrapper:hover .portrait-image-inset img {
+      transform: scale(1.03);
+    }
+
+    .portrait-plate-legend {
+      padding: 0.9rem 0.4rem 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #fff;
+    }
+
+    .plate-author-title {
+      color: var(--c-sauge);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .portrait-corner-brackets {
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--c-orange);
+      line-height: 1;
+    }
+
+    /* ==========================================================================
+       SECTION BANDEAU CONTINU : RYTHME & MANIFESTE KINÃ‰TIQUE
+       ========================================================================== */
+    .ticker-statement-band {
+      border-bottom: 1px solid var(--c-hairline);
+      padding: 1rem 0;
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      overflow: hidden;
+      overflow-x: clip;
+      max-width: 100%;
+      font-family: var(--font-display);
+      font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      gap: 3rem;
+      animation: tickerRun 28s linear infinite;
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track {
+        will-change: auto;
+      }
+    }
+
+    @keyframes tickerRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-dot {
+      color: var(--c-orange);
+      margin: 0 0.5rem;
+    }
+
+    /* ==========================================================================
+       SECTION 01 : CATALOGUE DES RÃ‰ALISATIONS (EDITORIAL DOSSIER)
+       ========================================================================== */
+    section.projects-catalogue {
+      padding: 6.5rem 0;
+      border-bottom: 1px solid var(--c-hairline);
+    }
+
+    .section-editorial-header {
+      display: grid;
+      grid-template-columns: 0.3fr 0.7fr;
+      gap: 3rem;
+      margin-bottom: 4.5rem;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--c-hairline);
+      padding-bottom: 2rem;
+    }
+
+    .section-editorial-header > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .section-editorial-header {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    .sec-index-number {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--c-orange);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .sec-editorial-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--c-noir);
+      margin-top: 0.4rem;
+    }
+
+    .sec-editorial-desc {
+      font-size: 1.12rem;
+      line-height: 1.65;
+      color: var(--c-noir-muted);
+    }
+
+    /* Liste des Projets en Fiches Architecturales */
+    .catalogue-dossier-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5.5rem;
+    }
+
+    .dossier-entry-block {
+      border-top: 2px solid var(--c-noir);
+      padding-top: 2rem;
+      display: grid;
+      grid-template-columns: 0.12fr 0.48fr 0.4fr;
+      gap: 2.5rem;
+      align-items: flex-start;
+      transition: all var(--trans-base);
+    }
+
+    .dossier-entry-block > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    @media (max-width: 1080px) {
+      .dossier-entry-block {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .dossier-folio-number {
+      font-family: var(--font-editorial);
+      font-size: 2.8rem;
+      font-style: italic;
+      line-height: 1;
+      color: var(--c-orange);
+    }
+
+    .dossier-meta-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .dossier-category-strip {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-noir-muted);
+    }
+
+    .dossier-project-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.2vw, 2.7rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--c-noir);
+    }
+
+    .dossier-lead-summary {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: var(--c-noir-muted);
+    }
+
+    .dossier-scope-annotation {
+      background: var(--c-ivoire-paper);
+      border-left: 3px solid var(--c-orange);
+      padding: 0.9rem 1.2rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--c-noir);
+    }
+
+    .dossier-scope-annotation strong {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--c-orange);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .dossier-tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tech-pill-spec {
+      border: 1px solid var(--c-hairline-strong);
+      padding: 0.3rem 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--c-noir);
+      background: transparent;
+    }
+
+    .dossier-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .btn-dossier-expand {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.85rem 1.4rem;
+      border: 1px solid var(--c-noir);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-dossier-expand:hover {
+      background: var(--c-orange);
+      border-color: var(--c-orange);
+      color: #fff;
+      transform: translateX(3px);
+    }
+
+    .btn-live-launch {
+      background: transparent;
+      color: var(--c-noir);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.85rem 1.3rem;
+      border: 1px solid var(--c-noir);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-live-launch:hover {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+    }
+
+    /* Cadre de ScÃ©nographie Visuelle du Projet */
+    .dossier-visual-canvas {
+      position: relative;
+      border: 1px solid var(--c-noir);
+      min-height: 340px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #171816;
+    }
+
+    .canvas-plate-art {
+      width: 100%;
+      height: 100%;
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .art-plate-ocr {
+      background: radial-gradient(circle at 10% 10%, #2A2C26 0%, #151614 90%);
+      color: #E8E5DD;
+    }
+
+    .art-plate-production {
+      background: radial-gradient(circle at 90% 10%, #243022 0%, #161A15 90%);
+      color: #E2ECE0;
+    }
+
+    .art-plate-eagence {
+      background: radial-gradient(circle at 50% 90%, #251E2E 0%, #16141A 90%);
+      color: #ECEAF4;
+    }
+
+    .art-plate-mariage {
+      background: #FAF7F2;
+      color: #161614;
+      border: 1px solid var(--c-hairline-strong);
+    }
+
+    .canvas-corner-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--c-orange);
+    }
+
+    .canvas-schematic-box {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      line-height: 1.5;
+    }
+
+    .art-plate-mariage .canvas-schematic-box {
+      border-color: var(--c-hairline-strong);
+      background: rgba(22, 22, 20, 0.03);
+    }
+
+    .canvas-caption-strip {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+    }
+    .art-plate-mariage .canvas-caption-strip {
+      color: var(--c-noir-muted);
+    }
+
+    /* ==========================================================================
+       SECTION 02 : Ã€ PROPOS & MANIFESTE DE L'ATELIER
+       ========================================================================== */
+    section.about-manifesto-sec {
+      padding: 6.5rem 0;
+      border-bottom: 1px solid var(--c-hairline);
+      background: var(--c-ivoire-paper);
+    }
+
+    .monumental-quote-display {
+      font-family: var(--font-editorial);
+      font-size: clamp(2rem, 3.8vw, 3.3rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--c-noir);
+      max-width: 1050px;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .monumental-quote-display span.accent-quote {
+      color: var(--c-orange);
+      font-style: normal;
+      font-family: var(--font-display);
+      font-weight: 800;
+    }
+
+    .about-editorial-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (max-width: 900px) {
+      .about-editorial-columns {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .editorial-narrative-col p {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--c-noir-muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .editorial-narrative-col p strong {
+      color: var(--c-noir);
+      font-weight: 600;
+    }
+
+    /* Les 3 Piliers MÃ©thodologiques NumÃ©rotÃ©s */
+    .method-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      border-top: 1px solid var(--c-hairline);
+      padding-top: 3rem;
+    }
+
+    @media (max-width: 900px) {
+      .method-pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .method-pillar-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .pillar-folio-code {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--c-orange);
+      letter-spacing: 0.12em;
+    }
+
+    .pillar-entry-heading {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--c-noir);
+    }
+
+    .pillar-entry-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--c-noir-muted);
+    }
+
+    /* ==========================================================================
+       SECTION 03 : SPÃ‰CIFICATION DES COMPÃ‰TENCES (ARCHITECTURAL SPEC SHEET)
+       ========================================================================== */
+    section.competences-spec-sec {
+      padding: 6.5rem 0;
+      border-bottom: 1px solid var(--c-hairline);
+    }
+
+    .skills-specification-table {
+      border-top: 2px solid var(--c-noir);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-spec-row {
+      display: grid;
+      grid-template-columns: 0.3fr 0.7fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--c-hairline);
+      align-items: baseline;
+      transition: background 0.2s;
+    }
+
+    @media (max-width: 800px) {
+      .skill-spec-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .skill-spec-row:hover {
+      background: var(--c-noir-subtle);
+    }
+
+    .skill-domain-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--c-noir);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .skill-domain-title .spec-marker {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--c-orange);
+    }
+
+    .skill-tags-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .spec-item-badge {
+      border: 1px solid var(--c-hairline-strong);
+      padding: 0.45rem 0.95rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--c-noir);
+      background: var(--c-ivoire);
+    }
+
+    .spec-item-badge.badge-primary {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    .spec-item-badge.badge-sauge {
+      background: var(--c-sauge);
+      color: var(--c-sauge-ink);
+      border-color: transparent;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       SECTION 04 : CONTACT & Ã‰PILOGUE Ã‰DITORIAL
+       ========================================================================== */
+    section.contact-epilogue-sec {
+      padding: 7rem 0 3.5rem;
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      position: relative;
+    }
+
+    .epilogue-huge-prompt {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 6.2vw, 5.8rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+      text-transform: uppercase;
+      margin-bottom: 3.5rem;
+    }
+
+    .epilogue-huge-prompt span.serif-italic {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--c-orange);
+      text-transform: none;
+    }
+
+    .contact-dispatch-panel {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-bottom: 5rem;
+    }
+
+    .dispatch-info-block h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    .dispatch-info-block p {
+      color: rgba(245, 241, 233, 0.7);
+      font-size: 1.05rem;
+      max-width: 540px;
+      line-height: 1.6;
+    }
+
+    .dispatch-action-group {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-dispatch-mail {
+      background: var(--c-orange);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      padding: 1.05rem 2rem;
+      transition: all 0.25s var(--ease-snappy);
+    }
+
+    .btn-dispatch-mail:hover {
+      background: #d6542f;
+      transform: translateY(-2px);
+    }
+
+    .btn-copy-address {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1.05rem 1.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn-copy-address:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .verified-channels-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .verified-channels-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .channel-folio-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--c-ivoire);
+      transition: all 0.2s;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .channel-folio-card:hover {
+      border-color: var(--c-orange);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .channel-card-index {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--c-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .channel-card-target {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      min-width: 0;
+    }
+
+    .channel-card-target span:first-child {
+      overflow-wrap: anywhere;
+    }
+
+    .colophon-footer-strip {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: rgba(245, 241, 233, 0.5);
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       TIROIR D'Ã‰TUDE TECHNIQUE (SLIDE-OVER ARCHITECTURAL)
+       ========================================================================== */
+    .drawer-backdrop-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(22, 22, 20, 0.72);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s var(--ease-editorial), visibility 0.35s;
+    }
+
+    .drawer-backdrop-mask.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer-technical-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 800px;
+      background: var(--c-ivoire);
+      color: var(--c-noir);
+      z-index: 1001;
+      border-left: 2px solid var(--c-noir);
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.35);
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-editorial);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .drawer-backdrop-mask.active .drawer-technical-panel {
+      transform: translateX(0);
+    }
+
+    .drawer-nav-bar {
+      padding: 1.6rem 2.2rem;
+      border-bottom: 1px solid var(--c-hairline-strong);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: var(--c-ivoire);
+      z-index: 10;
+    }
+
+    .drawer-ref-tag {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--c-orange);
+      letter-spacing: 0.12em;
+    }
+
+    .drawer-dismiss-btn {
+      background: var(--c-noir-subtle);
+      border: 1px solid var(--c-hairline);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--c-noir);
+      transition: all 0.2s;
+    }
+
+    .drawer-dismiss-btn:hover {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+    }
+
+    .drawer-scroll-body {
+      padding: 2.8rem 2.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
+
+    .drawer-tab-selectors {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--c-hairline-strong);
+      padding-bottom: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .drawer-filter-btn {
+      background: transparent;
+      border: 1px solid var(--c-hairline);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.5rem 0.95rem;
+      color: var(--c-noir-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .drawer-filter-btn.active {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    .drawer-tab-view {
+      display: none;
+      flex-direction: column;
+      gap: 1.2rem;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      color: var(--c-noir);
+    }
+
+    .drawer-tab-view.active {
+      display: flex;
+    }
+
+    .drawer-footer-actions {
+      border-top: 1px solid var(--c-hairline-strong);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Toast Notification Flottante */
+    .toast-folio-alert {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.85rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s var(--ease-editorial);
+      pointer-events: none;
+    }
+
+    .toast-folio-alert.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  
