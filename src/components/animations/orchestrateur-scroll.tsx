@@ -153,7 +153,7 @@ export function OrchestrateurScroll({ children }: PropsOrchestrateurScroll) {
               ease: "power2.out",
             });
 
-            const estLienNav = bouton.classList.contains("nav-link-item");
+            const estLienNav = bouton.classList.contains("header-nav-link");
             const onEnter = () => {
               if (!estLienNav) {
                 quickScale(1.02);

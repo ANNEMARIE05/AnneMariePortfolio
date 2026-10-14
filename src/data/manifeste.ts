@@ -18,23 +18,31 @@ export const COLONNES_MANIFESTE = [
   ],
 ] as const;
 
+/** Types de projets déjà présents dans le portfolio — pas d’invention. */
+export const DOMAINES_PARCOURS = [
+  "Applications métier",
+  "Interfaces de gestion",
+  "Sites vitrines",
+  "Projets web créatifs",
+] as const;
+
 export const PILIERS_METHODE: PilierMethode[] = [
   {
-    code: "01 / FONCTIONNALITÉ",
-    titre: "Clarté d'Usage",
+    code: "clarte",
+    titre: "Clarté d'usage",
     texte:
-      "Organiser la structure de façon évidente pour que chaque utilisateur accomplisse sa tâche sans hésitation ni friction superflue.",
+      "Structurer l'information pour que chaque parcours soit évident, sans friction inutile.",
   },
   {
-    code: "02 / SENSIBILITÉ",
-    titre: "Soin du Détail",
+    code: "soin",
+    titre: "Soin du détail",
     texte:
-      "Traiter la typographie, les alignements, les espacements et les transitions avec la précision d'un artisan pour susciter la confiance.",
+      "Typographie, espacements et transitions traités avec précision pour inspirer confiance.",
   },
   {
-    code: "03 / INGÉNIERIE",
-    titre: "Rigueur Logique",
+    code: "rigueur",
+    titre: "Rigueur technique",
     texte:
-      "S'appuyer sur des bases de code modulaires, des composants réutilisables, un typage propre et une intégration d'API fiable.",
+      "Composants réutilisables, intégration d'API fiable et bases de code maintenables.",
   },
 ];

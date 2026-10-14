@@ -1,27 +1,17 @@
-import {
-  Fraunces,
-  Plus_Jakarta_Sans,
-  Space_Mono,
-  Syne,
-} from "next/font/google";
+import { Instrument_Serif, Manrope, Space_Mono } from "next/font/google";
 
-export const policeSyne = Syne({
+export const policeManrope = Manrope({
   subsets: ["latin"],
-  weight: ["500", "700", "800"],
-  variable: "--font-syne",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
-export const policeFraunces = Fraunces({
+export const policeInstrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
-
-export const policePlusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-plus-jakarta",
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
   display: "swap",
 });
 
@@ -34,8 +24,7 @@ export const policeSpaceMono = Space_Mono({
 });
 
 export const classesPolices = [
-  policeSyne.variable,
-  policeFraunces.variable,
-  policePlusJakarta.variable,
+  policeManrope.variable,
+  policeInstrumentSerif.variable,
   policeSpaceMono.variable,
 ].join(" ");

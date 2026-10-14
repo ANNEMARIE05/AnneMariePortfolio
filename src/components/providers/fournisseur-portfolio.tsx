@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import type { IdentifiantProjet } from "@/types/projet";
+import { estLocale, type Locale } from "@/i18n";
 import {
   activerContexteAudio,
   jouerRetourSonore,
@@ -17,6 +18,9 @@ import {
 } from "@/lib/retour-sonore";
 
 interface ContextePortfolio {
+  locale: Locale;
+  setLocale: (locale: Locale) => void;
+  basculerLocale: () => void;
   themeStudioSombre: boolean;
   basculerTheme: () => void;
   sonActif: boolean;
@@ -32,6 +36,19 @@ interface ContextePortfolio {
 
 const ContextePortfolio = createContext<ContextePortfolio | null>(null);
 
+const CLE_LOCALE = "portfolio-locale";
+
+function lireLocaleInitiale(): Locale {
+  if (typeof window === "undefined") {
+    return "fr";
+  }
+  const stockee = window.localStorage.getItem(CLE_LOCALE);
+  if (stockee && estLocale(stockee)) {
+    return stockee;
+  }
+  return "fr";
+}
+
 export function usePortfolio(): ContextePortfolio {
   const contexte = useContext(ContextePortfolio);
   if (!contexte) {
@@ -41,6 +58,7 @@ export function usePortfolio(): ContextePortfolio {
 }
 
 export function FournisseurPortfolio({ children }: { children: ReactNode }) {
+  const [locale, setLocaleState] = useState<Locale>("fr");
   const [themeStudioSombre, setThemeStudioSombre] = useState(false);
   const [sonActif, setSonActif] = useState(false);
   const [messageToast, setMessageToast] = useState<string | null>(null);
@@ -49,6 +67,15 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
   );
   const [identifiantDossierAffiche, setIdentifiantDossierAffiche] =
     useState<IdentifiantProjet>("ocr");
+
+  useEffect(() => {
+    setLocaleState(lireLocaleInitiale());
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = locale === "en" ? "en" : "fr";
+    window.localStorage.setItem(CLE_LOCALE, locale);
+  }, [locale]);
 
   useEffect(() => {
     document.body.classList.toggle("theme-studio-dark", themeStudioSombre);
@@ -65,6 +92,14 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
     }
   }, [dossierOuvert]);
 
+  const setLocale = useCallback((prochaine: Locale) => {
+    setLocaleState(prochaine);
+  }, []);
+
+  const basculerLocale = useCallback(() => {
+    setLocaleState((courante) => (courante === "fr" ? "en" : "fr"));
+  }, []);
+
   const afficherToast = useCallback((message: string) => {
     setMessageToast(message);
     const delai = window.setTimeout(() => setMessageToast(null), 3000);
@@ -79,16 +114,8 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
   );
 
   const basculerTheme = useCallback(() => {
-    setThemeStudioSombre((valeur) => {
-      const prochain = !valeur;
-      jouerRetourSonore("click", sonActif);
-      setMessageToast(
-        prochain ? "Ambiance Studio Sombre" : "Ambiance Papier Ivoire",
-      );
-      window.setTimeout(() => setMessageToast(null), 3000);
-      return prochain;
-    });
-  }, [sonActif]);
+    setThemeStudioSombre((valeur) => !valeur);
+  }, []);
 
   const basculerSon = useCallback(() => {
     setSonActif((valeur) => {
@@ -96,11 +123,7 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
       if (prochain) {
         activerContexteAudio();
         jouerRetourSonore("chime", true);
-        setMessageToast("Retour sonore activé");
-      } else {
-        setMessageToast("Retour sonore désactivé");
       }
-      window.setTimeout(() => setMessageToast(null), 3000);
       return prochain;
     });
   }, []);
@@ -121,6 +144,9 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
 
   const valeur = useMemo(
     () => ({
+      locale,
+      setLocale,
+      basculerLocale,
       themeStudioSombre,
       basculerTheme,
       sonActif,
@@ -134,6 +160,9 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
       fermerDossier,
     }),
     [
+      locale,
+      setLocale,
+      basculerLocale,
       themeStudioSombre,
       basculerTheme,
       sonActif,

@@ -1,144 +1,116 @@
+"use client";
+
 import { Container } from "@/components/layout/container";
 import { BoutonCopieEmail } from "@/components/ui/bouton-copie-email";
-import { EMAIL_PROFESSIONNEL, LIENS_EXTERNES } from "@/data/site";
-
-const sujetMail = encodeURIComponent(
-  "Contact professionnel - Anne Marie Agbonou",
-);
+import {
+  EMAIL_PROFESSIONNEL,
+  LIENS_EXTERNES,
+  obtenirLienWhatsApp,
+} from "@/data/site";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function ContactSection() {
+  const { locale, t } = useI18n();
+  const sujetMail = encodeURIComponent(
+    locale === "en"
+      ? "Professional contact - Anne Marie Agbonou"
+      : "Contact professionnel - Anne Marie Agbonou",
+  );
+  const lienWhatsApp = obtenirLienWhatsApp(locale);
+
   return (
     <section
       id="contact"
       className="contact-epilogue-sec"
       data-reveal-section=""
     >
+      <div className="contact-ambient-glow" aria-hidden="true" />
       <Container>
-        <div data-reveal-entete="">
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.75rem",
-              letterSpacing: "0.16em",
-              color: "var(--c-orange)",
-              marginBottom: "1.5rem",
-            }}
-          >
-            SECTION 04 // ENGAGEMENT & COLLABORATION
+        <div className="contact-stage">
+          <div className="contact-stage-copy" data-reveal-entete="">
+            <div className="section-index-label section-index-label--inverse">
+              {t.contact.label}
+            </div>
+
+            <h2 className="epilogue-huge-prompt">{t.contact.title}</h2>
+
+            <p className="contact-stage-lead">{t.contact.lead}</p>
           </div>
 
-          <h2 className="epilogue-huge-prompt">
-            PARLONS DE VOTRE <br />
-            PROCHAIN <span className="serif-italic">projet.</span>
-          </h2>
-        </div>
-
-        <div data-reveal-corps="">
-        <div className="contact-dispatch-panel">
-          <div className="dispatch-info-block">
-            <h3>À l&apos;écoute d&apos;opportunités en entreprise & missions</h3>
-            <p>
-              Je suis disponible pour des opportunités professionnelles (CDI,
-              missions freelance, renfort d&apos;équipe frontend) avec
-              l&apos;envie de concevoir des interfaces soignées et durables.
-            </p>
-          </div>
-
-          <div className="dispatch-action-group">
+          <div className="contact-stage-actions" data-reveal-corps="">
             <a
-              href={`mailto:${EMAIL_PROFESSIONNEL}?subject=${sujetMail}`}
-              className="btn-dispatch-mail"
-              id="mainMailtoBtn"
+              href={lienWhatsApp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-whatsapp-hero"
             >
-              <span>Envoyer un message</span>
-              <span>→</span>
+              <span className="contact-whatsapp-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.882 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </span>
+              <span className="contact-whatsapp-copy">
+                <strong>{t.contact.whatsappTitle}</strong>
+                <span>{t.contact.whatsappHint}</span>
+              </span>
+              <span aria-hidden="true">↗</span>
             </a>
 
-            <BoutonCopieEmail variante="contact" />
-          </div>
-        </div>
+            <p className="contact-email-label">{t.contact.emailLabel}</p>
 
-        <div className="verified-channels-row">
-          <a
-            href={`mailto:${EMAIL_PROFESSIONNEL}`}
-            className="channel-folio-card"
-          >
-            <span className="channel-card-index">CANAL DIRECT 01</span>
-            <div className="channel-card-target">
+            <a
+              href={`mailto:${EMAIL_PROFESSIONNEL}?subject=${sujetMail}`}
+              className="contact-email-hero"
+              id="mainMailtoBtn"
+            >
+              <span className="contact-email-icon" aria-hidden="true">
+                @
+              </span>
               <span>{EMAIL_PROFESSIONNEL}</span>
-              <span>↗</span>
-            </div>
-          </a>
+            </a>
 
-          <a
-            href={LIENS_EXTERNES.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="channel-folio-card"
-          >
-            <span className="channel-card-index">RÉSEAU 02</span>
-            <div className="channel-card-target">
-              <span>LinkedIn Profil</span>
-              <span>↗</span>
+            <div className="contact-action-row">
+              <a
+                href={`mailto:${EMAIL_PROFESSIONNEL}?subject=${sujetMail}`}
+                className="btn-dispatch-mail"
+              >
+                <span>{t.contact.send}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+              <BoutonCopieEmail variante="contact" />
             </div>
-          </a>
 
-          <a
-            href={LIENS_EXTERNES.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="channel-folio-card"
-          >
-            <span className="channel-card-index">CODE 03</span>
-            <div className="channel-card-target">
-              <span>GitHub / ANNEMARIE05</span>
-              <span>↗</span>
-            </div>
-          </a>
+            <nav className="contact-social-nav" aria-label={t.contact.label}>
+              <a
+                href={LIENS_EXTERNES.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-social-link"
+              >
+                {t.contact.linkedin}
+              </a>
+              <a
+                href={LIENS_EXTERNES.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-social-link"
+              >
+                {t.contact.github}
+              </a>
+              <a
+                href={LIENS_EXTERNES.mariage}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-social-link"
+              >
+                {t.contact.wedding}
+              </a>
+            </nav>
+          </div>
         </div>
 
         <div className="colophon-footer-strip">
-          <div>
-            © 2026 Anne Marie Agbonou · Développeuse Frontend & Analyste
-            Programmeuse.
-          </div>
-
-          <div style={{ display: "flex", gap: "1.5rem" }}>
-            <a
-              href={LIENS_EXTERNES.mariage}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "rgba(245,241,233,0.7)",
-                textDecoration: "none",
-              }}
-            >
-              Projet Mariage ↗
-            </a>
-            <a
-              href={LIENS_EXTERNES.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "rgba(245,241,233,0.7)",
-                textDecoration: "none",
-              }}
-            >
-              Dépôt GitHub ↗
-            </a>
-            <a
-              href={LIENS_EXTERNES.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "rgba(245,241,233,0.7)",
-                textDecoration: "none",
-              }}
-            >
-              LinkedIn ↗
-            </a>
-          </div>
-        </div>
+          <div>{t.contact.footer}</div>
         </div>
       </Container>
     </section>

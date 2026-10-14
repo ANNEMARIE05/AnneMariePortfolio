@@ -1,25 +1,39 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { DOSSIERS_TECHNIQUES } from "@/data/dossiers-techniques";
+import { PlaqueProjet } from "@/components/projects/plaques-projet";
+import { obtenirContenuDossier } from "@/data/dossiers-contenu";
 import { usePortfolio } from "@/components/providers/fournisseur-portfolio";
-import type { DossierTechnique } from "@/types/projet";
+import { useI18n } from "@/hooks/use-i18n";
+import type { IdentifiantProjet } from "@/types/projet";
 
 type OngletDossier = "contexte" | "role" | "tech";
 
-const ONGLETS: { id: OngletDossier; libelle: string }[] = [
-  { id: "contexte", libelle: "1. Contexte & Défi" },
-  { id: "role", libelle: "2. Rôle & Approche Frontend" },
-  { id: "tech", libelle: "3. Technologies & Intégration" },
-];
+function ListeDossier({ items }: { items: string[] }) {
+  return (
+    <ul className="drawer-bullet-list">
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
 
-interface PropsPanneauDossier {
-  dossier: DossierTechnique;
+interface PropsPanneau {
+  identifiant: IdentifiantProjet;
   jouerSon: (type: "click") => void;
 }
 
-function PanneauContenuDossier({ dossier, jouerSon }: PropsPanneauDossier) {
+function PanneauContenuDossier({ identifiant, jouerSon }: PropsPanneau) {
+  const { locale, t } = useI18n();
+  const dossier = obtenirContenuDossier(locale, identifiant);
   const [ongletActif, setOngletActif] = useState<OngletDossier>("contexte");
+
+  const onglets: { id: OngletDossier; libelle: string }[] = [
+    { id: "contexte", libelle: t.drawer.tabs[0] },
+    { id: "role", libelle: t.drawer.tabs[1] },
+    { id: "tech", libelle: t.drawer.tabs[2] },
+  ];
 
   const changerOnglet = useCallback(
     (onglet: OngletDossier) => {
@@ -29,35 +43,30 @@ function PanneauContenuDossier({ dossier, jouerSon }: PropsPanneauDossier) {
     [jouerSon],
   );
 
+  const contenuListe =
+    ongletActif === "contexte"
+      ? dossier.contexte
+      : ongletActif === "role"
+        ? dossier.role
+        : dossier.tech;
+
   return (
     <>
+      <div className="drawer-preview-wrap">
+        <PlaqueProjet identifiant={identifiant} variante="drawer" />
+      </div>
+
       <div>
-        <h2
-          id="drawerProjectTitle"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "2.3rem",
-            fontWeight: 800,
-            lineHeight: 1.1,
-            marginBottom: "0.6rem",
-          }}
-        >
+        <h2 id="drawerProjectTitle" className="drawer-project-title">
           {dossier.titre}
         </h2>
-        <p
-          id="drawerProjectSubtitle"
-          style={{
-            fontSize: "1.1rem",
-            color: "var(--c-noir-muted)",
-            lineHeight: 1.6,
-          }}
-        >
+        <p id="drawerProjectSubtitle" className="drawer-project-subtitle">
           {dossier.sousTitre}
         </p>
       </div>
 
       <div className="drawer-tab-selectors" role="tablist">
-        {ONGLETS.map((onglet) => (
+        {onglets.map((onglet) => (
           <button
             key={onglet.id}
             type="button"
@@ -71,58 +80,24 @@ function PanneauContenuDossier({ dossier, jouerSon }: PropsPanneauDossier) {
         ))}
       </div>
 
-      <div
-        className={`drawer-tab-view${ongletActif === "contexte" ? " active" : ""}`}
-        role="tabpanel"
-      >
-        {ongletActif === "contexte" ? dossier.contexte : null}
-      </div>
-      <div
-        className={`drawer-tab-view${ongletActif === "role" ? " active" : ""}`}
-        role="tabpanel"
-      >
-        {ongletActif === "role" ? dossier.role : null}
-      </div>
-      <div
-        className={`drawer-tab-view${ongletActif === "tech" ? " active" : ""}`}
-        role="tabpanel"
-      >
-        {ongletActif === "tech" ? dossier.tech : null}
+      <div className="drawer-tab-view active" role="tabpanel">
+        <ListeDossier items={contenuListe} />
       </div>
 
       {dossier.lienExterne ? (
-        <div
-          className="drawer-footer-actions"
-          id="drawerFooterActions"
-          style={{ display: "flex" }}
-        >
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.74rem",
-              color: "var(--c-noir-muted)",
-            }}
-          >
-            Projet consultable publiquement :
-          </span>
+        <div className="drawer-footer-actions" id="drawerFooterActions">
+          <span className="drawer-footer-note">{t.drawer.publicProject}</span>
           <a
             href={dossier.lienExterne}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-solid-orange"
-            style={{ padding: "0.65rem 1.2rem", fontSize: "0.74rem" }}
+            className="btn-solid-orange drawer-live-link"
           >
-            <span>Ouvrir stephane-et-marie.site</span>
-            <span>↗</span>
+            <span>{t.drawer.openLive}</span>
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
-      ) : (
-        <div
-          className="drawer-footer-actions"
-          id="drawerFooterActions"
-          style={{ display: "none" }}
-        />
-      )}
+      ) : null}
     </>
   );
 }
@@ -130,9 +105,9 @@ function PanneauContenuDossier({ dossier, jouerSon }: PropsPanneauDossier) {
 export function TiroirTechnique() {
   const { dossierOuvert, identifiantDossierAffiche, fermerDossier, jouerSon } =
     usePortfolio();
+  const { locale, t } = useI18n();
   const refBoutonFermer = useRef<HTMLButtonElement>(null);
-
-  const dossier = DOSSIERS_TECHNIQUES[identifiantDossierAffiche];
+  const dossier = obtenirContenuDossier(locale, identifiantDossierAffiche);
 
   useEffect(() => {
     const main = document.getElementById("contenu-principal");
@@ -185,18 +160,20 @@ export function TiroirTechnique() {
             type="button"
             className="drawer-dismiss-btn"
             onClick={fermerDossier}
-            aria-label="Fermer le dossier"
+            aria-label={t.drawer.close}
           >
             ✕
           </button>
         </div>
 
         <div className="drawer-scroll-body">
-          <PanneauContenuDossier
-            key={dossierOuvert ?? "ferme"}
-            dossier={dossier}
-            jouerSon={jouerSon}
-          />
+          {dossierOuvert ? (
+            <PanneauContenuDossier
+              key={identifiantDossierAffiche}
+              identifiant={identifiantDossierAffiche}
+              jouerSon={jouerSon}
+            />
+          ) : null}
         </div>
       </div>
     </div>

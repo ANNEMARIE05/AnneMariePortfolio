@@ -4,6 +4,7 @@ import { Copy } from "lucide-react";
 import { useCallback, useState } from "react";
 import { EMAIL_PROFESSIONNEL } from "@/data/site";
 import { usePortfolio } from "@/components/providers/fournisseur-portfolio";
+import { useI18n } from "@/hooks/use-i18n";
 
 interface PropsBoutonCopieEmail {
   variante?: "hero" | "contact";
@@ -11,9 +12,8 @@ interface PropsBoutonCopieEmail {
 
 export function BoutonCopieEmail({ variante = "hero" }: PropsBoutonCopieEmail) {
   const { afficherToast, jouerSon } = usePortfolio();
-  const [libelleContact, setLibelleContact] = useState(
-    "Copier l'adresse email",
-  );
+  const { t, locale } = useI18n();
+  const [libelleContact, setLibelleContact] = useState(t.contact.copy);
 
   const copierEmail = useCallback(async () => {
     try {
@@ -21,16 +21,13 @@ export function BoutonCopieEmail({ variante = "hero" }: PropsBoutonCopieEmail) {
       jouerSon("chime");
       afficherToast(`Email ${EMAIL_PROFESSIONNEL} copié !`);
       if (variante === "contact") {
-        setLibelleContact("Adresse copiée ✓");
-        window.setTimeout(
-          () => setLibelleContact("Copier l'adresse email"),
-          2500,
-        );
+        setLibelleContact(locale === "en" ? "Copied ✓" : "Adresse copiée ✓");
+        window.setTimeout(() => setLibelleContact(t.contact.copy), 2500);
       }
     } catch {
       afficherToast("Impossible de copier l'adresse pour le moment.");
     }
-  }, [afficherToast, jouerSon, variante]);
+  }, [afficherToast, jouerSon, variante, locale, t.contact.copy]);
 
   if (variante === "hero") {
     return (

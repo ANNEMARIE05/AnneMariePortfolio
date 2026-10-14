@@ -17,12 +17,12 @@ export function PortraitArchitectural() {
       const rect = element.getBoundingClientRect();
       const x = (event.clientX - rect.left - rect.width / 2) / rect.width;
       const y = (event.clientY - rect.top - rect.height / 2) / rect.height;
-      element.style.transform = `perspective(800px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg)`;
+      element.style.transform = `perspective(900px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
     };
 
     const onMouseLeave = () => {
       element.style.transform =
-        "perspective(800px) rotateX(0deg) rotateY(0deg)";
+        "perspective(900px) rotateX(0deg) rotateY(0deg)";
     };
 
     element.addEventListener("mousemove", onMouseMove);
@@ -42,8 +42,6 @@ export function PortraitArchitectural() {
           className="architectural-portrait-tilt"
           id="architecturalPortrait"
         >
-          <span className="portrait-corner-brackets">┌ &nbsp; ┐</span>
-
           <div className="portrait-image-inset">
             <Image
               src="/images/anne-marie-portrait.jpg"
@@ -52,13 +50,12 @@ export function PortraitArchitectural() {
               priority
               sizes="(max-width: 1080px) 100vw, 40vw"
               className="object-cover"
-              style={{ filter: "contrast(1.05) brightness(0.96)" }}
             />
           </div>
 
           <div className="portrait-plate-legend">
-            <span className="plate-author-title">ANNE MARIE AGBONOU</span>
-            <span>PARIS / REMOTE · INTERMÉDIAIRE</span>
+            <span className="plate-author-title">Anne Marie Agbonou</span>
+            <span>Frontend & interfaces web</span>
           </div>
         </div>
       </div>

@@ -24,14 +24,27 @@
       --c-lavande: #8C83A8;
       --c-lavande-ink: #554D6C;
 
-      /* Typographie & Rythme */
-      --font-display: var(--font-syne), -apple-system, sans-serif;
-      --font-editorial: var(--font-fraunces), Georgia, serif;
-      --font-body: var(--font-plus-jakarta), -apple-system, sans-serif;
-      --font-mono: var(--font-space-mono), monospace;
+      /* Typographie */
+      --font-sans: var(--font-manrope), system-ui, -apple-system, sans-serif;
+      --font-accent: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+      --font-mono: var(--font-space-mono), ui-monospace, monospace;
+      --font-display: var(--font-sans);
+      --font-body: var(--font-sans);
+      --font-editorial: var(--font-accent);
 
-      /* Proportions & Ã‰chelles */
+      /* Échelle typographique */
+      --type-meta: clamp(0.6875rem, 0.66rem + 0.12vw, 0.75rem);
+      --type-body-lg: clamp(1.0625rem, 1rem + 0.35vw, 1.1875rem);
+      --type-title-sm: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+      --type-title-md: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
+      --type-title-lg: clamp(1.75rem, 1.4rem + 1.2vw, 2.375rem);
+      --type-title-xl: clamp(2.25rem, 1.75rem + 2vw, 3.25rem);
+      --type-quote: clamp(1.5rem, 1.25rem + 1vw, 2.125rem);
+
+      /* Grille & rythme */
       --container-max: 1400px;
+      --grid-gap: clamp(1.25rem, 2.5vw, 2.5rem);
+      --section-space: clamp(4.5rem, 6vw, 6.5rem);
       --ease-editorial: cubic-bezier(0.19, 1, 0.22, 1);
       --ease-snappy: cubic-bezier(0.25, 1, 0.5, 1);
       --trans-base: 0.35s var(--ease-editorial);
@@ -61,11 +74,12 @@
       background-color: var(--c-ivoire);
       color: var(--c-noir);
       font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.6;
+      font-size: clamp(15px, 14px + 0.25vw, 17px);
+      line-height: 1.65;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-offset, 7.5rem);
       overflow-x: clip;
     }
 
@@ -89,7 +103,7 @@
       max-width: var(--container-max);
       margin: 0 auto;
       padding: 0 2rem;
-      opacity: 0.35;
+      opacity: 0.16;
     }
 
     .grid-line-col {
@@ -114,218 +128,245 @@
     }
 
     /* ==========================================================================
-       MASTHEAD ARCHITECTURAL : FOLIO, DATE & CONTRÃ”LES HAUT DE PAGE
+       EN-TÊTE — BARRE ÉDITORIALE UNIQUE
        ========================================================================== */
-    .masthead-folio {
-      border-bottom: 1px solid var(--c-hairline);
-      padding: 0.65rem 0;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(245, 241, 233, 0.95);
-      backdrop-filter: blur(12px);
+    header.site-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      transition: background 0.3s;
-    }
-    body.theme-studio-dark .masthead-folio {
-      background: rgba(19, 19, 17, 0.95);
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--c-hairline);
+      transition:
+        background 0.35s var(--ease-editorial),
+        border-color 0.35s var(--ease-editorial);
     }
 
-    .masthead-inner {
+    body.theme-studio-dark header.site-header {
+      background: rgba(19, 19, 17, 0.92);
+    }
+
+    header.site-header.is-scrolled {
+      background: rgba(250, 247, 242, 0.96);
+    }
+
+    body.theme-studio-dark header.site-header.is-scrolled {
+      background: rgba(19, 19, 17, 0.96);
+    }
+
+    .header-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.4fr) minmax(0, auto);
+      align-items: center;
+      gap: 1rem 2rem;
+      padding: 1rem 0;
+      transition: padding 0.35s var(--ease-editorial);
+    }
+
+    header.site-header.is-scrolled .header-shell {
+      padding: 0.65rem 0;
+    }
+
+    header.site-header.is-scrolled .header-brand-role,
+    header.site-header.is-scrolled .header-availability,
+    header.site-header.is-scrolled .header-preferences {
+      display: none;
+    }
+
+    .header-brand {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.15rem;
+      text-decoration: none;
+      color: var(--c-noir);
+      min-width: 0;
     }
 
-    .folio-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
+    .header-brand-name {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 0.92rem + 0.35vw, 1.125rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-brand-role {
+      font-family: var(--font-body);
+      font-size: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+      font-weight: 400;
       color: var(--c-noir-muted);
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .folio-marker {
-      color: var(--c-orange);
-      font-weight: 700;
-    }
-
-    .folio-status-beacon {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--c-noir);
-      font-weight: 700;
-    }
-
-    .beacon-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--c-orange);
-      position: relative;
-    }
-    .beacon-dot::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: var(--c-orange);
-      opacity: 0.35;
-      animation: beaconWave 2s infinite ease-out;
-    }
-
-    @keyframes beaconWave {
-      0% { transform: scale(0.8); opacity: 0.8; }
-      100% { transform: scale(2.4); opacity: 0; }
-    }
-
-    .folio-controls {
+    .header-nav {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.35rem 1.35rem;
+      min-width: 0;
     }
 
-    .btn-folio-toggle {
-      background: transparent;
-      border: 1px solid var(--c-hairline);
-      padding: 0.3rem 0.75rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+    .header-nav-link {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--c-noir-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s var(--ease-snappy);
+    }
+
+    .header-nav-index {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.75rem;
+      color: var(--c-noir-muted);
+      opacity: 0.55;
+      margin-right: 0.35rem;
+    }
+
+    .header-nav-link:hover,
+    .header-nav-link:focus-visible {
       color: var(--c-noir);
-      cursor: pointer;
+    }
+
+    .header-nav-link:hover .header-nav-index,
+    .header-nav-link:focus-visible .header-nav-index {
+      color: var(--c-orange);
+      opacity: 1;
+    }
+
+    .header-end {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.85rem 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .header-availability {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      transition: all 0.2s var(--ease-snappy);
-    }
-
-    .btn-folio-toggle:hover {
-      background: var(--c-noir);
-      color: var(--c-ivoire);
-      border-color: var(--c-noir);
-    }
-
-    /* ==========================================================================
-       NAVIGATION PRINCIPALE : RYTHME Ã‰DITORIAL & MONOGRAMME
-       ========================================================================== */
-    header.site-header {
-      padding: 2.4rem 0 1.8rem;
-      border-bottom: 2px solid var(--c-hairline-strong);
-    }
-
-    .header-layout {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 2rem;
-    }
-
-    .brand-monogram-lockup {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      text-decoration: none;
-      color: var(--c-noir);
-    }
-
-    .brand-index-tag {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--c-orange);
-    }
-
-    .brand-name-huge {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 2.5vw, 2.1rem);
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 0.95;
-      text-transform: uppercase;
-    }
-
-    .brand-role-caption {
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 400;
       color: var(--c-noir-muted);
-      letter-spacing: 0.06em;
-      margin-top: 0.2rem;
+      white-space: nowrap;
     }
 
-    nav.site-nav {
-      display: flex;
-      align-items: center;
-      gap: 2.4rem;
-    }
-
-    .nav-link-item {
-      text-decoration: none;
-      color: var(--c-noir);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      position: relative;
-      padding-bottom: 0.3rem;
-      transition: color 0.2s;
-    }
-
-    .nav-link-item .nav-idx {
-      font-size: 0.65rem;
-      color: var(--c-orange);
-      margin-right: 0.3rem;
-    }
-
-    .nav-link-item::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
+    .header-availability-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
       background: var(--c-orange);
-      transition: width 0.3s var(--ease-editorial);
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px var(--c-orange-glow);
     }
 
-    .nav-link-item:hover::after {
-      width: 100%;
-    }
-
-    .header-contact-action {
-      background: var(--c-noir);
-      color: var(--c-ivoire);
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      text-decoration: none;
-      padding: 0.75rem 1.4rem;
-      border: 1px solid var(--c-noir);
+    .header-preferences {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: all 0.25s var(--ease-snappy);
+      gap: 0.65rem;
     }
 
-    .header-contact-action:hover {
-      background: var(--c-orange);
+    .header-pref-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--c-noir-muted);
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: 3px;
+      transition:
+        color 0.2s var(--ease-snappy),
+        text-decoration-color 0.2s var(--ease-snappy);
+    }
+
+    .header-pref-btn:hover,
+    .header-pref-btn:focus-visible {
+      color: var(--c-noir);
+      text-decoration-color: var(--c-hairline-strong);
+    }
+
+    .header-pref-btn[aria-pressed="true"] {
+      color: var(--c-noir);
+    }
+
+    .header-cta {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--c-noir);
+      text-decoration: none;
+      white-space: nowrap;
+      padding-bottom: 0.1rem;
+      border-bottom: 1.5px solid var(--c-orange);
+      transition:
+        color 0.2s var(--ease-snappy),
+        border-color 0.2s var(--ease-snappy);
+    }
+
+    .header-cta:hover,
+    .header-cta:focus-visible {
+      color: var(--c-orange);
       border-color: var(--c-orange);
-      color: #fff;
-      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1180px) {
+      .header-availability {
+        display: none;
+      }
+
+      .header-shell {
+        grid-template-columns: minmax(0, 1fr) minmax(0, auto);
+      }
+
+      .header-nav {
+        display: none;
+      }
     }
 
     @media (max-width: 900px) {
-      nav.site-nav { display: none; }
+      .header-preferences {
+        display: none;
+      }
+
+      .header-shell {
+        gap: 0.75rem;
+      }
+
+      .header-brand {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .header-brand-role {
+        display: none;
+      }
+
+      .header-cta {
+        display: none;
+      }
+    }
+
+    /* Alias hérités (études de cas, etc.) */
+    .folio-marker {
+      color: var(--c-orange);
+      font-weight: 600;
     }
 
     /* ==========================================================================
@@ -340,7 +381,7 @@
     .hero-composition-grid {
       display: grid;
       grid-template-columns: 1.18fr 0.82fr;
-      gap: 4rem;
+      gap: clamp(2.5rem, 5vw, 4rem);
       align-items: stretch;
     }
 
@@ -359,7 +400,8 @@
     .hero-lead-col {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 0;
     }
 
     .hero-editorial-meta {
@@ -381,19 +423,20 @@
     }
 
     .hero-monumental-title {
-      font-size: clamp(2.9rem, 5.6vw, 5.2rem);
-      line-height: 0.98;
-      font-weight: 900;
-      letter-spacing: -0.04em;
+      font-size: var(--type-title-xl);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.02em;
       color: var(--c-noir);
       margin-bottom: 2.5rem;
-      overflow-wrap: anywhere;
+      max-width: 14em;
+      text-wrap: balance;
     }
 
     .title-line-block {
       display: block;
       font-family: var(--font-display);
-      text-transform: uppercase;
+      text-transform: none;
     }
 
     .title-line-serif-accent {
@@ -408,10 +451,10 @@
     }
 
     .hero-statement-text {
-      font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+      font-size: var(--type-body-lg);
       line-height: 1.65;
       color: var(--c-noir-muted);
-      max-width: 650px;
+      max-width: 42rem;
       margin-bottom: 2.8rem;
     }
 
@@ -580,10 +623,11 @@
     }
 
     .architectural-portrait-wrapper {
-      border: 2px solid var(--c-noir);
-      background: var(--c-noir);
-      padding: 12px;
+      border: 1px solid var(--c-hairline-strong);
+      background: var(--c-ivoire-paper);
+      padding: 10px;
       position: relative;
+      box-shadow: 0 24px 48px rgba(22, 22, 20, 0.06);
     }
 
     .portrait-image-inset {
@@ -613,7 +657,7 @@
       justify-content: space-between;
       font-family: var(--font-mono);
       font-size: 0.72rem;
-      color: #fff;
+      color: var(--c-noir-muted);
     }
 
     .plate-author-title {
@@ -636,18 +680,19 @@
        SECTION BANDEAU CONTINU : RYTHME & MANIFESTE KINÃ‰TIQUE
        ========================================================================== */
     .ticker-statement-band {
+      border-top: 1px solid var(--c-hairline);
       border-bottom: 1px solid var(--c-hairline);
-      padding: 1rem 0;
-      background: var(--c-noir);
-      color: var(--c-ivoire);
+      padding: 0.85rem 0;
+      background: var(--c-ivoire-paper);
+      color: var(--c-noir-muted);
       overflow: hidden;
       overflow-x: clip;
       max-width: 100%;
       font-family: var(--font-display);
-      font-size: clamp(0.95rem, 1.4vw, 1.25rem);
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-size: clamp(0.8125rem, 0.78rem + 0.35vw, 0.9375rem);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: none;
       white-space: nowrap;
     }
 
@@ -678,18 +723,32 @@
        SECTION 01 : CATALOGUE DES RÃ‰ALISATIONS (EDITORIAL DOSSIER)
        ========================================================================== */
     section.projects-catalogue {
-      padding: 6.5rem 0;
+      padding: var(--section-space) 0;
       border-bottom: 1px solid var(--c-hairline);
+    }
+
+    .section-index-label {
+      margin-bottom: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: var(--type-meta);
+      letter-spacing: 0.14em;
+      color: var(--c-orange);
+      text-transform: uppercase;
+    }
+
+    .section-index-label--inverse {
+      color: var(--c-orange);
     }
 
     .section-editorial-header {
       display: grid;
-      grid-template-columns: 0.3fr 0.7fr;
-      gap: 3rem;
-      margin-bottom: 4.5rem;
-      align-items: flex-end;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: var(--grid-gap);
+      row-gap: clamp(1.5rem, 3vw, 2.5rem);
+      margin-bottom: clamp(3rem, 5vw, 4.5rem);
+      align-items: start;
       border-bottom: 1px solid var(--c-hairline);
-      padding-bottom: 2rem;
+      padding-bottom: clamp(1.75rem, 3vw, 2.25rem);
     }
 
     .section-editorial-header > * {
@@ -697,10 +756,31 @@
       max-width: 100%;
     }
 
+    .section-editorial-header > div:first-child {
+      grid-column: 1 / span 6;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .section-editorial-header > .sec-editorial-desc {
+      grid-column: 7 / span 6;
+      align-self: start;
+      padding-top: 0.35rem;
+    }
+
     @media (max-width: 900px) {
       .section-editorial-header {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+      }
+
+      .section-editorial-header > div:first-child,
+      .section-editorial-header > .sec-editorial-desc {
+        grid-column: 1 / -1;
+      }
+
+      .section-editorial-header > .sec-editorial-desc {
+        padding-top: 0;
       }
     }
 
@@ -716,18 +796,21 @@
 
     .sec-editorial-title {
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+      font-size: var(--type-title-lg);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.12;
       color: var(--c-noir);
-      margin-top: 0.4rem;
+      margin-top: 0;
+      max-width: 14em;
+      text-wrap: balance;
     }
 
     .sec-editorial-desc {
-      font-size: 1.12rem;
+      font-size: var(--type-body-lg);
       line-height: 1.65;
       color: var(--c-noir-muted);
+      max-width: 36rem;
     }
 
     /* Liste des Projets en Fiches Architecturales */
@@ -738,13 +821,23 @@
     }
 
     .dossier-entry-block {
-      border-top: 2px solid var(--c-noir);
+      border-top: 1px solid var(--c-hairline-strong);
       padding-top: 2rem;
       display: grid;
-      grid-template-columns: 0.12fr 0.48fr 0.4fr;
-      gap: 2.5rem;
-      align-items: flex-start;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: center;
       transition: all var(--trans-base);
+    }
+
+    .dossier-entry-block:nth-child(even) .dossier-visual-canvas {
+      order: -1;
+    }
+
+    @media (max-width: 1080px) {
+      .dossier-entry-block:nth-child(even) .dossier-visual-canvas {
+        order: 0;
+      }
     }
 
     .dossier-entry-block > * {
@@ -761,7 +854,7 @@
 
     .dossier-folio-number {
       font-family: var(--font-editorial);
-      font-size: 2.8rem;
+      font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
       font-style: italic;
       line-height: 1;
       color: var(--c-orange);
@@ -776,21 +869,27 @@
     .dossier-category-strip {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.65rem;
+      font-family: var(--font-body);
+      font-size: var(--type-meta);
+      text-transform: none;
+      letter-spacing: 0.02em;
       color: var(--c-noir-muted);
+    }
+
+    .dossier-category-sep {
+      display: none;
     }
 
     .dossier-project-heading {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 3.2vw, 2.7rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+      font-size: var(--type-title-md);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
       color: var(--c-noir);
+      text-wrap: balance;
     }
 
     .dossier-lead-summary {
@@ -836,7 +935,7 @@
     .dossier-actions-row {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
       margin-top: 0.5rem;
     }
@@ -844,17 +943,20 @@
     .btn-dossier-expand {
       background: var(--c-noir);
       color: var(--c-ivoire);
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.85rem 1.4rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+      padding: 0.75rem 1.25rem;
       border: 1px solid var(--c-noir);
+      border-radius: 999px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      width: auto;
+      max-width: 100%;
       transition: all 0.2s ease;
     }
 
@@ -868,17 +970,20 @@
     .btn-live-launch {
       background: transparent;
       color: var(--c-noir);
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.85rem 1.3rem;
-      border: 1px solid var(--c-noir);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+      padding: 0.75rem 1.25rem;
+      border: 1.5px solid var(--c-hairline-strong);
+      border-radius: 999px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      width: auto;
+      max-width: 100%;
       transition: all 0.2s ease;
     }
 
@@ -890,21 +995,32 @@
     /* Cadre de ScÃ©nographie Visuelle du Projet */
     .dossier-visual-canvas {
       position: relative;
-      border: 1px solid var(--c-noir);
-      min-height: 340px;
+      border: none;
+      border-radius: 16px;
+      min-height: clamp(280px, 32vw, 380px);
+      width: 100%;
       overflow: hidden;
       cursor: pointer;
       background: #171816;
+      box-shadow: 0 16px 40px rgba(36, 35, 32, 0.1);
     }
 
     .canvas-plate-art {
       width: 100%;
+      min-height: clamp(280px, 32vw, 380px);
       height: 100%;
       padding: 2.2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
+    }
+
+    .plaque-visuel-image {
+      position: relative;
+      width: 100%;
+      min-height: clamp(280px, 32vw, 380px);
+      height: 100%;
     }
 
     .art-plate-ocr {
@@ -967,20 +1083,20 @@
        SECTION 02 : Ã€ PROPOS & MANIFESTE DE L'ATELIER
        ========================================================================== */
     section.about-manifesto-sec {
-      padding: 6.5rem 0;
+      padding: var(--section-space) 0;
       border-bottom: 1px solid var(--c-hairline);
       background: var(--c-ivoire-paper);
     }
 
     .monumental-quote-display {
       font-family: var(--font-editorial);
-      font-size: clamp(2rem, 3.8vw, 3.3rem);
+      font-size: var(--type-quote);
       font-style: italic;
       font-weight: 400;
-      line-height: 1.2;
+      line-height: 1.35;
       color: var(--c-noir);
-      max-width: 1050px;
-      margin-bottom: 4rem;
+      max-width: 46rem;
+      margin-bottom: clamp(2.5rem, 4vw, 4rem);
       position: relative;
     }
 
@@ -988,7 +1104,7 @@
       color: var(--c-orange);
       font-style: normal;
       font-family: var(--font-display);
-      font-weight: 800;
+      font-weight: 600;
     }
 
     .about-editorial-columns {
@@ -1006,7 +1122,7 @@
     }
 
     .editorial-narrative-col p {
-      font-size: 1.15rem;
+      font-size: var(--type-body-lg);
       line-height: 1.75;
       color: var(--c-noir-muted);
       margin-bottom: 1.6rem;
@@ -1048,9 +1164,9 @@
 
     .pillar-entry-heading {
       font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-size: var(--type-title-sm);
+      font-weight: 600;
+      letter-spacing: -0.015em;
       color: var(--c-noir);
     }
 
@@ -1064,30 +1180,91 @@
        SECTION 03 : SPÃ‰CIFICATION DES COMPÃ‰TENCES (ARCHITECTURAL SPEC SHEET)
        ========================================================================== */
     section.competences-spec-sec {
-      padding: 6.5rem 0;
+      padding: var(--section-space) 0;
       border-bottom: 1px solid var(--c-hairline);
     }
 
-    .skills-specification-table {
-      border-top: 2px solid var(--c-noir);
+    .skills-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .skills-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .skill-category-card {
+      background: var(--c-ivoire-paper);
+      border-radius: 12px;
+      padding: 1.5rem 1.65rem;
+      border: 1px solid var(--c-hairline);
+    }
+
+    .skill-category-card h3 {
+      font-family: var(--font-display);
+      font-size: var(--type-title-sm);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+      color: var(--c-noir);
+    }
+
+    .skill-category-card ul {
+      list-style: none;
       display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .skill-category-card li {
+      font-size: var(--type-body-lg);
+      color: var(--c-noir-muted);
+    }
+
+    .skill-category-card li:not(:last-child)::after {
+      content: "·";
+      margin-left: 0.5rem;
+      color: var(--c-hairline-strong);
+    }
+
+    .skills-specification-table {
+      border-top: 1px solid var(--c-hairline-strong);
+      display: none;
       flex-direction: column;
     }
 
     .skill-spec-row {
       display: grid;
-      grid-template-columns: 0.3fr 0.7fr;
-      gap: 2rem;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: var(--grid-gap);
       padding: 2rem 0;
       border-bottom: 1px solid var(--c-hairline);
-      align-items: baseline;
+      align-items: start;
       transition: background 0.2s;
+    }
+
+    .skill-spec-row .skill-domain-title {
+      grid-column: 1 / span 4;
+    }
+
+    .skill-spec-row .skill-tags-flex {
+      grid-column: 5 / span 8;
     }
 
     @media (max-width: 800px) {
       .skill-spec-row {
         grid-template-columns: 1fr;
-        gap: 1rem;
+      }
+
+      .skill-spec-row .skill-domain-title,
+      .skill-spec-row .skill-tags-flex {
+        grid-column: 1 / -1;
       }
     }
 
@@ -1097,8 +1274,8 @@
 
     .skill-domain-title {
       font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 800;
+      font-size: var(--type-title-sm);
+      font-weight: 600;
       color: var(--c-noir);
       display: flex;
       align-items: center;
@@ -1151,12 +1328,14 @@
 
     .epilogue-huge-prompt {
       font-family: var(--font-display);
-      font-size: clamp(2.6rem, 6.2vw, 5.8rem);
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 0.98;
-      text-transform: uppercase;
-      margin-bottom: 3.5rem;
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      text-transform: none;
+      margin-bottom: 3rem;
+      max-width: 16em;
+      text-wrap: balance;
     }
 
     .epilogue-huge-prompt span.serif-italic {
@@ -1181,8 +1360,8 @@
 
     .dispatch-info-block h3 {
       font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-weight: 800;
+      font-size: var(--type-title-sm);
+      font-weight: 600;
       margin-bottom: 0.6rem;
     }
 
@@ -1345,6 +1524,20 @@
 
     .drawer-backdrop-mask.active .drawer-technical-panel {
       transform: translateX(0);
+    }
+
+    .drawer-project-title {
+      font-family: var(--font-display);
+      font-size: var(--type-title-md);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+      text-wrap: balance;
+    }
+
+    .drawer-project-subtitle {
+      font-size: var(--type-body-lg);
+      line-height: 1.6;
     }
 
     .drawer-nav-bar {

@@ -1,6 +1,19 @@
 import type { ReactNode } from "react";
 
-export type IdentifiantProjet = "ocr" | "production" | "eagence" | "mariage";
+export type IdentifiantProjet =
+  | "ocr"
+  | "production"
+  | "eagence"
+  | "ambassade"
+  | "mariage";
+
+export const ORDRE_PROJETS: IdentifiantProjet[] = [
+  "ocr",
+  "production",
+  "eagence",
+  "ambassade",
+  "mariage",
+];
 
 export type TypePerspective = "frontend" | "analyste";
 

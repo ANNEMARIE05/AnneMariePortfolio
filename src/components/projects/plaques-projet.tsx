@@ -1,131 +1,158 @@
+import Image from "next/image";
 import type { IdentifiantProjet } from "@/types/projet";
 
 interface PropsPlaqueProjet {
   identifiant: IdentifiantProjet;
+  variante?: "catalogue" | "drawer";
 }
 
-export function PlaqueProjet({ identifiant }: PropsPlaqueProjet) {
+function MaquetteOcr() {
+  return (
+    <div className="mock-ui mock-ui--ocr">
+      <div className="mock-ui-bar">
+        <span>Portail OCR</span>
+        <span className="mock-ui-pill mock-ui-pill--ok">Crédits : 120</span>
+      </div>
+      <div className="mock-ui-dropzone">
+        <span>Déposer un document PDF</span>
+        <span className="mock-ui-hint">ou parcourir les fichiers</span>
+      </div>
+      <div className="mock-ui-table">
+        <div className="mock-ui-row mock-ui-row--head">
+          <span>Fichier</span>
+          <span>Statut</span>
+        </div>
+        <div className="mock-ui-row">
+          <span>facture_2025.pdf</span>
+          <span className="mock-ui-status">Extraction terminée</span>
+        </div>
+        <div className="mock-ui-row">
+          <span>contrat_scan.pdf</span>
+          <span className="mock-ui-status mock-ui-status--wait">
+            En cours…
+          </span>
+        </div>
+      </div>
+      <p className="mock-ui-caption">Maquette d&apos;interface conceptuelle</p>
+    </div>
+  );
+}
+
+function MaquetteProduction() {
+  return (
+    <div className="mock-ui mock-ui--production">
+      <div className="mock-ui-bar">
+        <span>Pilotage production</span>
+        <span className="mock-ui-pill">Atelier 04</span>
+      </div>
+      <div className="mock-ui-kpis">
+        <div>
+          <span className="mock-ui-kpi-label">Tâches actives</span>
+          <span className="mock-ui-kpi-value">24</span>
+        </div>
+        <div>
+          <span className="mock-ui-kpi-label">Avancement</span>
+          <span className="mock-ui-kpi-value">78%</span>
+        </div>
+      </div>
+      <div className="mock-ui-progress">
+        <div className="mock-ui-progress-fill" />
+      </div>
+      <ul className="mock-ui-task-list">
+        <li>
+          <span>Préparation ligne A</span>
+          <span className="mock-ui-tag">Priorité haute</span>
+        </li>
+        <li>
+          <span>Contrôle qualité</span>
+          <span className="mock-ui-tag mock-ui-tag--muted">En cours</span>
+        </li>
+      </ul>
+      <p className="mock-ui-caption">Maquette d&apos;interface conceptuelle</p>
+    </div>
+  );
+}
+
+function MaquetteMariage() {
+  return (
+    <div className="mock-ui mock-ui--mariage">
+      <p className="mock-mariage-names">Stéphane & Marie</p>
+      <p className="mock-mariage-date">Invitation digitale</p>
+      <div className="mock-mariage-rsvp">
+        <span>Confirmer votre présence</span>
+        <span className="mock-mariage-btn">RSVP</span>
+      </div>
+      <p className="mock-ui-caption mock-ui-caption--light">
+        Projet en production · stephane-et-marie.site
+      </p>
+    </div>
+  );
+}
+
+function MaquetteAmbassade() {
+  return (
+    <div className="mock-ui mock-ui--ambassade">
+      <div className="mock-ui-bar">
+        <span>Portail institutionnel</span>
+        <span className="mock-ui-pill">RDC / RDA</span>
+      </div>
+      <div className="mock-ui-ambassade-grid">
+        <div className="mock-ui-amb-card">Services consulaires</div>
+        <div className="mock-ui-amb-card">Actualités</div>
+        <div className="mock-ui-amb-card">Contact & horaires</div>
+      </div>
+      <p className="mock-ui-caption">Maquette d&apos;interface conceptuelle</p>
+    </div>
+  );
+}
+
+export function PlaqueProjet({
+  identifiant,
+  variante = "catalogue",
+}: PropsPlaqueProjet) {
+  const classe =
+    variante === "drawer" ? "plaque-projet plaque-projet--drawer" : "plaque-projet";
+
   switch (identifiant) {
     case "ocr":
       return (
-        <div className="canvas-plate-art art-plate-ocr">
-          <div className="canvas-corner-tag">FIG. 01 — ARCHITECTURE FLUX OCR</div>
-          <div className="canvas-schematic-box">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: "0.6rem",
-                color: "#fff",
-              }}
-            >
-              <span>DOC_SCAN_2026.PDF</span>
-              <span style={{ color: "#8DE898" }}>EXTRACTION 100%</span>
-            </div>
-            <div style={{ fontSize: "0.7rem", color: "#ABA89F" }}>
-              • Gestion session utilisateur & crédits
-              <br />
-              • Visualisation des métadonnées extraites
-              <br />• Interface réactive sous Next.js & Tailwind
-            </div>
-          </div>
-          <div className="canvas-caption-strip">
-            <span>Composition d&apos;interface conceptuelle</span>
-            <span>Dossier 01 ↗</span>
-          </div>
+        <div className={classe}>
+          <MaquetteOcr />
         </div>
       );
     case "production":
       return (
-        <div className="canvas-plate-art art-plate-production">
-          <div className="canvas-corner-tag">FIG. 02 — COCKPIT DE GESTION</div>
-          <div className="canvas-schematic-box">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: "0.5rem",
-                color: "#fff",
-              }}
-            >
-              <span>ATELIER 04 — CADENCE</span>
-              <span style={{ color: "var(--c-orange)" }}>EN FLUX</span>
-            </div>
-            <div
-              style={{
-                height: "6px",
-                background: "rgba(255,255,255,0.15)",
-                marginBottom: "0.6rem",
-              }}
-            >
-              <div
-                style={{
-                  width: "82%",
-                  height: "100%",
-                  background: "var(--c-orange)",
-                }}
-              />
-            </div>
-            <div style={{ fontSize: "0.7rem", color: "#A8B8A6" }}>
-              • Supervision des ressources affectées
-              <br />• Vues filtrées par niveau de priorité
-            </div>
-          </div>
-          <div className="canvas-caption-strip">
-            <span>Composition d&apos;interface conceptuelle</span>
-            <span>Dossier 02 ↗</span>
-          </div>
-        </div>
-      );
-    case "eagence":
-      return (
-        <div className="canvas-plate-art art-plate-eagence">
-          <div className="canvas-corner-tag">FIG. 03 — SHOWCASE VITRINE</div>
-          <div className="canvas-schematic-box">
-            <div
-              style={{
-                fontWeight: 700,
-                color: "#fff",
-                marginBottom: "0.3rem",
-              }}
-            >
-              Paymoney Digital Platform
-            </div>
-            <div style={{ fontSize: "0.7rem", color: "#C0BDCF" }}>
-              • Grille responsive adaptative
-              <br />• Structure éditoriale orientée conversion
-            </div>
-          </div>
-          <div className="canvas-caption-strip">
-            <span>Composition d&apos;interface conceptuelle</span>
-            <span>Dossier 03 ↗</span>
-          </div>
+        <div className={classe}>
+          <MaquetteProduction />
         </div>
       );
     case "mariage":
       return (
-        <div className="canvas-plate-art art-plate-mariage">
-          <div className="canvas-corner-tag">FIG. 04 — EXPÉRIENCE ÉVÉNEMENTIELLE</div>
-          <div className="canvas-schematic-box">
-            <div
-              style={{
-                fontFamily: "var(--font-editorial)",
-                fontSize: "1.8rem",
-                fontStyle: "italic",
-                color: "var(--c-noir)",
-                marginBottom: "0.3rem",
-              }}
-            >
-              Stéphane & Marie
-            </div>
-            <div style={{ fontSize: "0.72rem", color: "var(--c-noir-muted)" }}>
-              • Module RSVP interactif
-              <br />• Consultation sécurisée des présences
-            </div>
-          </div>
-          <div className="canvas-caption-strip">
-            <span>Projet déployé en ligne</span>
-            <span>stephane-et-marie.site ↗</span>
+        <div className={classe}>
+          <MaquetteMariage />
+        </div>
+      );
+    case "ambassade":
+      return (
+        <div className={classe}>
+          <MaquetteAmbassade />
+        </div>
+      );
+    case "eagence":
+      return (
+        <div className={`${classe} plaque-projet--photo`}>
+          <Image
+            src="/images/project-aura.jpg"
+            alt="Aperçu du site vitrine EAgence Paymoney"
+            fill
+            sizes="(max-width: 1080px) 100vw, 45vw"
+            className="object-cover"
+          />
+          <div className="plaque-visuel-overlay">
+            <span className="plaque-visuel-label">
+              Composition illustrative · EAgence
+            </span>
+            <span className="plaque-visuel-title">Paymoney — vitrine</span>
           </div>
         </div>
       );

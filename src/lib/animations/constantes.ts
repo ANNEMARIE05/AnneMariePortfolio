@@ -6,4 +6,4 @@ export const DUREE_REVEAL_SECTION = 0.85;
 export const DECALAGE_SCROLL_MASTHEAD = 72;
 
 export const SELECTEUR_BOUTONS_MICRO =
-  ".btn-solid-orange, .btn-outline-ink, .btn-dispatch-mail, .header-contact-action, .btn-dossier-expand, .btn-live-launch, .btn-folio-toggle, .btn-copy-address, .nav-link-item";
+  ".btn-solid-orange, .btn-outline-ink, .btn-dispatch-mail, .header-cta, .btn-dossier-expand, .btn-live-launch, .header-pref-btn, .btn-copy-address, .header-nav-link";

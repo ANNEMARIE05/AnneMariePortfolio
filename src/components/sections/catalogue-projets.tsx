@@ -1,8 +1,13 @@
+"use client";
+
 import { Container } from "@/components/layout/container";
 import { EntreeDossier } from "@/components/projects/entree-dossier";
 import { ENTREES_CATALOGUE_PROJETS } from "@/data/projets-catalogue";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function CatalogueProjets() {
+  const { t } = useI18n();
+
   return (
     <section
       id="projets"
@@ -12,17 +17,10 @@ export function CatalogueProjets() {
       <Container>
         <div className="section-editorial-header" data-reveal-entete="">
           <div>
-            <span className="sec-index-number">
-              SECTION 01 // TRAVAUX CHOISIS
-            </span>
-            <h2 className="sec-editorial-title">Catalogue des Réalisations</h2>
+            <span className="sec-index-number">{t.projects.label}</span>
+            <h2 className="sec-editorial-title">{t.projects.title}</h2>
           </div>
-          <p className="sec-editorial-desc">
-            Chaque projet illustre une typologie d&apos;interface singulière :
-            applications documentaires à forte valeur ajoutée, outils de
-            pilotage opérationnel, vitrines institutionnelles et projets
-            personnels en production.
-          </p>
+          <p className="sec-editorial-desc">{t.projects.desc}</p>
         </div>
 
         <div className="catalogue-dossier-list" data-reveal-corps="">

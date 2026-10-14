@@ -33,7 +33,9 @@ export function AnimationHero({ children }: PropsAnimationHero) {
       const finaliserHero = () => {
         scope.setAttribute("data-hero-ready", "");
         scope
-          .querySelectorAll<HTMLElement>("[data-hero-reveal], [data-hero-ligne-titre]")
+          .querySelectorAll<HTMLElement>(
+            "[data-hero-reveal], [data-hero-ligne-titre]",
+          )
           .forEach((element) => {
             gsap.set(element, { clearProps: "opacity,visibility,transform" });
             element.style.willChange = "auto";
@@ -48,55 +50,55 @@ export function AnimationHero({ children }: PropsAnimationHero) {
 
         timeline
           .from("[data-hero-reveal='meta']", {
-            y: 18,
+            y: 14,
             autoAlpha: 0,
-            duration: 0.65,
+            duration: 0.55,
           })
           .from(
             lignesTitre,
             {
-              yPercent: 108,
-              duration: 0.9,
-              stagger: 0.11,
+              yPercent: 100,
+              duration: 0.85,
+              stagger: 0.1,
             },
-            "-=0.35",
+            "-=0.3",
           )
           .from(
             "[data-hero-reveal='statement']",
             {
-              y: 22,
+              y: 18,
               autoAlpha: 0,
               duration: DUREE_REVEAL_SECTION,
             },
-            "-=0.45",
+            "-=0.5",
           )
           .from(
-            "[data-hero-reveal='prisme']",
-            {
-              y: 28,
-              autoAlpha: 0,
-              duration: DUREE_REVEAL_SECTION,
-            },
-            "-=0.55",
-          )
-          .from(
-            "[data-hero-reveal='cta']",
+            "[data-hero-reveal='current-job']",
             {
               y: 16,
               autoAlpha: 0,
               duration: 0.55,
             },
-            "-=0.5",
+            "-=0.4",
+          )
+          .from(
+            "[data-hero-reveal='cta']",
+            {
+              y: 14,
+              autoAlpha: 0,
+              duration: 0.5,
+            },
+            "-=0.35",
           )
           .from(
             "[data-hero-reveal='portrait']",
             {
-              x: 36,
+              x: 28,
               autoAlpha: 0,
               scale: pointerFinDisponible() ? 0.98 : 1,
-              duration: 1.05,
+              duration: 0.95,
             },
-            "-=0.85",
+            "-=0.75",
           );
       }, scope);
 

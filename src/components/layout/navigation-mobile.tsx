@@ -2,11 +2,13 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { LIENS_NAVIGATION } from "@/data/navigation";
+import { useI18n } from "@/hooks/use-i18n";
 
 const SELECTEUR_FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function NavigationMobile() {
+  const { t } = useI18n();
   const [menuOuvert, setMenuOuvert] = useState(false);
   const idPanel = useId();
   const refPanel = useRef<HTMLElement>(null);
@@ -81,7 +83,7 @@ export function NavigationMobile() {
         aria-expanded={menuOuvert}
         aria-controls={idPanel}
         aria-haspopup="true"
-        aria-label={menuOuvert ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
+        aria-label={menuOuvert ? t.nav.menuClose : t.nav.menuOpen}
         onClick={() => setMenuOuvert((v) => !v)}
       >
         <span className="nav-mobile-toggle-label">
@@ -106,20 +108,10 @@ export function NavigationMobile() {
                 className="nav-mobile-link"
                 onClick={fermerMenu}
               >
-                <span className="nav-idx">{lien.indice}</span>
-                {lien.libelle}
+                {t.nav[lien.cle]}
               </a>
             </li>
           ))}
-          <li>
-            <a
-              href="#contact"
-              className="nav-mobile-link nav-mobile-link--accent"
-              onClick={fermerMenu}
-            >
-              Contact
-            </a>
-          </li>
         </ul>
       </nav>
 

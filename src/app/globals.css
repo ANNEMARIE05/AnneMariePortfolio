@@ -1,5 +1,35 @@
 @import "tailwindcss";
 @import "../styles/editorial.css";
+@import "../styles/studio-refonte.css";
+
+/* Garantit la grille projets / compétences si un import CSS est ignoré au build */
+.catalogue-dossier-list .dossier-entry-block {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+}
+
+.competences-spec-sec .skills-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .competences-spec-sec .skills-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-manifesto-sec .about-parcours-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.hero-lead-col {
+  justify-content: flex-start !important;
+}
 
 /* Accessibilité — évitement & focus */
 .lien-evitement {
@@ -34,42 +64,59 @@
 .header-actions-cluster {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   flex-shrink: 0;
 }
 
 .nav-mobile {
   display: none;
   position: relative;
+  z-index: 130;
 }
 
 .nav-mobile-toggle {
   background: transparent;
-  border: 1px solid var(--c-hairline-strong);
-  padding: 0.45rem 0.85rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  border: none;
+  padding: 0.35rem 0.15rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
   color: var(--c-noir);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+  transition:
+    background 0.2s var(--ease-snappy),
+    border-color 0.2s var(--ease-snappy),
+    color 0.2s var(--ease-snappy);
+}
+
+.nav-mobile-toggle:hover {
+  color: var(--c-orange);
 }
 
 .nav-mobile-panel {
   position: fixed;
-  top: 0;
+  top: var(--nav-offset, 0);
   right: 0;
   bottom: 0;
   width: min(100%, 320px);
-  background: var(--c-ivoire-paper);
+  background: rgba(250, 247, 242, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-left: 2px solid var(--c-noir);
-  z-index: 120;
-  padding: 5rem 1.5rem 2rem;
+  z-index: 125;
+  padding: 1.25rem 1.5rem 2rem;
   box-shadow: -12px 0 40px rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+body.theme-studio-dark .nav-mobile-panel {
+  background: rgba(24, 24, 22, 0.98);
 }
 
 .nav-mobile-panel.is-open {
@@ -88,25 +135,28 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
   color: var(--c-noir);
   text-decoration: none;
   border-bottom: 1px solid var(--c-hairline);
+  transition: color 0.2s ease, padding-left 0.25s var(--ease-editorial);
 }
 
-.nav-mobile-link--accent {
+.nav-mobile-link:hover,
+.nav-mobile-link:focus-visible {
   color: var(--c-orange);
-  margin-top: 0.5rem;
+  padding-left: 0.75rem;
 }
 
 .nav-mobile-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 110;
+  top: var(--nav-offset, 0);
+  z-index: 120;
   background: rgba(22, 22, 20, 0.45);
   border: none;
   cursor: pointer;
@@ -116,25 +166,6 @@
   .nav-mobile {
     display: block;
   }
-
-  .header-layout {
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-
-  .header-contact-action span:first-child {
-    max-width: 9rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 380px) {
-  .header-contact-action {
-    padding: 0.65rem 0.9rem;
-    font-size: 0.68rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -142,9 +173,6 @@
     animation: none !important;
   }
 
-  .beacon-dot::after {
-    animation: none !important;
-  }
 
   html {
     scroll-behavior: auto;

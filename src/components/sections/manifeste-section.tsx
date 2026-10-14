@@ -1,79 +1,66 @@
+"use client";
+
 import { Container } from "@/components/layout/container";
-import { PILIERS_METHODE } from "@/data/manifeste";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function ManifesteSection() {
+  const { t } = useI18n();
+
   return (
     <section
-      id="manifeste"
+      id="parcours"
       className="about-manifesto-sec"
       data-reveal-section=""
     >
       <Container>
-        <div
-          data-reveal-entete=""
-          style={{
-            marginBottom: "1.5rem",
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.75rem",
-            letterSpacing: "0.16em",
-            color: "var(--c-orange)",
-            textTransform: "uppercase",
-          }}
-        >
-          SECTION 02 // PARCOURS & PHILOSOPHIE
+        <div className="section-index-label" data-reveal-entete="">
+          {t.about.label}
         </div>
 
-        <div data-reveal-corps="">
-        <blockquote className="monumental-quote-display">
-          &ldquo;Ce qui me plaît dans le développement web, c&apos;est de partir
-          d&apos;une idée ou d&apos;un besoin et de lui donner vie à travers{" "}
-          <span className="accent-quote">une interface.</span>&rdquo;
-        </blockquote>
+        <div className="about-parcours-frame" data-reveal-corps="">
+          <div className="about-parcours-main">
+            <div className="about-parcours-voice">
+              <p className="about-lead-serif">
+                {t.about.quote}{" "}
+                <em>{t.about.quoteEm}</em> {t.about.quoteEnd}
+              </p>
 
-        <div className="about-editorial-columns">
-          <div className="editorial-narrative-col">
-            <p>
-              Je suis <strong>Anne Marie Agbonou</strong>, développeuse frontend
-              et analyste programmeuse.
-            </p>
-            <p>
-              J&apos;aime autant réfléchir à l&apos;organisation d&apos;une page
-              qu&apos;à ses interactions, ses détails visuels ou son
-              fonctionnement. Pour moi, une bonne interface ne doit pas seulement
-              être belle :{" "}
-              <strong>
-                elle doit être claire, agréable et répondre à un vrai besoin
-              </strong>
-              .
-            </p>
-          </div>
+              <div className="about-profile-lede">
+                <p>{t.about.p1}</p>
+                <p>{t.about.p2}</p>
+              </div>
 
-          <div className="editorial-narrative-col">
-            <p>
-              Au fil de mes expériences, j&apos;ai travaillé sur des applications
-              métier, des interfaces de gestion et des projets web plus créatifs.
-            </p>
-            <p>
-              Aujourd&apos;hui, je continue à approfondir mes compétences tout en
-              développant ma propre approche du frontend :{" "}
-              <strong>
-                créer des interfaces utiles, cohérentes et avec une vraie
-                personnalité
-              </strong>
-              .
-            </p>
-          </div>
-        </div>
-
-        <div className="method-pillars-grid">
-          {PILIERS_METHODE.map((pilier) => (
-            <div key={pilier.code} className="method-pillar-entry">
-              <span className="pillar-folio-code">{pilier.code}</span>
-              <h3 className="pillar-entry-heading">{pilier.titre}</h3>
-              <p className="pillar-entry-text">{pilier.texte}</p>
+              <div className="about-domaines">
+                <p className="about-domaines-label">{t.about.domainsLabel}</p>
+                <ul className="about-domaines-list">
+                  {t.about.domains.map((domaine) => (
+                    <li key={domaine}>{domaine}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          ))}
-        </div>
+
+            <div className="about-approach-panel" aria-label={t.about.approachLabel}>
+              <p className="about-approach-label">{t.about.approachLabel}</p>
+              <ul className="about-approach-list">
+                {t.about.pillars.map((pilier) => (
+                  <li key={pilier.title}>
+                    <span className="about-approach-item-title">
+                      {pilier.title}
+                    </span>
+                    <span className="about-approach-item-text">
+                      {pilier.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="about-parcours-suite">
+            <p>{t.about.p3}</p>
+            <p>{t.about.p4}</p>
+          </div>
         </div>
       </Container>
     </section>
