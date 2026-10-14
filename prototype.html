@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anne Marie Agbonou — Portfolio & Direction Éditoriale Frontend</title>
+  <meta name="description" content="Portfolio d'Anne Marie Agbonou, Développeuse Frontend & Analyste Programmeuse. Conception d'interfaces web singulières, rigueur d'ingénierie logicielle et sensibilité éditoriale.">
+  
+  <!-- Polices Google : Syne (display architectural), Fraunces (serif haute couture contrasté), Plus Jakarta Sans (corps moderne), Space Mono (données techniques & marginalia) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       SYSTÈME DE DESIGN ÉDITORIAL AVANCÉ — MANIFESTE TYPOGRAPHIQUE & GRILLE
+       Palette :
+       - Ivoire noble : #F5F1E9 (surface respirante, tons papier vergé)
+       - Encre noire : #161614 (structure graphique, densité d'impression)
+       - Terracotta Orange : #F16B45 (point de tension, impulsion)
+       - Vert Sauge poudré : #C7D5C0 (équilibre architectural)
+       - Lavande feutrée : #8C83A8 (subtilité, nuance éditoriale)
+       ========================================================================== */
+    :root {
+      --c-ivoire: #F5F1E9;
+      --c-ivoire-paper: #FAF7F2;
+      --c-ivoire-card: #ECE6DA;
+      --c-hairline: rgba(22, 22, 20, 0.12);
+      --c-hairline-strong: rgba(22, 22, 20, 0.28);
+      --c-noir: #161614;
+      --c-noir-muted: rgba(22, 22, 20, 0.7);
+      --c-noir-subtle: rgba(22, 22, 20, 0.05);
+      --c-orange: #F16B45;
+      --c-orange-glow: rgba(241, 107, 69, 0.2);
+      --c-sauge: #C7D5C0;
+      --c-sauge-ink: #4E6047;
+      --c-lavande: #8C83A8;
+      --c-lavande-ink: #554D6C;
+
+      /* Typographie & Rythme */
+      --font-display: 'Syne', -apple-system, sans-serif;
+      --font-editorial: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+
+      /* Proportions & Échelles */
+      --container-max: 1400px;
+      --ease-editorial: cubic-bezier(0.19, 1, 0.22, 1);
+      --ease-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+      --trans-base: 0.35s var(--ease-editorial);
+    }
+
+    /* Mode Studio Sombre */
+    body.theme-studio-dark {
+      --c-ivoire: #131311;
+      --c-ivoire-paper: #181816;
+      --c-ivoire-card: #20201D;
+      --c-hairline: rgba(245, 241, 233, 0.12);
+      --c-hairline-strong: rgba(245, 241, 233, 0.25);
+      --c-noir: #F5F1E9;
+      --c-noir-muted: rgba(245, 241, 233, 0.72);
+      --c-noir-subtle: rgba(245, 241, 233, 0.04);
+      --c-sauge-ink: #A4B89F;
+      --c-lavande-ink: #BDB7CF;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--c-ivoire);
+      color: var(--c-noir);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--c-ivoire);
+      color: var(--c-noir);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: background-color 0.4s var(--ease-editorial), color 0.4s var(--ease-editorial);
+    }
+
+    /* Trame d'architecture discrète et repères de composition */
+    .editorial-grid-lines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      opacity: 0.35;
+    }
+
+    .grid-line-col {
+      border-right: 1px dashed var(--c-hairline);
+      height: 100%;
+    }
+    .grid-line-col:first-child {
+      border-left: 1px dashed var(--c-hairline);
+    }
+
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 1.25rem; }
+      .editorial-grid-lines { display: none; }
+    }
+
+    /* ==========================================================================
+       MASTHEAD ARCHITECTURAL : FOLIO, DATE & CONTRÔLES HAUT DE PAGE
+       ========================================================================== */
+    .masthead-folio {
+      border-bottom: 1px solid var(--c-hairline);
+      padding: 0.65rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(245, 241, 233, 0.95);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background 0.3s;
+    }
+    body.theme-studio-dark .masthead-folio {
+      background: rgba(19, 19, 17, 0.95);
+    }
+
+    .masthead-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .folio-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--c-noir-muted);
+    }
+
+    .folio-marker {
+      color: var(--c-orange);
+      font-weight: 700;
+    }
+
+    .folio-status-beacon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--c-noir);
+      font-weight: 700;
+    }
+
+    .beacon-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c-orange);
+      position: relative;
+    }
+    .beacon-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: var(--c-orange);
+      opacity: 0.35;
+      animation: beaconWave 2s infinite ease-out;
+    }
+
+    @keyframes beaconWave {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    .folio-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-folio-toggle {
+      background: transparent;
+      border: 1px solid var(--c-hairline);
+      padding: 0.3rem 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--c-noir);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s var(--ease-snappy);
+    }
+
+    .btn-folio-toggle:hover {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    /* ==========================================================================
+       NAVIGATION PRINCIPALE : RYTHME ÉDITORIAL & MONOGRAMME
+       ========================================================================== */
+    header.site-header {
+      padding: 2.4rem 0 1.8rem;
+      border-bottom: 2px solid var(--c-hairline-strong);
+    }
+
+    .header-layout {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .brand-monogram-lockup {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      text-decoration: none;
+      color: var(--c-noir);
+    }
+
+    .brand-index-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-orange);
+    }
+
+    .brand-name-huge {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .brand-role-caption {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--c-noir-muted);
+      letter-spacing: 0.06em;
+      margin-top: 0.2rem;
+    }
+
+    nav.site-nav {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+    }
+
+    .nav-link-item {
+      text-decoration: none;
+      color: var(--c-noir);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .nav-link-item .nav-idx {
+      font-size: 0.65rem;
+      color: var(--c-orange);
+      margin-right: 0.3rem;
+    }
+
+    .nav-link-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--c-orange);
+      transition: width 0.3s var(--ease-editorial);
+    }
+
+    .nav-link-item:hover::after {
+      width: 100%;
+    }
+
+    .header-contact-action {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      padding: 0.75rem 1.4rem;
+      border: 1px solid var(--c-noir);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s var(--ease-snappy);
+    }
+
+    .header-contact-action:hover {
+      background: var(--c-orange);
+      border-color: var(--c-orange);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+      nav.site-nav { display: none; }
+    }
+
+    /* ==========================================================================
+       SECTION HERO : COMPOSITION ASYMÉTRIQUE & COUVERTURE DE REVUE D'ART
+       ========================================================================== */
+    section.hero-cover {
+      padding: 4rem 0 5rem;
+      position: relative;
+      border-bottom: 1px solid var(--c-hairline);
+    }
+
+    .hero-composition-grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 4rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-composition-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+    }
+
+    .hero-lead-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-editorial-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-noir-muted);
+    }
+
+    .hero-editorial-meta .meta-tag-bold {
+      color: var(--c-orange);
+      font-weight: 700;
+    }
+
+    .hero-monumental-title {
+      font-size: clamp(2.9rem, 5.6vw, 5.2rem);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--c-noir);
+      margin-bottom: 2.5rem;
+    }
+
+    .title-line-block {
+      display: block;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+    }
+
+    .title-line-serif-accent {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--c-orange);
+      letter-spacing: -0.02em;
+      display: inline-block;
+      margin-right: 0.2em;
+      text-transform: none;
+    }
+
+    .hero-statement-text {
+      font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+      line-height: 1.65;
+      color: var(--c-noir-muted);
+      max-width: 650px;
+      margin-bottom: 2.8rem;
+    }
+
+    .hero-statement-text strong {
+      color: var(--c-noir);
+      font-weight: 600;
+    }
+
+    /* Le Prisme Méthodologique Style "Table Traçante" */
+    .drafting-perspective-panel {
+      border: 1px solid var(--c-hairline-strong);
+      background: var(--c-ivoire-paper);
+      padding: 1.5rem 1.8rem;
+      margin-bottom: 2.8rem;
+      position: relative;
+    }
+
+    .drafting-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--c-hairline);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .drafting-switch-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .draft-tab-btn {
+      background: transparent;
+      border: 1px solid var(--c-hairline);
+      padding: 0.4rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--c-noir-muted);
+      transition: all 0.2s ease;
+    }
+
+    .draft-tab-btn.active {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    .draft-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .draft-spec-chip {
+      background: var(--c-ivoire);
+      border: 1px solid var(--c-hairline);
+      padding: 0.35rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--c-noir);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .draft-spec-chip:hover {
+      transform: translateY(-2px);
+      border-color: var(--c-orange);
+    }
+
+    .chip-code-symbol {
+      color: var(--c-orange);
+      font-weight: 700;
+    }
+
+    /* Actions Hero */
+    .hero-cta-ribbon {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .btn-solid-orange {
+      background: var(--c-orange);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      padding: 1rem 1.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid var(--c-orange);
+      transition: all 0.25s var(--ease-snappy);
+    }
+
+    .btn-solid-orange:hover {
+      background: #d6542f;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px var(--c-orange-glow);
+    }
+
+    .btn-outline-ink {
+      background: transparent;
+      color: var(--c-noir);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      padding: 1rem 1.7rem;
+      border: 1px solid var(--c-hairline-strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.25s var(--ease-snappy);
+    }
+
+    .btn-outline-ink:hover {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    .quick-copy-email-box {
+      border: 1px dashed var(--c-hairline-strong);
+      padding: 0.65rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--c-noir-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      transition: all 0.2s;
+    }
+
+    .quick-copy-email-box:hover {
+      border-color: var(--c-orange);
+      color: var(--c-noir);
+      background: rgba(241, 107, 69, 0.05);
+    }
+
+    /* Cadre Visuel Architectural (Portrait Auteur Inset) */
+    .hero-portrait-frame-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .architectural-portrait-wrapper {
+      border: 2px solid var(--c-noir);
+      background: var(--c-noir);
+      padding: 12px;
+      position: relative;
+    }
+
+    .portrait-image-inset {
+      position: relative;
+      aspect-ratio: 4 / 4.2;
+      overflow: hidden;
+      background: var(--c-ivoire-card);
+    }
+
+    .portrait-image-inset img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05) brightness(0.96);
+      transition: transform 0.8s var(--ease-editorial);
+    }
+
+    .architectural-portrait-wrapper:hover .portrait-image-inset img {
+      transform: scale(1.03);
+    }
+
+    .portrait-plate-legend {
+      padding: 0.9rem 0.4rem 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #fff;
+    }
+
+    .plate-author-title {
+      color: var(--c-sauge);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .portrait-corner-brackets {
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--c-orange);
+      line-height: 1;
+    }
+
+    /* ==========================================================================
+       SECTION BANDEAU CONTINU : RYTHME & MANIFESTE KINÉTIQUE
+       ========================================================================== */
+    .ticker-statement-band {
+      border-bottom: 1px solid var(--c-hairline);
+      padding: 1rem 0;
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      overflow: hidden;
+      font-family: var(--font-display);
+      font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      gap: 3rem;
+      animation: tickerRun 28s linear infinite;
+    }
+
+    @keyframes tickerRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-dot {
+      color: var(--c-orange);
+      margin: 0 0.5rem;
+    }
+
+    /* ==========================================================================
+       SECTION 01 : CATALOGUE DES RÉALISATIONS (EDITORIAL DOSSIER)
+       ========================================================================== */
+    section.projects-catalogue {
+      padding: 6.5rem 0;
+      border-bottom: 1px solid var(--c-hairline);
+    }
+
+    .section-editorial-header {
+      display: grid;
+      grid-template-columns: 0.3fr 0.7fr;
+      gap: 3rem;
+      margin-bottom: 4.5rem;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--c-hairline);
+      padding-bottom: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .section-editorial-header {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    .sec-index-number {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--c-orange);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .sec-editorial-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--c-noir);
+      margin-top: 0.4rem;
+    }
+
+    .sec-editorial-desc {
+      font-size: 1.12rem;
+      line-height: 1.65;
+      color: var(--c-noir-muted);
+    }
+
+    /* Liste des Projets en Fiches Architecturales */
+    .catalogue-dossier-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5.5rem;
+    }
+
+    .dossier-entry-block {
+      border-top: 2px solid var(--c-noir);
+      padding-top: 2rem;
+      display: grid;
+      grid-template-columns: 0.12fr 0.48fr 0.4fr;
+      gap: 2.5rem;
+      align-items: flex-start;
+      transition: all var(--trans-base);
+    }
+
+    @media (max-width: 1080px) {
+      .dossier-entry-block {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .dossier-folio-number {
+      font-family: var(--font-editorial);
+      font-size: 2.8rem;
+      font-style: italic;
+      line-height: 1;
+      color: var(--c-orange);
+    }
+
+    .dossier-meta-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .dossier-category-strip {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-noir-muted);
+    }
+
+    .dossier-project-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.2vw, 2.7rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--c-noir);
+    }
+
+    .dossier-lead-summary {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: var(--c-noir-muted);
+    }
+
+    .dossier-scope-annotation {
+      background: var(--c-ivoire-paper);
+      border-left: 3px solid var(--c-orange);
+      padding: 0.9rem 1.2rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--c-noir);
+    }
+
+    .dossier-scope-annotation strong {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--c-orange);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .dossier-tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tech-pill-spec {
+      border: 1px solid var(--c-hairline-strong);
+      padding: 0.3rem 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--c-noir);
+      background: transparent;
+    }
+
+    .dossier-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .btn-dossier-expand {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.85rem 1.4rem;
+      border: 1px solid var(--c-noir);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-dossier-expand:hover {
+      background: var(--c-orange);
+      border-color: var(--c-orange);
+      color: #fff;
+      transform: translateX(3px);
+    }
+
+    .btn-live-launch {
+      background: transparent;
+      color: var(--c-noir);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.85rem 1.3rem;
+      border: 1px solid var(--c-noir);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-live-launch:hover {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+    }
+
+    /* Cadre de Scénographie Visuelle du Projet */
+    .dossier-visual-canvas {
+      position: relative;
+      border: 1px solid var(--c-noir);
+      min-height: 340px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #171816;
+    }
+
+    .canvas-plate-art {
+      width: 100%;
+      height: 100%;
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .art-plate-ocr {
+      background: radial-gradient(circle at 10% 10%, #2A2C26 0%, #151614 90%);
+      color: #E8E5DD;
+    }
+
+    .art-plate-production {
+      background: radial-gradient(circle at 90% 10%, #243022 0%, #161A15 90%);
+      color: #E2ECE0;
+    }
+
+    .art-plate-eagence {
+      background: radial-gradient(circle at 50% 90%, #251E2E 0%, #16141A 90%);
+      color: #ECEAF4;
+    }
+
+    .art-plate-mariage {
+      background: #FAF7F2;
+      color: #161614;
+      border: 1px solid var(--c-hairline-strong);
+    }
+
+    .canvas-corner-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--c-orange);
+    }
+
+    .canvas-schematic-box {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      line-height: 1.5;
+    }
+
+    .art-plate-mariage .canvas-schematic-box {
+      border-color: var(--c-hairline-strong);
+      background: rgba(22, 22, 20, 0.03);
+    }
+
+    .canvas-caption-strip {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+    }
+    .art-plate-mariage .canvas-caption-strip {
+      color: var(--c-noir-muted);
+    }
+
+    /* ==========================================================================
+       SECTION 02 : À PROPOS & MANIFESTE DE L'ATELIER
+       ========================================================================== */
+    section.about-manifesto-sec {
+      padding: 6.5rem 0;
+      border-bottom: 1px solid var(--c-hairline);
+      background: var(--c-ivoire-paper);
+    }
+
+    .monumental-quote-display {
+      font-family: var(--font-editorial);
+      font-size: clamp(2rem, 3.8vw, 3.3rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--c-noir);
+      max-width: 1050px;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .monumental-quote-display span.accent-quote {
+      color: var(--c-orange);
+      font-style: normal;
+      font-family: var(--font-display);
+      font-weight: 800;
+    }
+
+    .about-editorial-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (max-width: 900px) {
+      .about-editorial-columns {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .editorial-narrative-col p {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--c-noir-muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .editorial-narrative-col p strong {
+      color: var(--c-noir);
+      font-weight: 600;
+    }
+
+    /* Les 3 Piliers Méthodologiques Numérotés */
+    .method-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      border-top: 1px solid var(--c-hairline);
+      padding-top: 3rem;
+    }
+
+    @media (max-width: 900px) {
+      .method-pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .method-pillar-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .pillar-folio-code {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--c-orange);
+      letter-spacing: 0.12em;
+    }
+
+    .pillar-entry-heading {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--c-noir);
+    }
+
+    .pillar-entry-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--c-noir-muted);
+    }
+
+    /* ==========================================================================
+       SECTION 03 : SPÉCIFICATION DES COMPÉTENCES (ARCHITECTURAL SPEC SHEET)
+       ========================================================================== */
+    section.competences-spec-sec {
+      padding: 6.5rem 0;
+      border-bottom: 1px solid var(--c-hairline);
+    }
+
+    .skills-specification-table {
+      border-top: 2px solid var(--c-noir);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-spec-row {
+      display: grid;
+      grid-template-columns: 0.3fr 0.7fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--c-hairline);
+      align-items: baseline;
+      transition: background 0.2s;
+    }
+
+    @media (max-width: 800px) {
+      .skill-spec-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .skill-spec-row:hover {
+      background: var(--c-noir-subtle);
+    }
+
+    .skill-domain-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--c-noir);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .skill-domain-title .spec-marker {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--c-orange);
+    }
+
+    .skill-tags-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .spec-item-badge {
+      border: 1px solid var(--c-hairline-strong);
+      padding: 0.45rem 0.95rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--c-noir);
+      background: var(--c-ivoire);
+    }
+
+    .spec-item-badge.badge-primary {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    .spec-item-badge.badge-sauge {
+      background: var(--c-sauge);
+      color: var(--c-sauge-ink);
+      border-color: transparent;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       SECTION 04 : CONTACT & ÉPILOGUE ÉDITORIAL
+       ========================================================================== */
+    section.contact-epilogue-sec {
+      padding: 7rem 0 3.5rem;
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      position: relative;
+    }
+
+    .epilogue-huge-prompt {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 6.2vw, 5.8rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+      text-transform: uppercase;
+      margin-bottom: 3.5rem;
+    }
+
+    .epilogue-huge-prompt span.serif-italic {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--c-orange);
+      text-transform: none;
+    }
+
+    .contact-dispatch-panel {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-bottom: 5rem;
+    }
+
+    .dispatch-info-block h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    .dispatch-info-block p {
+      color: rgba(245, 241, 233, 0.7);
+      font-size: 1.05rem;
+      max-width: 540px;
+      line-height: 1.6;
+    }
+
+    .dispatch-action-group {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-dispatch-mail {
+      background: var(--c-orange);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      padding: 1.05rem 2rem;
+      transition: all 0.25s var(--ease-snappy);
+    }
+
+    .btn-dispatch-mail:hover {
+      background: #d6542f;
+      transform: translateY(-2px);
+    }
+
+    .btn-copy-address {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1.05rem 1.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn-copy-address:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .verified-channels-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .verified-channels-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .channel-folio-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--c-ivoire);
+      transition: all 0.2s;
+    }
+
+    .channel-folio-card:hover {
+      border-color: var(--c-orange);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .channel-card-index {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--c-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .channel-card-target {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .colophon-footer-strip {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: rgba(245, 241, 233, 0.5);
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       TIROIR D'ÉTUDE TECHNIQUE (SLIDE-OVER ARCHITECTURAL)
+       ========================================================================== */
+    .drawer-backdrop-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(22, 22, 20, 0.72);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s var(--ease-editorial), visibility 0.35s;
+    }
+
+    .drawer-backdrop-mask.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer-technical-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 800px;
+      background: var(--c-ivoire);
+      color: var(--c-noir);
+      z-index: 1001;
+      border-left: 2px solid var(--c-noir);
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.35);
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-editorial);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .drawer-backdrop-mask.active .drawer-technical-panel {
+      transform: translateX(0);
+    }
+
+    .drawer-nav-bar {
+      padding: 1.6rem 2.2rem;
+      border-bottom: 1px solid var(--c-hairline-strong);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: var(--c-ivoire);
+      z-index: 10;
+    }
+
+    .drawer-ref-tag {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--c-orange);
+      letter-spacing: 0.12em;
+    }
+
+    .drawer-dismiss-btn {
+      background: var(--c-noir-subtle);
+      border: 1px solid var(--c-hairline);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--c-noir);
+      transition: all 0.2s;
+    }
+
+    .drawer-dismiss-btn:hover {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+    }
+
+    .drawer-scroll-body {
+      padding: 2.8rem 2.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
+
+    .drawer-tab-selectors {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--c-hairline-strong);
+      padding-bottom: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .drawer-filter-btn {
+      background: transparent;
+      border: 1px solid var(--c-hairline);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.5rem 0.95rem;
+      color: var(--c-noir-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .drawer-filter-btn.active {
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border-color: var(--c-noir);
+    }
+
+    .drawer-tab-view {
+      display: none;
+      flex-direction: column;
+      gap: 1.2rem;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      color: var(--c-noir);
+    }
+
+    .drawer-tab-view.active {
+      display: flex;
+    }
+
+    .drawer-footer-actions {
+      border-top: 1px solid var(--c-hairline-strong);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Toast Notification Flottante */
+    .toast-folio-alert {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--c-noir);
+      color: var(--c-ivoire);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.85rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s var(--ease-editorial);
+      pointer-events: none;
+    }
+
+    .toast-folio-alert.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lignes architecturales de composition d'arrière-plan -->
+  <div class="editorial-grid-lines" aria-hidden="true">
+    <div class="grid-line-col"></div><div class="grid-line-col"></div>
+    <div class="grid-line-col"></div><div class="grid-line-col"></div>
+    <div class="grid-line-col"></div><div class="grid-line-col"></div>
+    <div class="grid-line-col"></div><div class="grid-line-col"></div>
+    <div class="grid-line-col"></div><div class="grid-line-col"></div>
+    <div class="grid-line-col"></div><div class="grid-line-col"></div>
+  </div>
+
+  <!-- Masthead Architectural & Folio -->
+  <aside class="masthead-folio" aria-label="Informations techniques et folio d'édition">
+    <div class="container masthead-inner">
+      <div class="folio-item">
+        <span class="folio-marker">AM·AGB //</span>
+        <span>ÉDITION 2026 · DOSSIER DE CANDIDATURE & CRAFT</span>
+      </div>
+
+      <div class="folio-status-beacon">
+        <span class="beacon-dot"></span>
+        <span>DISPONIBLE POUR MISSIONS & OPPORTUNITÉS FRONTEND</span>
+      </div>
+
+      <div class="folio-controls">
+        <button id="soundToggleBtn" class="btn-folio-toggle" aria-label="Activer ou couper le son">
+          <span>Audio UI :</span>
+          <strong id="soundLabel">OFF</strong>
+        </button>
+
+        <button id="themeToggleBtn" class="btn-folio-toggle" aria-label="Basculer l'ambiance studio">
+          <span>Ambiance :</span>
+          <strong id="themeLabel">Ivoire</strong>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- En-tête de la Page : Monogramme & Navigation Haute Couture -->
+  <header class="site-header">
+    <div class="container header-layout">
+      
+      <a href="#hero" class="brand-monogram-lockup">
+        <span class="brand-index-tag">00 / AUTEURE & DÉVELOPPEUSE</span>
+        <h2 class="brand-name-huge">ANNE MARIE AGBONOU</h2>
+        <span class="brand-role-caption">Développeuse Frontend & Analyste Programmeuse</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Sommaire de navigation">
+        <a href="#projets" class="nav-link-item"><span class="nav-idx">01</span>Travaux</a>
+        <a href="#manifeste" class="nav-link-item"><span class="nav-idx">02</span>Philosophie</a>
+        <a href="#specifications" class="nav-link-item"><span class="nav-idx">03</span>Spécifications</a>
+        <a href="#contact" class="nav-link-item"><span class="nav-idx">04</span>Contact</a>
+      </nav>
+
+      <a href="#contact" class="header-contact-action">
+        <span>Parlons de votre projet</span>
+        <span>→</span>
+      </a>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- Section Hero : Composition Asymétrique Éditoriale -->
+    <section id="hero" class="hero-cover">
+      <div class="container hero-composition-grid">
+        
+        <!-- Colonne Texte & Typographie Monumentale -->
+        <div class="hero-lead-col">
+          <div>
+            <div class="hero-editorial-meta">
+              <span class="meta-tag-bold">[ POSTURE PROFESSIONNELLE ]</span>
+              <span>DÉVELOPPEMENT WEB · INTERFACES & RIGUEUR</span>
+            </div>
+
+            <h1 class="hero-monumental-title">
+              <span class="title-line-block">JE DONNE FORME</span>
+              <span class="title-line-block">
+                <span class="title-line-serif-accent">aux idées,</span>
+                <span>UNE INTERFACE</span>
+              </span>
+              <span class="title-line-block">À LA FOIS.</span>
+            </h1>
+
+            <p class="hero-statement-text">
+              Je suis <strong>Anne Marie</strong>, développeuse frontend et analyste programmeuse. J'aime créer des expériences web qui allient clarté, esthétique et fonctionnalité.
+            </p>
+          </div>
+
+          <!-- Prisme Méthodologique Style "Table Traçante" -->
+          <div class="drafting-perspective-panel">
+            <div class="drafting-panel-header">
+              <span>PRISME DE COMPÉTENCES // SÉLECTIONNEZ UN ANGLE</span>
+              <div class="drafting-switch-tabs">
+                <button class="draft-tab-btn active" id="tabVisionFrontend" onclick="setPerspective('frontend')">Frontend & UI</button>
+                <button class="draft-tab-btn" id="tabVisionAnalyste" onclick="setPerspective('analyste')">Analyse & Données</button>
+              </div>
+            </div>
+
+            <div class="draft-chips-grid" id="perspectiveChipsBox">
+              <!-- Rempli dynamiquement en JS -->
+            </div>
+          </div>
+
+          <!-- Actions du Hero -->
+          <div class="hero-cta-ribbon">
+            <a href="#projets" class="btn-solid-orange">
+              <span>Découvrir les réalisations</span>
+              <span>↓</span>
+            </a>
+
+            <a href="#contact" class="btn-outline-ink">
+              <span>Initier un échange</span>
+              <span>→</span>
+            </a>
+
+            <button class="quick-copy-email-box" id="quickCopyEmailBtn" title="Copier l'adresse annemarieagbonou@gmail.com">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>annemarieagbonou@gmail.com</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Colonne Portrait Architectural Inset -->
+        <div class="hero-portrait-frame-col">
+          <div class="architectural-portrait-wrapper" id="architecturalPortrait">
+            <span class="portrait-corner-brackets">┌ &nbsp; ┐</span>
+            
+            <div class="portrait-image-inset">
+              <img 
+                src="images/anne-marie-hero.jpg" 
+                alt="Portrait d'Anne Marie Agbonou dans son atelier de création" 
+                loading="eager"
+              />
+            </div>
+
+            <div class="portrait-plate-legend">
+              <span class="plate-author-title">ANNE MARIE AGBONOU</span>
+              <span>PARIS / REMOTE · INTERMÉDIAIRE</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bandeau Manifeste Kinétique -->
+    <div class="ticker-statement-band" aria-hidden="true">
+      <div class="ticker-track">
+        <span>TRANSFORMER DES BESOINS CONCRETS EN EXPÉRIENCES SIMPLES</span><span class="ticker-dot">✦</span>
+        <span>ATTENTION PARTICULIÈRE PORTÉE AU DESIGN ET AUX DÉTAILS</span><span class="ticker-dot">✦</span>
+        <span>RÉACT · NEXT.JS · ANGULAR · JAVA · TAILWIND CSS</span><span class="ticker-dot">✦</span>
+        <span>DES INTERFACES UTILES, COHÉRENTES ET AVEC UNE VRAIE PERSONNALITÉ</span><span class="ticker-dot">✦</span>
+        <span>TRANSFORMER DES BESOINS CONCRETS EN EXPÉRIENCES SIMPLES</span><span class="ticker-dot">✦</span>
+        <span>ATTENTION PARTICULIÈRE PORTÉE AU DESIGN ET AUX DÉTAILS</span><span class="ticker-dot">✦</span>
+      </div>
+    </div>
+
+    <!-- Section 01 : Catalogue des Travaux (Dossier Raisonné) -->
+    <section id="projets" class="projects-catalogue">
+      <div class="container">
+        
+        <div class="section-editorial-header">
+          <div>
+            <span class="sec-index-number">SECTION 01 // TRAVAUX CHOISIS</span>
+            <h2 class="sec-editorial-title">Catalogue des Réalisations</h2>
+          </div>
+          <p class="sec-editorial-desc">
+            Chaque projet illustre une typologie d'interface singulière : applications documentaires à forte valeur ajoutée, outils de pilotage opérationnel, vitrines institutionnelles et projets personnels en production.
+          </p>
+        </div>
+
+        <div class="catalogue-dossier-list">
+
+          <!-- ENTRÉE 01 : PORTAIL OCR -->
+          <article class="dossier-entry-block">
+            <div class="dossier-folio-number">01</div>
+
+            <div class="dossier-meta-column">
+              <div class="dossier-category-strip">
+                <span style="color: var(--c-orange); font-weight: 700;">APPLICATION WEB</span>
+                <span>/ /</span>
+                <span>TRAITEMENT DOCUMENTAIRE & QUOTAS</span>
+              </div>
+
+              <h3 class="dossier-project-heading">Portail OCR</h3>
+
+              <p class="dossier-lead-summary">
+                Plateforme de traitement documentaire avec extraction OCR, authentification sécurisée, gestion des quotas, achat de crédits et suivi des extractions en direct.
+              </p>
+
+              <div class="dossier-scope-annotation">
+                <strong>Périmètre & Rôle Frontend</strong>
+                Conception et intégration des interfaces utilisateur avec Next.js et Tailwind CSS : parcours d'authentification, visualisation des états de conversion documentaire, suivi des crédits et tableaux d'historique.
+              </div>
+
+              <div class="dossier-tech-row">
+                <span class="tech-pill-spec">Next.js</span>
+                <span class="tech-pill-spec">Tailwind CSS</span>
+                <span class="tech-pill-spec">Extraction OCR</span>
+                <span class="tech-pill-spec">Authentification</span>
+                <span class="tech-pill-spec">Gestion de Quotas</span>
+              </div>
+
+              <div class="dossier-actions-row">
+                <button class="btn-dossier-expand" onclick="openTechnicalDossier('ocr')">
+                  <span>Consulter le dossier d'ingénierie</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Visuel Scénographique Dédié -->
+            <div class="dossier-visual-canvas" onclick="openTechnicalDossier('ocr')">
+              <div class="canvas-plate-art art-plate-ocr">
+                <div class="canvas-corner-tag">FIG. 01 — ARCHITECTURE FLUX OCR</div>
+                
+                <div class="canvas-schematic-box">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; color: #fff;">
+                    <span>DOC_SCAN_2026.PDF</span>
+                    <span style="color: #8DE898;">EXTRACTION 100%</span>
+                  </div>
+                  <div style="font-size: 0.7rem; color: #ABA89F;">
+                    • Gestion session utilisateur & crédits<br>
+                    • Visualisation des métadonnées extraites<br>
+                    • Interface réactive sous Next.js & Tailwind
+                  </div>
+                </div>
+
+                <div class="canvas-caption-strip">
+                  <span>Composition d'interface conceptuelle</span>
+                  <span>Dossier 01 ↗</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ENTRÉE 02 : GESTION DE PRODUCTION -->
+          <article class="dossier-entry-block">
+            <div class="dossier-folio-number">02</div>
+
+            <div class="dossier-meta-column">
+              <div class="dossier-category-strip">
+                <span style="color: var(--c-sauge-ink); font-weight: 700;">APPLICATION MÉTIER</span>
+                <span>/ /</span>
+                <span>PILOTAGE INDUSTRIEL & RESSOURCES</span>
+              </div>
+
+              <h3 class="dossier-project-heading">Gestion de Production</h3>
+
+              <p class="dossier-lead-summary">
+                Application de suivi des tâches, de l'avancement opérationnel, des ressources humaines et matérielles, et tableaux de bord de pilotage.
+              </p>
+
+              <div class="dossier-scope-annotation">
+                <strong>Périmètre & Rôle Frontend</strong>
+                Développement des interfaces sous Angular, liaison avec les contrôleurs backend Java, et organisation de tableaux de bord pour fluidifier le pilotage des équipes sans surcharge cognitive.
+              </div>
+
+              <div class="dossier-tech-row">
+                <span class="tech-pill-spec">Angular</span>
+                <span class="tech-pill-spec">Java</span>
+                <span class="tech-pill-spec">Tableaux de Bord</span>
+                <span class="tech-pill-spec">Suivi des Tâches</span>
+                <span class="tech-pill-spec">Flux Métier</span>
+              </div>
+
+              <div class="dossier-actions-row">
+                <button class="btn-dossier-expand" onclick="openTechnicalDossier('production')">
+                  <span>Consulter le dossier d'ingénierie</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Visuel Scénographique Dédié -->
+            <div class="dossier-visual-canvas" onclick="openTechnicalDossier('production')">
+              <div class="canvas-plate-art art-plate-production">
+                <div class="canvas-corner-tag">FIG. 02 — COCKPIT DE GESTION</div>
+
+                <div class="canvas-schematic-box">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #fff;">
+                    <span>ATELIER 04 — CADENCE</span>
+                    <span style="color: var(--c-orange);">EN FLUX</span>
+                  </div>
+                  <div style="height: 6px; background: rgba(255,255,255,0.15); margin-bottom: 0.6rem;">
+                    <div style="width: 82%; height: 100%; background: var(--c-orange);"></div>
+                  </div>
+                  <div style="font-size: 0.7rem; color: #A8B8A6;">
+                    • Supervision des ressources affectées<br>
+                    • Vues filtrées par niveau de priorité
+                  </div>
+                </div>
+
+                <div class="canvas-caption-strip">
+                  <span>Composition d'interface conceptuelle</span>
+                  <span>Dossier 02 ↗</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ENTRÉE 03 : EAGENCE -->
+          <article class="dossier-entry-block">
+            <div class="dossier-folio-number">03</div>
+
+            <div class="dossier-meta-column">
+              <div class="dossier-category-strip">
+                <span style="color: var(--c-lavande-ink); font-weight: 700;">SITE VITRINE</span>
+                <span>/ /</span>
+                <span>SERVICES FINANCIERS PAYMONEY</span>
+              </div>
+
+              <h3 class="dossier-project-heading">EAgence</h3>
+
+              <p class="dossier-lead-summary">
+                Site vitrine responsive de présentation des services Paymoney, conçu pour valoriser l'éventail des solutions financières et simplifier la découverte utilisateur.
+              </p>
+
+              <div class="dossier-scope-annotation">
+                <strong>Périmètre & Rôle Frontend</strong>
+                Intégration Next.js soignée, respect strict de la charte de marque, hiérarchisation visuelle des offres et adaptation irréprochable sur l'ensemble des résolutions d'écrans.
+              </div>
+
+              <div class="dossier-tech-row">
+                <span class="tech-pill-spec">Next.js</span>
+                <span class="tech-pill-spec">Responsive Design</span>
+                <span class="tech-pill-spec">Site Vitrine</span>
+                <span class="tech-pill-spec">Composants Modulaires</span>
+              </div>
+
+              <div class="dossier-actions-row">
+                <button class="btn-dossier-expand" onclick="openTechnicalDossier('eagence')">
+                  <span>Consulter le dossier d'ingénierie</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Visuel Scénographique Dédié -->
+            <div class="dossier-visual-canvas" onclick="openTechnicalDossier('eagence')">
+              <div class="canvas-plate-art art-plate-eagence">
+                <div class="canvas-corner-tag">FIG. 03 — SHOWCASE VITRINE</div>
+
+                <div class="canvas-schematic-box">
+                  <div style="font-weight: 700; color: #fff; margin-bottom: 0.3rem;">Paymoney Digital Platform</div>
+                  <div style="font-size: 0.7rem; color: #C0BDCF;">
+                    • Grille responsive adaptative<br>
+                    • Structure éditoriale orientée conversion
+                  </div>
+                </div>
+
+                <div class="canvas-caption-strip">
+                  <span>Composition d'interface conceptuelle</span>
+                  <span>Dossier 03 ↗</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ENTRÉE 04 : INVITATION DE MARIAGE DIGITALE -->
+          <article class="dossier-entry-block">
+            <div class="dossier-folio-number">04</div>
+
+            <div class="dossier-meta-column">
+              <div class="dossier-category-strip">
+                <span style="color: var(--c-noir); font-weight: 700;">PROJET WEB PERSONNEL</span>
+                <span>/ /</span>
+                <span>EN PRODUCTION · stephane-et-marie.site</span>
+              </div>
+
+              <h3 class="dossier-project-heading">Invitation de Mariage Digitale</h3>
+
+              <p class="dossier-lead-summary">
+                Site d'invitation de mariage avec présentation chaleureuse de l'événement, confirmation de présence interactive (RSVP) et espace dédié aux mariés.
+              </p>
+
+              <div class="dossier-scope-annotation">
+                <strong>Conception & Réalisation Intégrale</strong>
+                Direction artistique douce et mémorable, typographie élégante, développement du module de confirmation interactive en temps réel et déploiement en production accessible publiquement.
+              </div>
+
+              <div class="dossier-tech-row">
+                <span class="tech-pill-spec">Projet Personnel</span>
+                <span class="tech-pill-spec">Formulaire RSVP</span>
+                <span class="tech-pill-spec">Espace Mariés</span>
+                <span class="tech-pill-spec">En Production</span>
+              </div>
+
+              <div class="dossier-actions-row">
+                <button class="btn-dossier-expand" onclick="openTechnicalDossier('mariage')">
+                  <span>Consulter le dossier</span>
+                  <span>→</span>
+                </button>
+
+                <a href="https://stephane-et-marie.site" target="_blank" rel="noopener noreferrer" class="btn-live-launch">
+                  <span>Visiter le site réel</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Visuel Scénographique Dédié -->
+            <div class="dossier-visual-canvas" onclick="openTechnicalDossier('mariage')">
+              <div class="canvas-plate-art art-plate-mariage">
+                <div class="canvas-corner-tag">FIG. 04 — EXPÉRIENCE ÉVÉNEMENTIELLE</div>
+
+                <div class="canvas-schematic-box">
+                  <div style="font-family: var(--font-editorial); font-size: 1.8rem; font-style: italic; color: var(--c-noir); margin-bottom: 0.3rem;">
+                    Stéphane & Marie
+                  </div>
+                  <div style="font-size: 0.72rem; color: var(--c-noir-muted);">
+                    • Module RSVP interactif<br>
+                    • Consultation sécurisée des présences
+                  </div>
+                </div>
+
+                <div class="canvas-caption-strip">
+                  <span>Projet déployé en ligne</span>
+                  <span>stephane-et-marie.site ↗</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 02 : À Propos & Philosophie de l'Atelier -->
+    <section id="manifeste" class="about-manifesto-sec">
+      <div class="container">
+        
+        <div style="margin-bottom: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.16em; color: var(--c-orange); text-transform: uppercase;">
+          SECTION 02 // PARCOURS & PHILOSOPHIE
+        </div>
+
+        <blockquote class="monumental-quote-display">
+          “Ce qui me plaît dans le développement web, c'est de partir d'une idée ou d'un besoin et de lui donner vie à travers <span class="accent-quote">une interface.</span>”
+        </blockquote>
+
+        <div class="about-editorial-columns">
+          <div class="editorial-narrative-col">
+            <p>
+              Je suis <strong>Anne Marie Agbonou</strong>, développeuse frontend et analyste programmeuse.
+            </p>
+            <p>
+              J'aime autant réfléchir à l'organisation d'une page qu'à ses interactions, ses détails visuels ou son fonctionnement. Pour moi, une bonne interface ne doit pas seulement être belle : <strong>elle doit être claire, agréable et répondre à un vrai besoin</strong>.
+            </p>
+          </div>
+
+          <div class="editorial-narrative-col">
+            <p>
+              Au fil de mes expériences, j'ai travaillé sur des applications métier, des interfaces de gestion et des projets web plus créatifs.
+            </p>
+            <p>
+              Aujourd'hui, je continue à approfondir mes compétences tout en développant ma propre approche du frontend : <strong>créer des interfaces utiles, cohérentes et avec une vraie personnalité</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3 Piliers de Travail -->
+        <div class="method-pillars-grid">
+          <div class="method-pillar-entry">
+            <span class="pillar-folio-code">01 / FONCTIONNALITÉ</span>
+            <h3 class="pillar-entry-heading">Clarté d'Usage</h3>
+            <p class="pillar-entry-text">
+              Organiser la structure de façon évidente pour que chaque utilisateur accomplisse sa tâche sans hésitation ni friction superflue.
+            </p>
+          </div>
+
+          <div class="method-pillar-entry">
+            <span class="pillar-folio-code">02 / SENSIBILITÉ</span>
+            <h3 class="pillar-entry-heading">Soin du Détail</h3>
+            <p class="pillar-entry-text">
+              Traiter la typographie, les alignements, les espacements et les transitions avec la précision d'un artisan pour susciter la confiance.
+            </p>
+          </div>
+
+          <div class="method-pillar-entry">
+            <span class="pillar-folio-code">03 / INGÉNIERIE</span>
+            <h3 class="pillar-entry-heading">Rigueur Logique</h3>
+            <p class="pillar-entry-text">
+              S'appuyer sur des bases de code modulaires, des composants réutilisables, un typage propre et une intégration d'API fiable.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 03 : Spécifications des Compétences -->
+    <section id="specifications" class="competences-spec-sec">
+      <div class="container">
+        
+        <div class="section-editorial-header">
+          <div>
+            <span class="sec-index-number">SECTION 03 // ÉCOSYSTÈME TECHNIQUE</span>
+            <h2 class="sec-editorial-title">Fiche de Spécifications</h2>
+          </div>
+          <p class="sec-editorial-desc">
+            Revue exhaustive des technologies, langages et méthodes maîtrisés, organisée selon les impératifs de production moderne.
+          </p>
+        </div>
+
+        <div class="skills-specification-table">
+          
+          <div class="skill-spec-row">
+            <div class="skill-domain-title">
+              <span class="spec-marker">[01]</span>
+              <span>Frontend</span>
+            </div>
+            <div class="skill-tags-flex">
+              <span class="spec-item-badge badge-primary">React</span>
+              <span class="spec-item-badge badge-primary">Next.js</span>
+              <span class="spec-item-badge badge-primary">Angular</span>
+            </div>
+          </div>
+
+          <div class="skill-spec-row">
+            <div class="skill-domain-title">
+              <span class="spec-marker">[02]</span>
+              <span>Langages</span>
+            </div>
+            <div class="skill-tags-flex">
+              <span class="spec-item-badge">JavaScript (ES6+)</span>
+              <span class="spec-item-badge badge-sauge">TypeScript</span>
+              <span class="spec-item-badge">HTML5 Sémantique</span>
+              <span class="spec-item-badge">CSS3 Moderne</span>
+            </div>
+          </div>
+
+          <div class="skill-spec-row">
+            <div class="skill-domain-title">
+              <span class="spec-marker">[03]</span>
+              <span>UI & Intégration</span>
+            </div>
+            <div class="skill-tags-flex">
+              <span class="spec-item-badge badge-primary">Tailwind CSS</span>
+              <span class="spec-item-badge">shadcn/ui</span>
+              <span class="spec-item-badge badge-sauge">Responsive Design</span>
+              <span class="spec-item-badge">Systèmes de Design</span>
+            </div>
+          </div>
+
+          <div class="skill-spec-row">
+            <div class="skill-domain-title">
+              <span class="spec-marker">[04]</span>
+              <span>Backend & Outils</span>
+            </div>
+            <div class="skill-tags-flex">
+              <span class="spec-item-badge">Java</span>
+              <span class="spec-item-badge">Spring Boot</span>
+              <span class="spec-item-badge">Docker</span>
+              <span class="spec-item-badge badge-sauge">Git & GitHub</span>
+            </div>
+          </div>
+
+          <div class="skill-spec-row">
+            <div class="skill-domain-title">
+              <span class="spec-marker">[05]</span>
+              <span>Méthodes & Rigueur</span>
+            </div>
+            <div class="skill-tags-flex">
+              <span class="spec-item-badge badge-primary">Intégration d'API REST</span>
+              <span class="spec-item-badge">Composants Réutilisables</span>
+              <span class="spec-item-badge">Travail Collaboratif</span>
+              <span class="spec-item-badge badge-sauge">Sensibilité au Design</span>
+              <span class="spec-item-badge">Qualité d'Intégration</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 04 : Contact & Épilogue Éditorial -->
+    <section id="contact" class="contact-epilogue-sec">
+      <div class="container">
+        
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.16em; color: var(--c-orange); margin-bottom: 1.5rem;">
+          SECTION 04 // ENGAGEMENT & COLLABORATION
+        </div>
+
+        <h2 class="epilogue-huge-prompt">
+          PARLONS DE VOTRE <br>
+          PROCHAIN <span class="serif-italic">projet.</span>
+        </h2>
+
+        <div class="contact-dispatch-panel">
+          <div class="dispatch-info-block">
+            <h3>À l'écoute d'opportunités en entreprise & missions</h3>
+            <p>
+              Je suis disponible pour des opportunités professionnelles (CDI, missions freelance, renfort d'équipe frontend) avec l'envie de concevoir des interfaces soignées et durables.
+            </p>
+          </div>
+
+          <div class="dispatch-action-group">
+            <a href="mailto:annemarieagbonou@gmail.com?subject=Contact%20professionnel%20-%20Anne%20Marie%20Agbonou" class="btn-dispatch-mail" id="mainMailtoBtn">
+              <span>Envoyer un message</span>
+              <span>→</span>
+            </a>
+
+            <button class="btn-copy-address" onclick="copyEmailToClipboard()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="footerCopyBtnLabel">Copier l'adresse email</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Canaux Vérifiés -->
+        <div class="verified-channels-row">
+          <a href="mailto:annemarieagbonou@gmail.com" class="channel-folio-card">
+            <span class="channel-card-index">CANAL DIRECT 01</span>
+            <div class="channel-card-target">
+              <span>annemarieagbonou@gmail.com</span>
+              <span>↗</span>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/anne-marie-agbonou-ba31692a1/" target="_blank" rel="noopener noreferrer" class="channel-folio-card">
+            <span class="channel-card-index">RÉSEAU 02</span>
+            <div class="channel-card-target">
+              <span>LinkedIn Profil</span>
+              <span>↗</span>
+            </div>
+          </a>
+
+          <a href="https://github.com/ANNEMARIE05" target="_blank" rel="noopener noreferrer" class="channel-folio-card">
+            <span class="channel-card-index">CODE 03</span>
+            <div class="channel-card-target">
+              <span>GitHub / ANNEMARIE05</span>
+              <span>↗</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="colophon-footer-strip">
+          <div>
+            © 2026 Anne Marie Agbonou · Développeuse Frontend & Analyste Programmeuse.
+          </div>
+
+          <div style="display: flex; gap: 1.5rem;">
+            <a href="https://stephane-et-marie.site" target="_blank" rel="noopener noreferrer" style="color: rgba(245,241,233,0.7); text-decoration: none;">Projet Mariage ↗</a>
+            <a href="https://github.com/ANNEMARIE05" target="_blank" rel="noopener noreferrer" style="color: rgba(245,241,233,0.7); text-decoration: none;">Dépôt GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/anne-marie-agbonou-ba31692a1/" target="_blank" rel="noopener noreferrer" style="color: rgba(245,241,233,0.7); text-decoration: none;">LinkedIn ↗</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Tiroir d'Étude Technique (Slide-Over Architectural) -->
+  <div class="drawer-backdrop-mask" id="technicalDrawerMask" onclick="closeTechnicalDossier(event)">
+    <div class="drawer-technical-panel" id="technicalDrawerPanel" onclick="event.stopPropagation()">
+      <div class="drawer-nav-bar">
+        <span class="drawer-ref-tag" id="drawerRefCode">FICHE PROJET D'INGÉNIERIE // DOSSIER</span>
+        <button class="drawer-dismiss-btn" onclick="closeTechnicalDossier()" aria-label="Fermer le dossier">✕</button>
+      </div>
+
+      <div class="drawer-scroll-body">
+        <div>
+          <h2 id="drawerProjectTitle" style="font-family: var(--font-display); font-size: 2.3rem; font-weight: 800; line-height: 1.1; margin-bottom: 0.6rem;">Titre du Projet</h2>
+          <p id="drawerProjectSubtitle" style="font-size: 1.1rem; color: var(--c-noir-muted); line-height: 1.6;">Sous-titre et description du besoin.</p>
+        </div>
+
+        <!-- Onglets du Tiroir -->
+        <div class="drawer-tab-selectors">
+          <button class="drawer-filter-btn active" onclick="switchDrawerTab('context', this)">1. Contexte & Défi</button>
+          <button class="drawer-filter-btn" onclick="switchDrawerTab('role', this)">2. Rôle & Approche Frontend</button>
+          <button class="drawer-filter-btn" onclick="switchDrawerTab('tech', this)">3. Technologies & Intégration</button>
+        </div>
+
+        <!-- Contenus des Onglets -->
+        <div id="drawerTabContext" class="drawer-tab-view active"></div>
+        <div id="drawerTabRole" class="drawer-tab-view"></div>
+        <div id="drawerTabTech" class="drawer-tab-view"></div>
+
+        <div class="drawer-footer-actions" id="drawerFooterActions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Flottante -->
+  <div class="toast-folio-alert" id="toastFolioAlert">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c-orange)" stroke-width="2.5">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toastAlertMessage">Adresse email copiée !</span>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       DONNÉES RIGUREUSES DES 4 PROJETS RÉELS D'ANNE MARIE
+       ========================================================================== */
+    const dossiersData = {
+      ocr: {
+        ref: "DOSSIER // 01 — APPLICATION WEB",
+        title: "Portail OCR",
+        subtitle: "Plateforme de traitement documentaire avec extraction OCR, authentification, gestion des quotas, achat de crédits et suivi des extractions.",
+        context: `
+          <p><strong>Besoin Métier :</strong> Rendre accessible aux utilisateurs la numérisation et l'extraction automatisée de données textuelles contenues dans des documents variés, tout en fournissant un contrôle strict des quotas d'utilisation et des packs de crédits.</p>
+          <p><strong>Enjeu d'Usage :</strong> Transformer une chaîne technique complexe (chargement de fichier, pipeline OCR, extraction asynchrone) en une interface limpide, rassurante et immédiate à utiliser.</p>
+        `,
+        role: `
+          <p><strong>Rôle & Conception Frontend :</strong></p>
+          <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.55rem;">
+            <li>Conception et intégration des interfaces utilisateur sous <strong>Next.js</strong> et <strong>Tailwind CSS</strong>.</li>
+            <li>Structuration du parcours complet : formulaires d'authentification, zone de glisser-déposer de documents et tableau récapitulatif des extractions.</li>
+            <li>Mise en valeur pédagogique du solde de crédits et des statuts de traitement en temps réel.</li>
+            <li>Garantie d'une adaptation fluide sur l'ensemble des formats d'écrans.</li>
+          </ul>
+        `,
+        tech: `
+          <p><strong>Environnement Technique & Composants :</strong></p>
+          <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.55rem;">
+            <li><strong>Next.js :</strong> Routage applicatif, structure modulaire et performances d'exécution.</li>
+            <li><strong>Tailwind CSS :</strong> Intégration sur-mesure respectant les hiérarchies visuelles sans surcharge de classes superflues.</li>
+            <li><strong>Liaison d'API REST :</strong> Consommation des endpoints de sécurité, d'état des crédits et de statut d'extraction.</li>
+          </ul>
+        `,
+        link: null
+      },
+      production: {
+        ref: "DOSSIER // 02 — APPLICATION MÉTIER",
+        title: "Gestion de Production",
+        subtitle: "Application de suivi des tâches, de l'avancement opérationnel, des ressources et de tableaux de bord de pilotage.",
+        context: `
+          <p><strong>Besoin Métier :</strong> Donner aux équipes de production un outil centralisé pour superviser les tâches en cours, affecter les ressources matérielles et humaines, et repérer immédiatement les goulets d'étranglement.</p>
+          <p><strong>Enjeu d'Usage :</strong> Éviter la dispersion d'informations en proposant des tableaux de bord clairs, lisibles en un coup d'œil par les gestionnaires d'atelier.</p>
+        `,
+        role: `
+          <p><strong>Rôle & Conception Frontend :</strong></p>
+          <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.55rem;">
+            <li>Développement des interfaces avec le framework <strong>Angular</strong> en synchronisation avec le backend <strong>Java</strong>.</li>
+            <li>Mise en place de tableaux de bord de pilotage avec indicateurs d'état d'avancement des commandes.</li>
+            <li>Conception de modules de gestion et de répartition des ressources de production.</li>
+            <li>Application rigoureuse de la logique d'analyste programmeuse : intégrité des données affichées et prévention des erreurs de manipulation.</li>
+          </ul>
+        `,
+        tech: `
+          <p><strong>Environnement Technique :</strong></p>
+          <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.55rem;">
+            <li><strong>Angular :</strong> Structure en composants, typage TypeScript strict et réactivité des flux.</li>
+            <li><strong>Java / Spring :</strong> Modélisation des objets métier et transmission des états opérationnels.</li>
+            <li><strong>Composants de Dataviz :</strong> Présentation ordonnée des métriques et des statuts d'avancement.</li>
+          </ul>
+        `,
+        link: null
+      },
+      eagence: {
+        ref: "DOSSIER // 03 — SITE VITRINE",
+        title: "EAgence",
+        subtitle: "Site vitrine responsive de présentation des services Paymoney, pensé pour mettre en valeur les solutions financières.",
+        context: `
+          <p><strong>Besoin Métier :</strong> Présenter au public et aux partenaires commerciaux l'ensemble des solutions de paiement et services numériques proposés par Paymoney.</p>
+          <p><strong>Enjeu d'Usage :</strong> Inspirer confiance dès la première seconde grâce à un design contemporain, aéré et facile à explorer.</p>
+        `,
+        role: `
+          <p><strong>Rôle & Conception Frontend :</strong></p>
+          <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.55rem;">
+            <li>Intégration frontend intégrale du site vitrine sous <strong>Next.js</strong>.</li>
+            <li>Travail approfondi sur la réactivité multi-supports (smartphones, tablettes et écrans larges de bureau).</li>
+            <li>Agencement des sections pour guider naturellement l'utilisateur vers les informations clés de chaque offre.</li>
+            <li>Optimisation des temps de chargement et des transitions de page.</li>
+          </ul>
+        `,
+        tech: `
+          <p><strong>Environnement Technique :</strong></p>
+          <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.55rem;">
+            <li><strong>Next.js :</strong> Rendu performant et gestion sémantique des balises pour une structure claire.</li>
+            <li><strong>CSS Responsive :</strong> Grilles fluides et règles d'adaptation sans saut d'affichage.</li>
+            <li><strong>Architecture de composants :</strong> Blocs modulaires et réutilisables.</li>
+          </ul>
+        `,
+        link: null
+      },
+      mariage: {
+        ref: "DOSSIER // 04 — PROJET WEB PERSONNEL",
+        title: "Invitation de Mariage Digitale",
+        subtitle: "Site d'invitation de mariage avec présentation de l'événement, confirmation de présence (RSVP) et espace dédié aux mariés.",
+        context: `
+          <p><strong>Besoin Réel :</strong> Concevoir une invitation numérique élégante, interactive et mémorable pour célébrer l'union de Stéphane et Marie, simplifier le recueil des confirmations et communiquer les détails pratiques aux invités.</p>
+          <p><strong>Enjeu d'Usage :</strong> Offrir une expérience raffinée et intuitive accessible à des invités de tous âges et sur tout type d'appareil.</p>
+        `,
+        role: `
+          <p><strong>Conception Complète de A à Z :</strong></p>
+          <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.55rem;">
+            <li>Direction artistique délicate, choix typographiques sensibles et harmonie des couleurs.</li>
+            <li>Développement du formulaire interactif de confirmation de présence (RSVP).</li>
+            <li>Création d'un espace dédié permettant aux mariés de consulter les retours en temps réel.</li>
+            <li>Déploiement en ligne et maintenance du domaine public.</li>
+          </ul>
+        `,
+        tech: `
+          <p><strong>Technologies & Production :</strong></p>
+          <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.55rem;">
+            <li><strong>HTML5 / CSS3 / JavaScript :</strong> Intégration sur-mesure et réactive.</li>
+            <li><strong>Module RSVP :</strong> Validation et persistance des réponses.</li>
+            <li><strong>Lien réel en ligne :</strong> <a href="https://stephane-et-marie.site" target="_blank" rel="noopener noreferrer" style="color: var(--c-orange); font-weight: 700;">https://stephane-et-marie.site ↗</a></li>
+          </ul>
+        `,
+        link: "https://stephane-et-marie.site"
+      }
+    };
+
+    /* ==========================================================================
+       PRISME DE COMPÉTENCES DYNAMIQUE
+       ========================================================================== */
+    const perspectivesData = {
+      frontend: [
+        { label: "React & Next.js", code: "01" },
+        { label: "Tailwind CSS & shadcn/ui", code: "02" },
+        { label: "Responsive Design Précis", code: "03" },
+        { label: "Composants Réutilisables", code: "04" },
+        { label: "Sensibilité Typographique", code: "05" },
+        { label: "Qualité d'Intégration", code: "06" }
+      ],
+      analyste: [
+        { label: "Angular & Java", code: "A1" },
+        { label: "Intégration d'API REST", code: "A2" },
+        { label: "Gestion des Données & Quotas", code: "A3" },
+        { label: "Docker & Git", code: "A4" },
+        { label: "Travail Collaboratif", code: "A5" },
+        { label: "Compréhension Métier", code: "A6" }
+      ]
+    };
+
+    function setPerspective(type) {
+      document.getElementById('tabVisionFrontend').classList.toggle('active', type === 'frontend');
+      document.getElementById('tabVisionAnalyste').classList.toggle('active', type === 'analyste');
+
+      const container = document.getElementById('perspectiveChipsBox');
+      if (!container) return;
+      container.innerHTML = '';
+
+      perspectivesData[type].forEach(item => {
+        const chip = document.createElement('span');
+        chip.className = 'draft-spec-chip';
+        chip.innerHTML = `<span class="chip-code-symbol">[${item.code}]</span>${item.label}`;
+        container.appendChild(chip);
+      });
+
+      playAudioHaptic('click');
+    }
+
+    setPerspective('frontend');
+
+    /* ==========================================================================
+       TIROIR D'INGÉNIERIE (MODAL ARCHITECTURAL)
+       ========================================================================== */
+    function openTechnicalDossier(id) {
+      const data = dossiersData[id];
+      if (!data) return;
+
+      document.getElementById('drawerRefCode').textContent = data.ref;
+      document.getElementById('drawerProjectTitle').textContent = data.title;
+      document.getElementById('drawerProjectSubtitle').textContent = data.subtitle;
+
+      document.getElementById('drawerTabContext').innerHTML = data.context;
+      document.getElementById('drawerTabRole').innerHTML = data.role;
+      document.getElementById('drawerTabTech').innerHTML = data.tech;
+
+      const footer = document.getElementById('drawerFooterActions');
+      if (data.link) {
+        footer.style.display = 'flex';
+        footer.innerHTML = `
+          <span style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--c-noir-muted);">Projet consultable publiquement :</span>
+          <a href="${data.link}" target="_blank" rel="noopener noreferrer" class="btn-solid-orange" style="padding: 0.65rem 1.2rem; font-size: 0.74rem;">
+            <span>Ouvrir stephane-et-marie.site</span>
+            <span>↗</span>
+          </a>
+        `;
+      } else {
+        footer.style.display = 'none';
+        footer.innerHTML = '';
+      }
+
+      switchDrawerTab('context', document.querySelector('.drawer-filter-btn'));
+
+      document.getElementById('technicalDrawerMask').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      playAudioHaptic('click');
+    }
+
+    function closeTechnicalDossier(event) {
+      if (event && event.target && event.target.id !== 'technicalDrawerMask' && !event.target.classList.contains('drawer-dismiss-btn')) {
+        return;
+      }
+      document.getElementById('technicalDrawerMask').classList.remove('active');
+      document.body.style.overflow = '';
+      playAudioHaptic('click');
+    }
+
+    function switchDrawerTab(tabId, el) {
+      document.querySelectorAll('.drawer-filter-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.drawer-tab-view').forEach(view => view.classList.remove('active'));
+
+      if (el) el.classList.add('active');
+
+      const targetView = document.getElementById(`drawerTab${tabId.charAt(0).toUpperCase() + tabId.slice(1)}`);
+      if (targetView) targetView.classList.add('active');
+      playAudioHaptic('click');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const mask = document.getElementById('technicalDrawerMask');
+        if (mask && mask.classList.contains('active')) {
+          closeTechnicalDossier();
+        }
+      }
+    });
+
+    /* ==========================================================================
+       CONTRÔLE AUDIO & AMBIANCE STUDIO
+       ========================================================================== */
+    let audioCtx = null;
+    let isSoundOn = false;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playAudioHaptic(type) {
+      if (!isSoundOn) return;
+      try {
+        initAudioContext();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(740, now);
+          osc.frequency.exponentialRampToValueAtTime(380, now + 0.04);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+          osc.start(now);
+          osc.stop(now + 0.04);
+        } else if (type === 'chime') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(1020, now);
+          osc.frequency.exponentialRampToValueAtTime(680, now + 0.18);
+          gain.gain.setValueAtTime(0.07, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+          osc.start(now);
+          osc.stop(now + 0.18);
+        }
+      } catch (err) {}
+    }
+
+    const soundBtn = document.getElementById('soundToggleBtn');
+    const soundLbl = document.getElementById('soundLabel');
+    if (soundBtn && soundLbl) {
+      soundBtn.addEventListener('click', () => {
+        isSoundOn = !isSoundOn;
+        soundLbl.textContent = isSoundOn ? "ON" : "OFF";
+        if (isSoundOn) {
+          initAudioContext();
+          playAudioHaptic('chime');
+          displayFolioToast("Retour sonore activé");
+        } else {
+          displayFolioToast("Retour sonore désactivé");
+        }
+      });
+    }
+
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeLbl = document.getElementById('themeLabel');
+    if (themeBtn && themeLbl) {
+      themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('theme-studio-dark');
+        const isDark = document.body.classList.contains('theme-studio-dark');
+        themeLbl.textContent = isDark ? "Sombre" : "Ivoire";
+        playAudioHaptic('click');
+        displayFolioToast(isDark ? "Ambiance Studio Sombre" : "Ambiance Papier Ivoire");
+      });
+    }
+
+    /* ==========================================================================
+       NOTIFICATION TOAST & COPIE EMAIL
+       ========================================================================== */
+    function displayFolioToast(msg) {
+      const toast = document.getElementById('toastFolioAlert');
+      const label = document.getElementById('toastAlertMessage');
+      if (!toast || !label) return;
+
+      label.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function copyEmailToClipboard() {
+      const email = "annemarieagbonou@gmail.com";
+      navigator.clipboard.writeText(email).then(() => {
+        playAudioHaptic('chime');
+        displayFolioToast("Email annemarieagbonou@gmail.com copié !");
+        const btnLabel = document.getElementById('footerCopyBtnLabel');
+        if (btnLabel) {
+          btnLabel.textContent = "Adresse copiée ✓";
+          setTimeout(() => { btnLabel.textContent = "Copier l'adresse email"; }, 2500);
+        }
+      });
+    }
+
+    const quickCopyBtn = document.getElementById('quickCopyEmailBtn');
+    if (quickCopyBtn) {
+      quickCopyBtn.addEventListener('click', copyEmailToClipboard);
+    }
+
+    /* ==========================================================================
+       EFFET SUBTIL D'INCLINAISON SUR LE PORTRAIT
+       ========================================================================== */
+    const portraitEl = document.getElementById('architecturalPortrait');
+    if (portraitEl && window.matchMedia('(pointer: fine)').matches) {
+      portraitEl.addEventListener('mousemove', (e) => {
+        const rect = portraitEl.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+        portraitEl.style.transform = `perspective(800px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg)`;
+      });
+      portraitEl.addEventListener('mouseleave', () => {
+        portraitEl.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+      });
+    }
+  </script>
+</body>
+</html>
