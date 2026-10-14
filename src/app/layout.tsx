@@ -26,10 +26,10 @@ export const metadata: Metadata = {
     description: METADONNEES_SITE.description,
     images: [
       {
-        url: "/images/anne-marie-hero.jpg",
+        url: "/images/anne-marie-portrait.jpg",
         width: 1200,
         height: 1200,
-        alt: "Portrait d'Anne Marie Agbonou",
+        alt: "Portrait d'Anne Marie Agbonou en lumière naturelle",
       },
     ],
   },

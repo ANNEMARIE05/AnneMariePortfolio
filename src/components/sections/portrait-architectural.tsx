@@ -46,8 +46,8 @@ export function PortraitArchitectural() {
 
           <div className="portrait-image-inset">
             <Image
-              src="/images/anne-marie-hero.jpg"
-              alt="Portrait d'Anne Marie Agbonou dans son atelier de création"
+              src="/images/anne-marie-portrait.jpg"
+              alt="Portrait d'Anne Marie Agbonou, en col roulé beige, lumière naturelle chaude"
               fill
               priority
               sizes="(max-width: 1080px) 100vw, 40vw"
