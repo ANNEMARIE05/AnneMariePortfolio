@@ -29,10 +29,17 @@ export function HeroSection() {
       <AnimationHero>
         <Container className="hero-composition-grid">
           <div className="hero-lead-col">
+            <div className="hero-profil-annonce" data-hero-reveal="profil">
+              <p className="hero-profil-ligne">
+                <span className="hero-profil-role">{t.hero.profileRole}</span>{" "}
+                <span className="hero-profil-at">{t.hero.profileAt}</span>{" "}
+                <span className="hero-profil-ngser">{t.hero.profileCompany}</span>
+              </p>
+              <span className="hero-profil-badge">{t.hero.profileBadge}</span>
+            </div>
+
             <p className="hero-editorial-meta" data-hero-reveal="meta">
               <span className="meta-tag-bold">{t.hero.metaName}</span>
-              <span aria-hidden="true">·</span>
-              <span>{t.hero.metaRole}</span>
             </p>
 
             <h1 className="hero-monumental-title">

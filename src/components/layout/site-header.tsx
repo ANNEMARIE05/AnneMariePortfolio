@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/layout/container";
 import { NavigationMobile } from "@/components/layout/navigation-mobile";
+import { LogoMarque } from "@/components/ui/logo-marque";
+import { CHEMIN_LOGO } from "@/data/site";
 import { SelecteurLangue } from "@/components/ui/selecteur-langue";
 import { LIENS_NAVIGATION } from "@/data/navigation";
 import { useI18n } from "@/hooks/use-i18n";
@@ -54,8 +56,19 @@ export function SiteHeader() {
     >
       <Container className="header-shell">
         <a href="#hero" className="header-brand">
-          <span className="header-brand-name">Anne Marie Agbonou</span>
-          <span className="header-brand-role">{t.nav.headerTagline}</span>
+          <LogoMarque
+            taille={52}
+            prioritaire
+            src={CHEMIN_LOGO}
+            className="header-brand-logo"
+          />
+          <span className="header-brand-copy">
+            <span className="header-brand-name">Anne Marie Agbonou</span>
+            <span className="header-brand-profile">
+              <span className="header-brand-role">{t.nav.headerProfileRole}</span>
+              <span className="header-brand-badge">{t.nav.headerProfileBadge}</span>
+            </span>
+          </span>
         </a>
 
         <nav className="header-nav" aria-label="Navigation principale">

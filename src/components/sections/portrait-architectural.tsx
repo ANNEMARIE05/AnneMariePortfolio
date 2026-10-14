@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { CHEMIN_PORTRAIT, VERSION_MEDIA } from "@/data/site";
 import { pointerFinDisponible } from "@/lib/animations/mouvement-reduit";
 
 export function PortraitArchitectural() {
@@ -44,12 +45,14 @@ export function PortraitArchitectural() {
         >
           <div className="portrait-image-inset">
             <Image
-              src="/images/anne-marie-portrait.jpg"
-              alt="Portrait d'Anne Marie Agbonou, en col roulé beige, lumière naturelle chaude"
+              key={VERSION_MEDIA}
+              src={CHEMIN_PORTRAIT}
+              alt="Portrait professionnel d'Anne Marie Agbonou, en blazer, souriante en studio"
               fill
               priority
+              unoptimized
               sizes="(max-width: 1080px) 100vw, 40vw"
-              className="object-cover"
+              className="object-cover portrait-photo-hero"
             />
           </div>
 

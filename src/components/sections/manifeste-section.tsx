@@ -32,7 +32,7 @@ export function ManifesteSection() {
 
               <div className="about-domaines">
                 <p className="about-domaines-label">{t.about.domainsLabel}</p>
-                <ul className="about-domaines-list">
+                <ul className="about-domaines-list" data-reveal-stagger="">
                   {t.about.domains.map((domaine) => (
                     <li key={domaine}>{domaine}</li>
                   ))}
@@ -42,7 +42,7 @@ export function ManifesteSection() {
 
             <div className="about-approach-panel" aria-label={t.about.approachLabel}>
               <p className="about-approach-label">{t.about.approachLabel}</p>
-              <ul className="about-approach-list">
+              <ul className="about-approach-list" data-reveal-stagger="">
                 {t.about.pillars.map((pilier) => (
                   <li key={pilier.title}>
                     <span className="about-approach-item-title">

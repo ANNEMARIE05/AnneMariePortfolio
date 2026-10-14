@@ -60,7 +60,7 @@ export function FormationSection() {
           <p className="sec-editorial-desc">{t.formation.desc}</p>
         </div>
 
-        <div className="formation-layout" data-reveal-corps="">
+        <div className="formation-layout" data-reveal-stagger="">
           <GrouperFormation
             titre={t.formation.groupAcademic}
             entrees={academique}
@@ -82,7 +82,7 @@ export function FormationSection() {
             <p className="sec-editorial-desc">{t.skills.desc}</p>
           </div>
 
-          <div className="skills-cards-grid">
+          <div className="skills-cards-grid" data-reveal-stagger="">
             {t.skills.categories.map((categorie) => (
               <article key={categorie.title} className="skill-category-card">
                 <h3>{categorie.title}</h3>

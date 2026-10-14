@@ -3,8 +3,10 @@
 import { useGSAP } from "@gsap/react";
 import { useRef, type ReactNode } from "react";
 import {
+  BASE_FROM_SCROLL,
   propsCorpsSection,
   propsEnteteSection,
+  scrollTriggerUneFois,
 } from "@/lib/animations/config-reveal";
 import {
   DECALAGE_SCROLL_MASTHEAD,
@@ -55,6 +57,23 @@ export function OrchestrateurScroll({ children }: PropsOrchestrateurScroll) {
             if (corps) {
               gsap.from(corps, propsCorpsSection(section));
             }
+          },
+        );
+
+        scope.querySelectorAll<HTMLElement>("[data-reveal-stagger]").forEach(
+          (conteneur) => {
+            const enfants = Array.from(conteneur.children) as HTMLElement[];
+            if (enfants.length === 0) {
+              return;
+            }
+
+            gsap.from(enfants, {
+              ...BASE_FROM_SCROLL,
+              y: 28,
+              autoAlpha: 0,
+              stagger: 0.11,
+              scrollTrigger: scrollTriggerUneFois(conteneur, "top 84%"),
+            });
           },
         );
 

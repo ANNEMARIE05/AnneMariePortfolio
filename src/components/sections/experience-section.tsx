@@ -21,7 +21,7 @@ export function ExperienceSection() {
           <p className="sec-editorial-desc">{t.experience.desc}</p>
         </div>
 
-        <div className="experience-timeline" data-reveal-corps="">
+        <div className="experience-timeline" data-reveal-stagger="">
           {t.experience.items.map((item) => (
             <article key={item.company} className="experience-timeline-entry">
               <div className="experience-timeline-marker" aria-hidden="true">

@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { LienEvitement } from "@/components/layout/lien-evitement";
-import { METADONNEES_SITE, obtenirUrlSite } from "@/data/site";
+import {
+  CHEMIN_LOGO,
+  CHEMIN_PORTRAIT,
+  METADONNEES_SITE,
+  obtenirUrlSite,
+} from "@/data/site";
 import { classesPolices } from "@/lib/polices";
 import "./globals.css";
 
@@ -26,10 +31,10 @@ export const metadata: Metadata = {
     description: METADONNEES_SITE.description,
     images: [
       {
-        url: "/images/anne-marie-portrait.jpg",
+        url: CHEMIN_PORTRAIT,
         width: 1200,
         height: 1200,
-        alt: "Portrait d'Anne Marie Agbonou en lumière naturelle",
+        alt: "Portrait professionnel d'Anne Marie Agbonou en studio",
       },
     ],
   },
@@ -41,6 +46,10 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  icons: {
+    icon: CHEMIN_LOGO,
+    apple: CHEMIN_LOGO,
   },
 };
 

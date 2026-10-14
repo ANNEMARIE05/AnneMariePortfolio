@@ -168,7 +168,7 @@
       padding: 0.65rem 0;
     }
 
-    header.site-header.is-scrolled .header-brand-role,
+    header.site-header.is-scrolled .header-brand-profile,
     header.site-header.is-scrolled .header-availability,
     header.site-header.is-scrolled .header-preferences {
       display: none;
@@ -176,10 +176,18 @@
 
     .header-brand {
       display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.7rem;
       text-decoration: none;
       color: var(--c-noir);
+      min-width: 0;
+    }
+
+    .header-brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.12rem;
       min-width: 0;
     }
 
@@ -194,15 +202,33 @@
       text-overflow: ellipsis;
     }
 
+    .header-brand-profile {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem 0.5rem;
+      line-height: 1.3;
+    }
+
     .header-brand-role {
       font-family: var(--font-body);
-      font-size: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
-      font-weight: 400;
-      color: var(--c-noir-muted);
-      line-height: 1.35;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: clamp(0.8125rem, 0.78rem + 0.12vw, 0.9375rem);
+      font-weight: 650;
+      color: var(--c-noir);
+      letter-spacing: -0.01em;
+    }
+
+    .header-brand-badge {
+      display: inline-flex;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(243, 108, 80, 0.14);
+      color: var(--c-orange-deep, #c94e38);
+      border: 1px solid rgba(243, 108, 80, 0.28);
     }
 
     .header-nav {
@@ -358,6 +384,11 @@
         display: none;
       }
 
+      .header-brand-badge {
+        font-size: 0.625rem;
+        padding: 0.18rem 0.45rem;
+      }
+
       .header-cta {
         display: none;
       }
@@ -394,6 +425,10 @@
       .hero-composition-grid {
         grid-template-columns: 1fr;
         gap: 3.5rem;
+      }
+
+      .hero-portrait-frame-col {
+        order: -1;
       }
     }
 

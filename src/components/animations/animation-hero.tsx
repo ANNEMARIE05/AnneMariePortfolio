@@ -2,6 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import { useRef, type ReactNode } from "react";
+import { usePortfolio } from "@/components/providers/fournisseur-portfolio";
 import {
   DUREE_REVEAL_SECTION,
   EASE_EDITORIAL,
@@ -18,10 +19,15 @@ interface PropsAnimationHero {
 
 export function AnimationHero({ children }: PropsAnimationHero) {
   const scopeRef = useRef<HTMLDivElement>(null);
+  const { phaseIntro } = usePortfolio();
 
   useGSAP(
     () => {
-      if (prefererMouvementReduit() || !scopeRef.current) {
+      if (
+        prefererMouvementReduit() ||
+        !scopeRef.current ||
+        phaseIntro !== "terminee"
+      ) {
         return;
       }
 
@@ -49,6 +55,20 @@ export function AnimationHero({ children }: PropsAnimationHero) {
         });
 
         timeline
+          .from("[data-hero-reveal='profil']", {
+            y: 20,
+            autoAlpha: 0,
+            duration: 0.65,
+          })
+          .from(
+            "[data-hero-reveal='profil'] .hero-profil-badge",
+            {
+              scale: 0.92,
+              autoAlpha: 0,
+              duration: 0.45,
+            },
+            "-=0.35",
+          )
           .from("[data-hero-reveal='meta']", {
             y: 14,
             autoAlpha: 0,
@@ -82,6 +102,16 @@ export function AnimationHero({ children }: PropsAnimationHero) {
             "-=0.4",
           )
           .from(
+            "[data-hero-reveal='current-job'] .hero-current-job-stack li",
+            {
+              y: 10,
+              autoAlpha: 0,
+              duration: 0.35,
+              stagger: 0.06,
+            },
+            "-=0.35",
+          )
+          .from(
             "[data-hero-reveal='cta']",
             {
               y: 14,
@@ -100,11 +130,27 @@ export function AnimationHero({ children }: PropsAnimationHero) {
             },
             "-=0.75",
           );
+
+        const portrait = scope.querySelector<HTMLElement>(
+          "[data-hero-reveal='portrait']",
+        );
+        if (portrait) {
+          gsap.to(portrait, {
+            y: 48,
+            ease: "none",
+            scrollTrigger: {
+              trigger: scope.closest("#hero") ?? scope,
+              start: "top top",
+              end: "bottom top",
+              scrub: 0.6,
+            },
+          });
+        }
       }, scope);
 
       return () => ctx.revert();
     },
-    { scope: scopeRef },
+    { scope: scopeRef, dependencies: [phaseIntro] },
   );
 
   return (

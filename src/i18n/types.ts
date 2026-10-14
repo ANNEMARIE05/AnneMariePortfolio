@@ -23,12 +23,24 @@ export interface Messages {
     contact: string;
     cta: string;
     headerTagline: string;
+    headerProfileRole: string;
+    headerProfileBadge: string;
     menuOpen: string;
     menuClose: string;
+  };
+  intro: {
+    profileRole: string;
+    profileCompany: string;
+    profileBadge: string;
+    skip: string;
   };
   hero: {
     metaName: string;
     metaRole: string;
+    profileRole: string;
+    profileAt: string;
+    profileCompany: string;
+    profileBadge: string;
     titleLine1: string;
     titleAccent: string;
     titleLine2: string;

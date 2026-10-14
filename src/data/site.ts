@@ -1,5 +1,13 @@
 export const EMAIL_PROFESSIONNEL = "annemarieagbonou@gmail.com" as const;
 
+/** Incrémenter après remplacement logo / portrait (force le remontage des `<Image>`). */
+export const VERSION_MEDIA = "2025-10-14-logo-officiel" as const;
+
+/** Logo officiel (fichier fourni tel quel). */
+export const CHEMIN_LOGO = "/images/logo-officiel.png" as const;
+
+export const CHEMIN_PORTRAIT = "/images/anne-marie-portrait-studio.jpg" as const;
+
 /** Numéro WhatsApp public (Côte d'Ivoire, sans + ni espaces pour wa.me). */
 export const WHATSAPP_NUMERO_INTERNATIONAL = "225172317983" as const;
 

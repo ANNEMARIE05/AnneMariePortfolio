@@ -16,6 +16,9 @@ import {
   jouerRetourSonore,
   type TypeRetourSonore,
 } from "@/lib/retour-sonore";
+import { prefererMouvementReduit } from "@/lib/animations/mouvement-reduit";
+
+export type PhaseIntro = "attente" | "lecture" | "terminee";
 
 interface ContextePortfolio {
   locale: Locale;
@@ -32,6 +35,8 @@ interface ContextePortfolio {
   identifiantDossierAffiche: IdentifiantProjet;
   ouvrirDossier: (identifiant: IdentifiantProjet) => void;
   fermerDossier: () => void;
+  phaseIntro: PhaseIntro;
+  terminerIntro: () => void;
 }
 
 const ContextePortfolio = createContext<ContextePortfolio | null>(null);
@@ -67,9 +72,31 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
   );
   const [identifiantDossierAffiche, setIdentifiantDossierAffiche] =
     useState<IdentifiantProjet>("ocr");
+  const [phaseIntro, setPhaseIntro] = useState<PhaseIntro>("attente");
 
   useEffect(() => {
     setLocaleState(lireLocaleInitiale());
+  }, []);
+
+  useEffect(() => {
+    if (phaseIntro === "lecture") {
+      document.body.classList.add("intro-en-cours");
+    } else {
+      document.body.classList.remove("intro-en-cours");
+    }
+    return () => document.body.classList.remove("intro-en-cours");
+  }, [phaseIntro]);
+
+  useEffect(() => {
+    if (prefererMouvementReduit()) {
+      setPhaseIntro("terminee");
+      return;
+    }
+    setPhaseIntro("lecture");
+  }, []);
+
+  const terminerIntro = useCallback(() => {
+    setPhaseIntro("terminee");
   }, []);
 
   useEffect(() => {
@@ -158,6 +185,8 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
       identifiantDossierAffiche,
       ouvrirDossier,
       fermerDossier,
+      phaseIntro,
+      terminerIntro,
     }),
     [
       locale,
@@ -174,6 +203,8 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
       identifiantDossierAffiche,
       ouvrirDossier,
       fermerDossier,
+      phaseIntro,
+      terminerIntro,
     ],
   );
 

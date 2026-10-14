@@ -1,3 +1,4 @@
+import { AnimationLancement } from "@/components/animations/animation-lancement";
 import { OrchestrateurScroll } from "@/components/animations/orchestrateur-scroll";
 import { GrilleEditoriale } from "@/components/layout/grille-editoriale";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -16,6 +17,7 @@ import { ToastFolio } from "@/components/ui/toast-folio";
 export default function PagePortfolio() {
   return (
     <FournisseurPortfolio>
+      <AnimationLancement />
       <GrilleEditoriale />
       <SiteHeader />
 

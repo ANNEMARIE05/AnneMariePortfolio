@@ -56,8 +56,50 @@ header.site-header.is-scrolled .header-shell {
   padding: 0.55rem 0;
 }
 
-header.site-header.is-scrolled .header-brand-role {
-  display: block;
+header.site-header.is-scrolled .header-brand-profile {
+  display: flex;
+}
+
+.header-brand {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.header-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.logo-marque {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  overflow: visible;
+}
+
+.logo-marque-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.portrait-photo-hero {
+  object-position: center 18%;
+}
+
+.header-brand-logo.logo-marque {
+  background: transparent;
+  overflow: visible;
+}
+
+.header-brand-logo .logo-marque-img {
+  /* Fond noir du PNG masqué sur l’en-tête ivoire ; A gris + traits orange visibles */
+  mix-blend-mode: lighten;
 }
 
 .header-brand-name {
@@ -65,8 +107,32 @@ header.site-header.is-scrolled .header-brand-role {
   font-weight: 600;
 }
 
+.header-brand-profile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.55rem;
+}
+
 .header-brand-role {
-  font-size: var(--type-meta);
+  font-size: clamp(0.8125rem, 0.78rem + 0.12vw, 0.9375rem);
+  font-weight: 650;
+  color: var(--c-noir);
+  letter-spacing: -0.01em;
+}
+
+.header-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(243, 108, 80, 0.14);
+  color: var(--c-orange-deep, #c94e38);
+  border: 1px solid rgba(243, 108, 80, 0.28);
 }
 
 .header-nav-link {
@@ -165,6 +231,53 @@ section.hero-cover {
   font-weight: 500;
   color: var(--c-noir);
   margin-bottom: 1rem;
+}
+
+.hero-profil-annonce {
+  margin: 0 0 1.35rem;
+  padding: 1rem 1.15rem;
+  max-width: 36rem;
+  border-radius: var(--radius-soft);
+  background: linear-gradient(
+    135deg,
+    rgba(243, 108, 80, 0.1) 0%,
+    rgba(255, 255, 255, 0.72) 55%
+  );
+  border: 1px solid rgba(243, 108, 80, 0.22);
+  box-shadow: 0 12px 32px rgba(243, 108, 80, 0.08);
+}
+
+.hero-profil-ligne {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1.05rem + 0.85vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--c-noir);
+}
+
+.hero-profil-ngser {
+  color: var(--c-orange);
+}
+
+.hero-profil-at {
+  font-weight: 500;
+  color: var(--c-noir-muted);
+  font-size: 0.92em;
+}
+
+.hero-profil-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: var(--c-noir);
+  color: var(--c-ivoire);
 }
 
 .hero-statement-text {
@@ -1093,6 +1206,129 @@ section.contact-epilogue-sec .verified-channels-row {
 .bouton-remonter:hover {
   background: var(--c-orange);
   transform: translateY(-2px);
+}
+
+/* —— Intro au lancement —— */
+body.intro-en-cours {
+  overflow: hidden;
+}
+
+body.intro-en-cours .site-header,
+body.intro-en-cours #contenu-principal {
+  visibility: hidden;
+}
+
+.intro-lancement {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-ivoire-paper);
+  overflow: hidden;
+}
+
+.intro-lancement-voile {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 42%,
+    var(--c-orange-glow) 0%,
+    transparent 58%
+  );
+  pointer-events: none;
+}
+
+.intro-lancement-scene {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  max-width: 22rem;
+}
+
+.intro-lancement-logo {
+  margin-bottom: 1.35rem;
+  filter: drop-shadow(0 8px 28px rgba(243, 108, 80, 0.22));
+}
+
+.intro-lancement-logo .logo-marque-img {
+  mix-blend-mode: normal;
+}
+
+.intro-lancement-role {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--c-noir);
+}
+
+.intro-lancement-ngser {
+  margin: 0.35rem 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--c-orange);
+  line-height: 1;
+}
+
+.intro-lancement-badge {
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--c-ivoire-card);
+  color: var(--c-noir-muted);
+  border: 1px solid var(--c-hairline-strong);
+}
+
+.intro-lancement-trait {
+  display: block;
+  width: min(12rem, 60vw);
+  height: 2px;
+  margin-top: 1.35rem;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--c-orange) 45%,
+    transparent
+  );
+}
+
+.intro-lancement-skip {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 2;
+  border: 1px solid var(--c-hairline-strong);
+  background: var(--c-ivoire);
+  color: var(--c-noir-muted);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.intro-lancement-skip:hover,
+.intro-lancement-skip:focus-visible {
+  background: var(--c-ivoire-card);
+  border-color: var(--c-orange);
+  color: var(--c-noir);
 }
 
 .whatsapp-floating-btn {
