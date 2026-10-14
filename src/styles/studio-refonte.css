@@ -47,17 +47,13 @@ header.site-header.is-scrolled {
 }
 
 .header-shell {
-  grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, auto);
-  gap: 1rem 2.5rem;
-  padding: 0.85rem 0;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
+  gap: 1rem 1.75rem;
+  padding: 0.75rem 0;
 }
 
 header.site-header.is-scrolled .header-shell {
   padding: 0.55rem 0;
-}
-
-header.site-header.is-scrolled .header-brand-profile {
-  display: flex;
 }
 
 .header-brand {
@@ -135,9 +131,18 @@ header.site-header.is-scrolled .header-brand-profile {
   border: 1px solid rgba(243, 108, 80, 0.28);
 }
 
+.header-nav {
+  gap: 0.35rem 1.15rem;
+}
+
 .header-nav-link {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   position: relative;
+}
+
+.header-nav-link[href="#contact"] {
+  font-weight: 600;
+  color: var(--c-noir);
 }
 
 .header-nav-link::after {

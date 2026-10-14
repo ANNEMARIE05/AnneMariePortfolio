@@ -1,11 +1,19 @@
 @import "tailwindcss";
 @import "../styles/editorial.css";
 @import "../styles/studio-refonte.css";
+@import "../styles/mobile-responsive.css";
 
 /* Garantit la grille projets / compétences si un import CSS est ignoré au build */
 .catalogue-dossier-list .dossier-entry-block {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
+}
+
+@media (max-width: 1080px) {
+  .catalogue-dossier-list .dossier-entry-block {
+    grid-template-columns: 1fr;
+    gap: clamp(1.25rem, 4vw, 2rem);
+  }
 }
 
 .competences-spec-sec .skills-cards-grid {
@@ -25,6 +33,12 @@
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   gap: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+@media (max-width: 900px) {
+  .about-manifesto-sec .about-parcours-main {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hero-lead-col {

@@ -57,17 +57,13 @@ export function SiteHeader() {
       <Container className="header-shell">
         <a href="#hero" className="header-brand">
           <LogoMarque
-            taille={52}
+            taille={44}
             prioritaire
             src={CHEMIN_LOGO}
             className="header-brand-logo"
           />
           <span className="header-brand-copy">
             <span className="header-brand-name">Anne Marie Agbonou</span>
-            <span className="header-brand-profile">
-              <span className="header-brand-role">{t.nav.headerProfileRole}</span>
-              <span className="header-brand-badge">{t.nav.headerProfileBadge}</span>
-            </span>
           </span>
         </a>
 
@@ -81,9 +77,6 @@ export function SiteHeader() {
 
         <div className="header-end">
           <SelecteurLangue />
-          <a href="#contact" className="header-cta">
-            {t.nav.cta}
-          </a>
           <NavigationMobile />
         </div>
       </Container>
