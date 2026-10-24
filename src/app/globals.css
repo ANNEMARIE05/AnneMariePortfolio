@@ -2,6 +2,9 @@
 @import "../styles/editorial.css";
 @import "../styles/studio-refonte.css";
 @import "../styles/mobile-responsive.css";
+@import "../styles/ux-polish.css";
+@import "../styles/wow-expert.css";
+@import "../styles/header-nav.css";
 
 /* Garantit la grille projets / compétences si un import CSS est ignoré au build */
 .catalogue-dossier-list .dossier-entry-block {
@@ -129,12 +132,8 @@
   overscroll-behavior: contain;
 }
 
-body.theme-studio-dark .nav-mobile-panel {
-  background: rgba(24, 24, 22, 0.98);
-}
-
 .nav-mobile-panel.is-open {
-  display: block;
+  display: flex;
 }
 
 .nav-mobile-list {
@@ -164,6 +163,13 @@ body.theme-studio-dark .nav-mobile-panel {
 .nav-mobile-link:focus-visible {
   color: var(--c-orange);
   padding-left: 0.75rem;
+}
+
+.nav-mobile-link.is-active {
+  color: var(--c-orange);
+  font-weight: 600;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--c-orange);
 }
 
 .nav-mobile-backdrop {
@@ -225,3 +231,108 @@ body.theme-studio-dark .nav-mobile-panel {
 .dossier-visual-canvas {
   will-change: transform;
 }
+
+/* Cascade finale — le thème studio doit l’emporter sur editorial.css */
+:root {
+  --c-noir: #1e1d1b;
+  --c-noir-muted: rgba(30, 29, 27, 0.68);
+  --c-orange: #e86248;
+  --c-orange-deep: #c4523a;
+}
+
+/* Studio sombre — surfaces sombres, accents terracotta (comme le thème clair) */
+body.theme-studio-dark {
+  --c-ivoire: #090a0f;
+  --c-ivoire-paper: #0f121d;
+  --c-ivoire-card: #151928;
+  background-color: var(--c-ivoire-paper);
+  --c-hairline: rgba(255, 255, 255, 0.09);
+  --c-hairline-strong: rgba(255, 255, 255, 0.2);
+  --c-noir: #f8fafc;
+  --c-noir-muted: rgba(248, 250, 252, 0.72);
+  --c-noir-subtle: rgba(255, 255, 255, 0.04);
+  --c-orange: #ff5733;
+  --c-orange-deep: #e64a19;
+  --c-orange-glow: rgba(255, 87, 51, 0.32);
+  --c-sauge-ink: #34d399;
+  --c-lavande-ink: #c084fc;
+}
+
+
+body.theme-studio-dark .header-brand-logo .logo-marque-img {
+  mix-blend-mode: normal;
+}
+
+body.theme-studio-dark .header-cta {
+  background: var(--c-orange);
+  color: #fff;
+}
+
+body.theme-studio-dark .header-cta:hover,
+body.theme-studio-dark .header-cta:focus-visible {
+  background: var(--c-orange-deep);
+  color: #fff;
+}
+
+body.theme-studio-dark .theme-switch-btn {
+  color: var(--c-noir-muted);
+  border-color: var(--c-hairline);
+}
+
+body.theme-studio-dark .theme-switch-btn:hover,
+body.theme-studio-dark .theme-switch-btn:focus-visible {
+  color: var(--c-noir);
+  border-color: var(--c-hairline-strong);
+  background: var(--c-noir-subtle);
+}
+
+body.theme-studio-dark .nav-mobile-panel {
+  background: rgba(24, 24, 22, 0.98);
+  border-left: 1px solid var(--c-hairline);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.4);
+}
+
+body.theme-studio-dark .hero-orb--warm {
+  background: radial-gradient(circle, rgba(255, 87, 51, 0.42) 0%, rgba(249, 115, 22, 0.15) 60%, transparent 80%);
+}
+
+body.theme-studio-dark .hero-orb--cool {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.38) 0%, rgba(6, 182, 212, 0.18) 60%, transparent 80%);
+}
+
+body.theme-studio-dark .ticker-statement-band {
+  background: rgba(255, 87, 51, 0.05);
+  border-color: rgba(255, 87, 51, 0.18);
+  color: #f8fafc;
+}
+
+body.theme-studio-dark .portrait-cadre-premium::before {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 87, 51, 0.85),
+    rgba(139, 92, 246, 0.5) 45%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+}
+
+.sec-index-number,
+.section-index-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-orange);
+}
+
+/* Sticky nav : overflow-x hidden sur body casse position:sticky dans Chrome */
+body {
+  overflow-x: clip;
+}
+
+header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+

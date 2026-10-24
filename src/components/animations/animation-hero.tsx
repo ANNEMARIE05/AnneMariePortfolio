@@ -23,15 +23,16 @@ export function AnimationHero({ children }: PropsAnimationHero) {
 
   useGSAP(
     () => {
-      if (
-        prefererMouvementReduit() ||
-        !scopeRef.current ||
-        phaseIntro !== "terminee"
-      ) {
+      if (!scopeRef.current || phaseIntro !== "terminee") {
         return;
       }
 
       const scope = scopeRef.current;
+
+      if (prefererMouvementReduit()) {
+        scope.setAttribute("data-hero-ready", "");
+        return;
+      }
       const lignesTitre = scope.querySelectorAll<HTMLElement>(
         "[data-hero-ligne-titre]",
       );
@@ -55,20 +56,17 @@ export function AnimationHero({ children }: PropsAnimationHero) {
         });
 
         timeline
+          .from(".hero-ambiance .hero-orb", {
+            scale: 0.6,
+            autoAlpha: 0,
+            duration: 1.1,
+            stagger: 0.15,
+          })
           .from("[data-hero-reveal='profil']", {
             y: 20,
             autoAlpha: 0,
             duration: 0.65,
           })
-          .from(
-            "[data-hero-reveal='profil'] .hero-profil-badge",
-            {
-              scale: 0.92,
-              autoAlpha: 0,
-              duration: 0.45,
-            },
-            "-=0.35",
-          )
           .from("[data-hero-reveal='meta']", {
             y: 14,
             autoAlpha: 0,
@@ -77,11 +75,21 @@ export function AnimationHero({ children }: PropsAnimationHero) {
           .from(
             lignesTitre,
             {
-              yPercent: 100,
-              duration: 0.85,
-              stagger: 0.1,
+              yPercent: 110,
+              duration: 1,
+              stagger: 0.12,
+              ease: "power4.out",
             },
-            "-=0.3",
+            "-=0.55",
+          )
+          .from(
+            ".title-line-serif-accent",
+            {
+              yPercent: 120,
+              duration: 0.95,
+              ease: "power4.out",
+            },
+            "-=0.75",
           )
           .from(
             "[data-hero-reveal='statement']",
@@ -123,29 +131,15 @@ export function AnimationHero({ children }: PropsAnimationHero) {
           .from(
             "[data-hero-reveal='portrait']",
             {
-              x: 28,
+              x: 36,
               autoAlpha: 0,
-              scale: pointerFinDisponible() ? 0.98 : 1,
-              duration: 0.95,
+              scale: pointerFinDisponible() ? 0.94 : 1,
+              duration: 1.05,
+              ease: "power3.out",
             },
-            "-=0.75",
+            "-=0.85",
           );
 
-        const portrait = scope.querySelector<HTMLElement>(
-          "[data-hero-reveal='portrait']",
-        );
-        if (portrait) {
-          gsap.to(portrait, {
-            y: 48,
-            ease: "none",
-            scrollTrigger: {
-              trigger: scope.closest("#hero") ?? scope,
-              start: "top top",
-              end: "bottom top",
-              scrub: 0.6,
-            },
-          });
-        }
       }, scope);
 
       return () => ctx.revert();
@@ -154,7 +148,7 @@ export function AnimationHero({ children }: PropsAnimationHero) {
   );
 
   return (
-    <div ref={scopeRef} data-animation-hero="">
+    <div ref={scopeRef} className="hero-animation-scope" data-animation-hero="">
       {children}
     </div>
   );

@@ -1,0 +1,163 @@
+/* ==========================================================================
+   UX — repères, progression, micro-interactions
+   ========================================================================== */
+
+::selection {
+  background: rgba(243, 108, 80, 0.22);
+  color: var(--c-noir);
+}
+
+#hero,
+#experience,
+#projets,
+#formation,
+#parcours,
+#contact {
+  scroll-margin-top: calc(var(--nav-offset, 72px) + 16px);
+}
+
+.header-nav-link.is-active .header-nav-index {
+  color: var(--c-orange);
+  opacity: 1;
+}
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.header-cta:active {
+  transform: scale(0.97);
+}
+
+.hero-cover {
+  position: relative;
+}
+
+.nav-mobile-panel {
+  display: none;
+  flex-direction: column;
+}
+
+.nav-mobile-panel.is-open {
+  display: flex;
+}
+
+.nav-mobile-list {
+  flex: 1;
+}
+
+.nav-mobile-index {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-noir-muted);
+  opacity: 0.6;
+  min-width: 1.75rem;
+}
+
+.nav-mobile-link.is-active .nav-mobile-index {
+  color: var(--c-orange);
+  opacity: 1;
+}
+
+.nav-mobile-footer {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--c-hairline);
+}
+
+.nav-mobile-cta {
+  width: 100%;
+  text-align: center;
+}
+
+.btn-solid-orange:active,
+.btn-outline-ink:active,
+.btn-whatsapp-outline:active,
+.btn-dossier-expand:active,
+.btn-live-launch:active {
+  transform: scale(0.98);
+}
+
+.hero-monumental-title,
+.sec-editorial-title {
+  text-wrap: balance;
+}
+
+.bouton-remonter {
+  position: fixed;
+  overflow: visible;
+}
+
+.bouton-remonter-icone {
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+}
+
+.bouton-remonter-anneau {
+  position: absolute;
+  inset: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.bouton-remonter-anneau-fond {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 2;
+}
+
+.bouton-remonter-anneau-progres {
+  fill: none;
+  stroke: var(--c-orange);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.15s linear;
+}
+
+.experience-timeline-sec,
+.projects-catalogue,
+.formation-competences-sec,
+.about-manifesto-sec,
+.contact-epilogue-sec {
+  transition: background-color 0.55s var(--ease-editorial);
+}
+
+body[data-section-active="experience"] .experience-timeline-sec {
+  background-color: rgba(243, 108, 80, 0.035);
+}
+
+body[data-section-active="projets"] .projects-catalogue {
+  background-color: rgba(140, 131, 168, 0.06);
+}
+
+body[data-section-active="formation"] .formation-competences-sec {
+  background-color: rgba(200, 212, 196, 0.12);
+}
+
+body[data-section-active="parcours"] .about-manifesto-sec {
+  background-color: rgba(243, 108, 80, 0.03);
+}
+
+body[data-section-active="contact"] .contact-epilogue-sec {
+  background-color: var(--c-ivoire);
+}
+
+body[data-section-active="contact"] .whatsapp-floating-pulse {
+  animation: none;
+  opacity: 0;
+}
+
+body[data-section-active="contact"] .whatsapp-floating-btn {
+  background: #128c7e;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+

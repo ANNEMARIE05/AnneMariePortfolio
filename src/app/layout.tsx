@@ -5,6 +5,7 @@ import {
   CHEMIN_LOGO,
   CHEMIN_PORTRAIT,
   METADONNEES_SITE,
+  VERSION_MEDIA,
   obtenirUrlSite,
 } from "@/data/site";
 import { classesPolices } from "@/lib/polices";
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
         url: CHEMIN_PORTRAIT,
         width: 1200,
         height: 1200,
-        alt: "Portrait professionnel d'Anne Marie Agbonou en studio",
+        alt: "Portrait professionnel d'Anne Marie Agbonou au bureau",
       },
     ],
   },
@@ -59,8 +60,8 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="fr" className={classesPolices}>
-      <body>
+    <html lang="fr" className={classesPolices} suppressHydrationWarning>
+      <body data-site-version={VERSION_MEDIA} suppressHydrationWarning>
         <LienEvitement />
         {children}
       </body>

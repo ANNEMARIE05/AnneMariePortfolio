@@ -232,6 +232,10 @@ export function OrchestrateurScroll({ children }: PropsOrchestrateurScroll) {
         const onLoad = () => ScrollTrigger.refresh();
         window.addEventListener("load", onLoad);
 
+        if (window.location.hash) {
+          requestAnimationFrame(() => ScrollTrigger.refresh());
+        }
+
         const promessePolices =
           document.fonts?.ready ?? Promise.resolve(undefined);
         void promessePolices.then(() => ScrollTrigger.refresh());

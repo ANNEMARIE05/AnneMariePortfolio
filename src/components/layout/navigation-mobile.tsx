@@ -3,11 +3,17 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { LIENS_NAVIGATION } from "@/data/navigation";
 import { useI18n } from "@/hooks/use-i18n";
+import { BoutonTheme } from "@/components/ui/bouton-theme";
+import { SelecteurLangue } from "@/components/ui/selecteur-langue";
 
 const SELECTEUR_FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export function NavigationMobile() {
+interface PropsNavigationMobile {
+  hrefSectionActive: string | null;
+}
+
+export function NavigationMobile({ hrefSectionActive }: PropsNavigationMobile) {
   const { t } = useI18n();
   const [menuOuvert, setMenuOuvert] = useState(false);
   const idPanel = useId();
@@ -87,7 +93,7 @@ export function NavigationMobile() {
         onClick={() => setMenuOuvert((v) => !v)}
       >
         <span className="nav-mobile-toggle-label">
-          {menuOuvert ? "Fermer" : "Menu"}
+          {menuOuvert ? t.nav.menuCloseLabel : t.nav.menuLabel}
         </span>
         <span aria-hidden="true">{menuOuvert ? "✕" : "☰"}</span>
       </button>
@@ -101,25 +107,46 @@ export function NavigationMobile() {
         hidden={!menuOuvert}
       >
         <ul className="nav-mobile-list">
-          {LIENS_NAVIGATION.map((lien) => (
-            <li key={lien.href}>
-              <a
-                href={lien.href}
-                className="nav-mobile-link"
-                onClick={fermerMenu}
-              >
-                {t.nav[lien.cle]}
-              </a>
-            </li>
-          ))}
+          {LIENS_NAVIGATION.map((lien) => {
+            const estActif = hrefSectionActive === lien.href;
+            return (
+              <li key={lien.href}>
+                <a
+                  href={lien.href}
+                  className={`nav-mobile-link${estActif ? " is-active" : ""}`}
+                  aria-current={estActif ? "location" : undefined}
+                  onClick={fermerMenu}
+                >
+                  <span className="nav-mobile-index" aria-hidden="true">
+                    {lien.indice}
+                  </span>
+                  {t.nav[lien.cle]}
+                </a>
+              </li>
+            );
+          })}
         </ul>
+
+        <div className="nav-mobile-footer">
+          <div className="nav-mobile-actions-cluster">
+            <BoutonTheme />
+            <SelecteurLangue />
+          </div>
+          <a
+            href="#contact"
+            className="header-cta nav-mobile-cta"
+            onClick={fermerMenu}
+          >
+            {t.nav.cta}
+          </a>
+        </div>
       </nav>
 
       {menuOuvert ? (
         <button
           type="button"
           className="nav-mobile-backdrop"
-          aria-label="Fermer le menu"
+          aria-label={t.nav.menuCloseLabel}
           onClick={fermerMenu}
         />
       ) : null}

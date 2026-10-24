@@ -6,11 +6,14 @@ import { NavigationMobile } from "@/components/layout/navigation-mobile";
 import { LogoMarque } from "@/components/ui/logo-marque";
 import { CHEMIN_LOGO } from "@/data/site";
 import { SelecteurLangue } from "@/components/ui/selecteur-langue";
+import { BoutonTheme } from "@/components/ui/bouton-theme";
 import { LIENS_NAVIGATION } from "@/data/navigation";
 import { useI18n } from "@/hooks/use-i18n";
+import { useParcoursScroll } from "@/hooks/use-section-active";
 
 export function SiteHeader() {
   const { t } = useI18n();
+  const { hrefSectionActive } = useParcoursScroll();
   const refHeader = useRef<HTMLElement>(null);
   const [defile, setDefile] = useState(false);
 
@@ -68,16 +71,31 @@ export function SiteHeader() {
         </a>
 
         <nav className="header-nav" aria-label="Navigation principale">
-          {LIENS_NAVIGATION.map((lien) => (
-            <a key={lien.href} href={lien.href} className="header-nav-link">
-              {t.nav[lien.cle]}
-            </a>
-          ))}
+          {LIENS_NAVIGATION.map((lien) => {
+            const estActif = hrefSectionActive === lien.href;
+            return (
+              <a
+                key={lien.href}
+                href={lien.href}
+                className={`header-nav-link${estActif ? " is-active" : ""}`}
+                aria-current={estActif ? "location" : undefined}
+              >
+                <span className="header-nav-index" aria-hidden="true">
+                  {lien.indice}
+                </span>
+                {t.nav[lien.cle]}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="header-end">
+          <BoutonTheme />
           <SelecteurLangue />
-          <NavigationMobile />
+          <a href="#contact" className="header-cta">
+            {t.nav.cta}
+          </a>
+          <NavigationMobile hrefSectionActive={hrefSectionActive} />
         </div>
       </Container>
     </header>

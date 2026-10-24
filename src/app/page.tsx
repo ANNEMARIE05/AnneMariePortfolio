@@ -8,6 +8,7 @@ import { CatalogueProjets } from "@/components/sections/catalogue-projets";
 import { ContactSection } from "@/components/sections/contact-section";
 import { ExperienceSection } from "@/components/sections/experience-section";
 import { FormationSection } from "@/components/sections/formation-section";
+import { BandeauTicker } from "@/components/sections/bandeau-ticker";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ManifesteSection } from "@/components/sections/manifeste-section";
 import { BoutonRemonter } from "@/components/ui/bouton-remonter";
@@ -23,6 +24,7 @@ export default function PagePortfolio() {
 
       <OrchestrateurScroll>
         <HeroSection />
+        <BandeauTicker />
         <ExperienceSection />
         <CatalogueProjets />
         <FormationSection />

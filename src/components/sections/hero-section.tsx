@@ -27,19 +27,30 @@ export function HeroSection() {
   return (
     <section id="hero" className="hero-cover">
       <AnimationHero>
+        <div className="hero-ambiance" aria-hidden="true">
+          <span className="hero-orb hero-orb--warm" />
+          <span className="hero-orb hero-orb--cool" />
+          <span className="hero-orb hero-orb--accent" />
+          <span className="hero-grain" />
+        </div>
         <Container className="hero-composition-grid">
           <div className="hero-lead-col">
-            <div className="hero-profil-annonce" data-hero-reveal="profil">
-              <p className="hero-profil-ligne">
-                <span className="hero-profil-role">{t.hero.profileRole}</span>{" "}
-                <span className="hero-profil-at">{t.hero.profileAt}</span>{" "}
-                <span className="hero-profil-ngser">{t.hero.profileCompany}</span>
-              </p>
-              <span className="hero-profil-badge">{t.hero.profileBadge}</span>
-            </div>
+            <p className="hero-availability-line" data-hero-reveal="profil">
+              <span
+                className="hero-availability-indicator"
+                aria-hidden="true"
+              >
+                <span className="hero-availability-dot" />
+              </span>
+              <span>{t.hero.availability}</span>
+            </p>
 
             <p className="hero-editorial-meta" data-hero-reveal="meta">
               <span className="meta-tag-bold">{t.hero.metaName}</span>
+              <span className="hero-meta-sep" aria-hidden="true">
+                ·
+              </span>
+              <span className="meta-role-highlight">{t.hero.metaRole}</span>
             </p>
 
             <h1 className="hero-monumental-title">
@@ -67,7 +78,10 @@ export function HeroSection() {
               data-hero-reveal="current-job"
               aria-labelledby="hero-current-job-heading"
             >
-              <p className="hero-current-job-label">{t.hero.currentJobLabel}</p>
+              <div className="current-job-badge-row">
+                <span className="hero-current-job-label">{t.hero.currentJobLabel}</span>
+                <span className="current-job-verified-tag">✓ Vérifié</span>
+              </div>
               <h2 id="hero-current-job-heading" className="hero-current-job-role">
                 {t.hero.currentJobRole}
               </h2>
@@ -75,22 +89,34 @@ export function HeroSection() {
               <p className="hero-current-job-summary">
                 {t.hero.currentJobSummary}
               </p>
-              <ul className="hero-current-job-stack" aria-label="Stack">
+              <ul className="hero-current-job-stack" aria-label="Stack principale">
                 {t.hero.currentJobStack.map((tech) => (
-                  <li key={tech}>{tech}</li>
+                  <li key={tech}>
+                    <span className="tech-dot" aria-hidden="true" />
+                    <span>{tech}</span>
+                  </li>
                 ))}
               </ul>
             </article>
+          </div>
 
-            <div className="hero-cta-ribbon" data-hero-reveal="cta">
-              <a href="#projets" className="btn-solid-orange">
-                <span>{t.hero.ctaProjects}</span>
-                <span aria-hidden="true">↓</span>
-              </a>
+          <div className="hero-portrait-col">
+            <div data-hero-reveal="portrait">
+              <PortraitArchitectural />
+            </div>
 
+            <div
+              className="hero-cta-ribbon hero-cta-ribbon--under-portrait"
+              data-hero-reveal="cta"
+            >
               <a href="#contact" className="btn-outline-ink">
                 <span>{t.hero.ctaContact}</span>
                 <span aria-hidden="true">→</span>
+              </a>
+
+              <a href="#projets" className="btn-solid-orange btn-shine-effect">
+                <span>{t.hero.ctaProjects}</span>
+                <span aria-hidden="true">↓</span>
               </a>
 
               <a
@@ -98,15 +124,13 @@ export function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-whatsapp-outline"
+                title="Discuter directement sur WhatsApp"
               >
                 <IconeWhatsApp />
                 <span>{t.hero.ctaWhatsApp}</span>
+                <span className="btn-online-pulse" aria-hidden="true" />
               </a>
             </div>
-          </div>
-
-          <div data-hero-reveal="portrait">
-            <PortraitArchitectural />
           </div>
         </Container>
       </AnimationHero>

@@ -13,8 +13,8 @@ export function ManifesteSection() {
       data-reveal-section=""
     >
       <Container>
-        <div className="section-index-label" data-reveal-entete="">
-          {t.about.label}
+        <div className="section-editorial-header about-section-index" data-reveal-entete="">
+          <span className="sec-index-number">{t.about.label}</span>
         </div>
 
         <div className="about-parcours-frame" data-reveal-corps="">

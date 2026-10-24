@@ -24,13 +24,10 @@ export function ContactSection() {
       className="contact-epilogue-sec"
       data-reveal-section=""
     >
-      <div className="contact-ambient-glow" aria-hidden="true" />
       <Container>
         <div className="contact-stage">
           <div className="contact-stage-copy" data-reveal-entete="">
-            <div className="section-index-label section-index-label--inverse">
-              {t.contact.label}
-            </div>
+            <span className="sec-index-number">{t.contact.label}</span>
 
             <h2 className="epilogue-huge-prompt">{t.contact.title}</h2>
 

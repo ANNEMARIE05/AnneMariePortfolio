@@ -62,9 +62,22 @@ export function usePortfolio(): ContextePortfolio {
   return contexte;
 }
 
+const CLE_THEME = "portfolio-theme";
+
+function lireThemeInitial(): boolean {
+  if (typeof window === "undefined") {
+    return true;
+  }
+  const stockee = window.localStorage.getItem(CLE_THEME);
+  if (stockee !== null) {
+    return stockee === "dark";
+  }
+  return true;
+}
+
 export function FournisseurPortfolio({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("fr");
-  const [themeStudioSombre, setThemeStudioSombre] = useState(false);
+  const [themeStudioSombre, setThemeStudioSombre] = useState(true);
   const [sonActif, setSonActif] = useState(false);
   const [messageToast, setMessageToast] = useState<string | null>(null);
   const [dossierOuvert, setDossierOuvert] = useState<IdentifiantProjet | null>(
@@ -76,23 +89,18 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setLocaleState(lireLocaleInitiale());
+    setThemeStudioSombre(lireThemeInitial());
   }, []);
-
-  useEffect(() => {
-    if (phaseIntro === "lecture") {
-      document.body.classList.add("intro-en-cours");
-    } else {
-      document.body.classList.remove("intro-en-cours");
-    }
-    return () => document.body.classList.remove("intro-en-cours");
-  }, [phaseIntro]);
 
   useEffect(() => {
     if (prefererMouvementReduit()) {
       setPhaseIntro("terminee");
       return;
     }
-    setPhaseIntro("lecture");
+    const id = window.requestAnimationFrame(() => {
+      setPhaseIntro("lecture");
+    });
+    return () => window.cancelAnimationFrame(id);
   }, []);
 
   const terminerIntro = useCallback(() => {
@@ -106,10 +114,18 @@ export function FournisseurPortfolio({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.body.classList.toggle("theme-studio-dark", themeStudioSombre);
+    window.localStorage.setItem(CLE_THEME, themeStudioSombre ? "dark" : "light");
     return () => {
       document.body.classList.remove("theme-studio-dark");
     };
   }, [themeStudioSombre]);
+
+  useEffect(() => {
+    document.body.classList.toggle("intro-en-cours", phaseIntro === "lecture");
+    return () => {
+      document.body.classList.remove("intro-en-cours");
+    };
+  }, [phaseIntro]);
 
   useEffect(() => {
     if (dossierOuvert) {

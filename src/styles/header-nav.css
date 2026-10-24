@@ -1,0 +1,28 @@
+/* En-tête — aucune barre, bordure ou fond (doit rester importé en dernier) */
+header.site-header,
+header.site-header.is-scrolled,
+body.theme-studio-dark header.site-header,
+body.theme-studio-dark header.site-header.is-scrolled,
+body:not(.theme-studio-dark) header.site-header,
+body:not(.theme-studio-dark) header.site-header.is-scrolled {
+  background: var(--c-ivoire) !important;
+  background-color: var(--c-ivoire) !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+header.site-header::before,
+header.site-header::after,
+.header-shell::before,
+.header-shell::after {
+  content: none !important;
+  display: none !important;
+}
+
+.header-shell {
+  border: none !important;
+  box-shadow: none !important;
+}

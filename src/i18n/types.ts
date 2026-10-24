@@ -27,14 +27,11 @@ export interface Messages {
     headerProfileBadge: string;
     menuOpen: string;
     menuClose: string;
-  };
-  intro: {
-    profileRole: string;
-    profileCompany: string;
-    profileBadge: string;
-    skip: string;
+    menuLabel: string;
+    menuCloseLabel: string;
   };
   hero: {
+    availability: string;
     metaName: string;
     metaRole: string;
     profileRole: string;
@@ -53,6 +50,14 @@ export interface Messages {
     ctaProjects: string;
     ctaContact: string;
     ctaWhatsApp: string;
+    portraitCaption: string;
+  };
+  intro: {
+    profileRole: string;
+    profileCompany: string;
+    profileBadge: string;
+    tagline: string;
+    skip: string;
   };
   experience: {
     label: string;
@@ -137,4 +142,5 @@ export interface Messages {
   };
   scrollTop: string;
   langSwitch: string;
+  themeSwitch?: string;
 }
